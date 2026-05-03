@@ -1,54 +1,109 @@
 import { Link } from "@tanstack/react-router";
-import { MapPin, Phone, Mail } from "lucide-react";
+import { Mail, MapPin, Phone, Instagram, Twitter, Linkedin, Facebook } from "lucide-react";
+import logoImg from "@/assets/KILLIS BIRD - LOGO.png";
+
+const quickLinks = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Products", to: "/products" },
+  { label: "Support", to: "/support" },
+  { label: "Blog", to: "/blog" },
+  { label: "Careers", to: "/careers" },
+  { label: "Request a Quote", to: "/contact" },
+  { label: "Privacy Policy", to: "/" },
+];
 
 export function Footer() {
   return (
-    <footer className="relative mt-32 border-t border-border/50">
-      <div className="absolute inset-x-0 -top-px divider-line" />
-      <div className="container-edge py-16 grid gap-12 lg:grid-cols-4">
-        <div className="lg:col-span-2 space-y-5">
-          <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 border border-neon grid place-items-center">
-              <div className="w-3 h-3 bg-neon/60" />
+    <footer className="bg-black text-white py-16 md:py-24 border-t border-white/10">
+      <div className="container-edge grid gap-16 lg:grid-cols-12 mb-16">
+        
+        {/* Left: Company Info & Address */}
+        <div className="lg:col-span-5 space-y-8">
+          <img src={logoImg} alt="Killis Bird Logo" className="h-10 md:h-12 w-auto object-contain" />
+          
+          <div className="space-y-4 text-sm text-white/60">
+            <div className="flex items-start gap-4">
+              <MapPin size={18} className="text-neon mt-0.5 shrink-0" />
+              <span className="leading-relaxed max-w-sm">
+                Plot No.107,
+                <br />
+                Pollupalli SIDCO Industrial Estate,
+                <br />
+                Gangasandiram, Krishnagiri 635115.
+              </span>
             </div>
-            <div>
-              <div className="text-base font-semibold tracking-wide">KILLIS BIRD</div>
-              <div className="font-mono text-[9px] text-muted-foreground tracking-[0.3em]">IMAGINE · IDEATE · INNOVATIVE</div>
+            <div className="flex items-center gap-4">
+              <Phone size={18} className="text-neon shrink-0" />
+              <a href="tel:+917200743683" className="hover:text-neon transition-colors font-mono tracking-widest text-xs">
+                +91 72007 43683
+              </a>
             </div>
-          </div>
-          <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-            We provide high-quality drones, expert support, and reliable after-sales service to help businesses and enthusiasts explore limitless aerial possibilities safely and professionally.
-          </p>
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <div className="flex items-start gap-2.5"><MapPin size={14} className="text-neon mt-0.5 shrink-0" />Plot No.107, Pollupalli SIDCO Industrial Estate, Gangasandiram, Krishnagiri – 635115, TN, India</div>
-            <div className="flex items-center gap-2.5"><Phone size={14} className="text-neon" />+91 72007 43683</div>
-            <div className="flex items-center gap-2.5"><Mail size={14} className="text-neon" />info@killisbird.com</div>
+            <div className="flex items-center gap-4">
+              <Mail size={18} className="text-neon shrink-0" />
+              <a href="mailto:info@killisbird.com" className="hover:text-neon transition-colors font-mono tracking-widest text-xs">
+                info@killisbird.com
+              </a>
+            </div>
           </div>
         </div>
 
-        <div>
-          <div className="font-mono text-[10px] tracking-[0.3em] text-neon mb-4">// NAVIGATION</div>
-          <ul className="space-y-2.5 text-sm">
-            {[["/", "Home"], ["/about", "About"], ["/products", "Systems"], ["/blog", "Intel"], ["/careers", "Careers"], ["/contact", "Contact"]].map(([to, label]) => (
-              <li key={to}><Link to={to} className="text-muted-foreground hover:text-neon transition">{label}</Link></li>
+        {/* Center: Quick Links */}
+        <div className="lg:col-span-4 lg:px-8">
+          <h3 className="text-sm font-mono tracking-widest text-white/40 mb-8 uppercase">
+            Quick Links
+          </h3>
+          <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+            {quickLinks.map((link) => (
+              <Link 
+                key={link.label} 
+                to={link.to} 
+                className="text-white/70 hover:text-neon transition-colors text-sm font-medium"
+              >
+                {link.label}
+              </Link>
             ))}
-          </ul>
+          </div>
         </div>
 
-        <div>
-          <div className="font-mono text-[10px] tracking-[0.3em] text-neon mb-4">// LEGAL</div>
-          <ul className="space-y-2.5 text-sm">
-            <li><Link to="/privacy" className="text-muted-foreground hover:text-neon transition">Privacy Policy</Link></li>
-            <li><Link to="/privacy" className="text-muted-foreground hover:text-neon transition">Terms of Use</Link></li>
-            <li><Link to="/contact" className="text-muted-foreground hover:text-neon transition">Request a Quote</Link></li>
-          </ul>
+        {/* Right: Socials */}
+        <div className="lg:col-span-3 lg:text-right">
+          <h3 className="text-sm font-mono tracking-widest text-white/40 mb-8 uppercase">
+            Connect
+          </h3>
+          <div className="flex lg:flex-col gap-4 lg:items-end">
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-neon hover:text-black hover:border-neon transition-all"
+            >
+              <Instagram size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-neon hover:text-black hover:border-neon transition-all"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-neon hover:text-black hover:border-neon transition-all"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href="#"
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-neon hover:text-black hover:border-neon transition-all"
+            >
+              <Facebook size={18} />
+            </a>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-border/40">
-        <div className="container-edge py-5 flex flex-col md:flex-row gap-3 justify-between text-[11px] font-mono text-muted-foreground tracking-wider">
-          <div>© 2026 KILLIS BIRD LLP · ALL RIGHTS RESERVED</div>
-          <div>DEVELOPED BY <a href="https://wizmotech.in" className="text-neon hover:underline">WIZMO TECH</a></div>
+      <div className="container-edge border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] font-mono tracking-widest text-white/40">
+        <div>COPYRIGHT © 2026 KILLIS BIRD, ALL RIGHTS RESERVED.</div>
+        <div>
+          DEVELOPED BY <span className="text-white/80 font-bold">WIZMO TECH</span>
         </div>
       </div>
     </footer>

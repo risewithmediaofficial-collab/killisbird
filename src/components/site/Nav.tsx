@@ -1,70 +1,158 @@
-import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { Link, useLocation } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { cn } from "@/lib/utils";
+import logoImg from "@/assets/KILLIS BIRD - LOGO.png";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
-  { to: "/products", label: "Systems" },
-  { to: "/blog", label: "Intel" },
+  { to: "/products", label: "Products" },
+  { to: "/support", label: "Support" },
+  { to: "/blog", label: "Blog" },
   { to: "/careers", label: "Careers" },
-  { to: "/contact", label: "Contact" },
 ] as const;
 
 export function Nav() {
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname]);
+
+  // Scroll handler for shrink effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
-    <header className="fixed top-0 inset-x-0 z-50">
-      <div className="glass-strong border-b border-border/40">
-        <div className="container-edge flex items-center justify-between h-16">
-          <Link to="/" className="flex items-center gap-2.5 group">
-            <div className="relative w-7 h-7 grid place-items-center">
-              <div className="absolute inset-0 rounded-sm border border-neon" />
-              <div className="absolute inset-1 rounded-sm bg-neon/20 group-hover:bg-neon/40 transition" />
-              <div className="absolute inset-0 animate-pulse-ring rounded-sm" />
-            </div>
-            <div className="leading-none">
-              <div className="text-[15px] font-semibold tracking-wide">KILLIS BIRD</div>
-              <div className="font-mono text-[9px] text-muted-foreground tracking-[0.3em] mt-0.5">CLASSIFIED · LLP</div>
-            </div>
+    <header className="fixed top-4 inset-x-0 z-50 pointer-events-none flex justify-center px-4">
+      {/* The background pill */}
+      <div
+        className={cn(
+          "pointer-events-auto relative flex flex-col w-full max-w-5xl bg-white/75 backdrop-blur-xl border border-black/5 shadow-[0_8px_30px_rgb(0,0,0,0.06)] transition-all duration-500 ease-out",
+          open ? "rounded-3xl" : "rounded-full"
+        )}
+      >
+        <div
+          className={cn(
+            "flex items-center justify-between px-6 md:px-8 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            isScrolled && !open ? "py-3" : "py-5"
+          )}
+        >
+          {/* Left: Logo */}
+          <Link to="/" className="group flex items-center gap-2.5 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-sm">
+            <img
+              src={logoImg}
+              alt="Killis Bird Logo"
+              className={cn(
+                "w-auto object-contain drop-shadow-sm transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]",
+                isScrolled && !open ? "h-6 md:h-7" : "h-8 md:h-9"
+              )}
+            />
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          {/* Center: Navigation Links */}
+          <nav className="hidden lg:flex flex-1 justify-center items-center gap-4 xl:gap-8 mx-4">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 activeOptions={{ exact: l.to === "/" }}
-                activeProps={{ className: "text-neon" }}
-                className="font-mono text-[11px] tracking-[0.2em] uppercase px-3 py-2 text-muted-foreground hover:text-foreground transition"
+                activeProps={{ className: "text-foreground font-bold" }}
+                className="text-sm font-semibold tracking-wide text-muted-foreground hover:text-foreground transition-colors relative group py-2 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-sm"
               >
                 {l.label}
+                <span className="absolute bottom-1 left-1/2 w-0 h-0.5 bg-neon rounded-full -translate-x-1/2 transition-all duration-300 ease-out group-hover:w-[80%]"></span>
               </Link>
             ))}
-            <Link
-              to="/contact"
-              className="ml-4 font-mono text-[11px] tracking-[0.2em] uppercase px-4 py-2 border border-neon/60 text-neon hover:bg-neon hover:text-background transition relative neon-border"
-            >
-              Request Access
-            </Link>
           </nav>
 
-          <button onClick={() => setOpen(!open)} className="lg:hidden text-foreground p-2" aria-label="menu">
-            {open ? <X size={20} /> : <Menu size={20} />}
+          {/* Right: CTA Button & Contact Info */}
+          <div className="hidden lg:flex shrink-0 items-center gap-6">
+            <div className={cn(
+              "hidden xl:flex flex-col text-right transition-opacity duration-300",
+              isScrolled && !open ? "opacity-0 w-0 overflow-hidden" : "opacity-100"
+            )}>
+              <a href="tel:+917200743683" className="font-mono text-[10px] tracking-widest text-muted-foreground hover:text-foreground transition-colors">+91 72007 43683</a>
+              <a href="mailto:info@killisbird.com" className="font-mono text-[10px] tracking-widest text-muted-foreground hover:text-foreground transition-colors">info@killisbird.com</a>
+            </div>
+            <Link
+              to="/contact"
+              className={cn(
+                "flex items-center justify-center rounded-full bg-neon text-black font-bold shadow-neon transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:shadow-[0_4px_25px_-4px_rgba(232,69,10,0.5)] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neon",
+                isScrolled && !open ? "px-5 py-2 text-[13px]" : "px-6 py-2.5 text-sm"
+              )}
+            >
+              Request Quote <span className="ml-1 opacity-70">→</span>
+            </Link>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setOpen((value) => !value)}
+            className="grid place-items-center text-foreground lg:hidden shrink-0 ml-auto p-2 -mr-2 transition-transform hover:scale-105 active:scale-95"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
-        {open && (
-          <nav className="lg:hidden border-t border-border/40 px-6 py-4 flex flex-col gap-1">
+
+        {/* Mobile Menu Content */}
+        <div
+          id="mobile-navigation"
+          className={cn(
+            "overflow-hidden transition-[max-height,opacity] duration-400 ease-in-out lg:hidden",
+            open ? "max-h-[400px] opacity-100 border-t border-black/5" : "max-h-0 opacity-0"
+          )}
+        >
+          <nav className="flex flex-col gap-2 py-6 px-6 md:px-8">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)}
+              <Link
+                key={l.to}
+                to={l.to}
+                onClick={() => setOpen(false)}
                 activeOptions={{ exact: l.to === "/" }}
-                activeProps={{ className: "text-neon" }}
-                className="font-mono text-xs tracking-[0.2em] uppercase py-2 text-muted-foreground">
+                activeProps={{ className: "text-foreground font-bold" }}
+                className="py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground border-b border-black/5 last:border-0 flex items-center justify-between group"
+              >
                 {l.label}
+                <span className="opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 text-neon">→</span>
               </Link>
             ))}
+            <div className="mt-4 pt-4 border-t border-black/5 flex flex-col gap-2 font-mono text-[11px] tracking-widest text-muted-foreground">
+              <a href="tel:+917200743683" className="hover:text-neon">+91 72007 43683</a>
+              <a href="mailto:info@killisbird.com" className="hover:text-neon">info@killisbird.com</a>
+            </div>
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-neon px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-black font-bold transition-all hover:scale-[1.02] shadow-neon"
+            >
+              Request Quote
+            </Link>
           </nav>
-        )}
+        </div>
       </div>
     </header>
   );

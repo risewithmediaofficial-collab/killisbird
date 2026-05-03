@@ -13,9 +13,14 @@ function NotFoundComponent() {
           <div className="font-mono text-xs tracking-[0.3em] text-neon mb-4">// SIGNAL_LOST</div>
           <h1 className="text-8xl font-semibold text-foreground text-glow">404</h1>
           <h2 className="mt-4 text-xl font-semibold">Coordinates not found</h2>
-          <p className="mt-2 text-sm text-muted-foreground">This sector is outside operational airspace.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            This sector is outside operational airspace.
+          </p>
           <div className="mt-8">
-            <Link to="/" className="font-mono text-[11px] tracking-[0.2em] uppercase px-5 py-3 border border-neon text-neon hover:bg-neon hover:text-background transition">
+            <Link
+              to="/"
+              className="inline-flex min-h-11 items-center border border-neon px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-neon transition hover:bg-neon hover:text-background"
+            >
               Return to base
             </Link>
           </div>
@@ -31,14 +36,27 @@ export const Route = createRootRoute({
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Killis Bird — Autonomous Flight. Engineered." },
-      { name: "description", content: "Indigenous UAV systems built for precision, intelligence, and control. Killis Bird LLP — next-generation aerospace and autonomous systems." },
+      {
+        name: "description",
+        content:
+          "Indigenous UAV systems built for precision, intelligence, and control. Killis Bird LLP — next-generation aerospace and autonomous systems.",
+      },
       { name: "author", content: "Killis Bird LLP" },
       { property: "og:title", content: "Killis Bird — Autonomous Flight. Engineered." },
-      { property: "og:description", content: "Indigenous UAV systems built for precision, intelligence, and control." },
+      {
+        property: "og:description",
+        content: "Indigenous UAV systems built for precision, intelligence, and control.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap",
+      },
       {
         rel: "stylesheet",
         href: appCss,
