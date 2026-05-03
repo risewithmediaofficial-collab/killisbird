@@ -245,7 +245,7 @@ function ProductsPage() {
               <p className="text-base font-medium text-foreground leading-snug">{p.blurb}</p>
               <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
 
-              <div className="mt-auto grid gap-px bg-border/40 grid-cols-2 pt-6">
+              <div className="grid gap-px bg-border/40 grid-cols-2 pt-2">
                 {p.specs.map((s) => (
                   <div key={s.k} className="bg-background min-w-0 p-4 flex flex-col justify-center">
                     <div className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
