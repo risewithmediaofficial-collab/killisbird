@@ -3,30 +3,30 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import appCss from "../styles.css?url";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
+import { Preloader } from "@/components/site/Preloader";
+import { CustomCursor } from "@/components/site/CustomCursor";
+import { ScrollToTop } from "@/components/site/ScrollToTop";
 
 function NotFoundComponent() {
   return (
-    <>
-      <Nav />
-      <div className="flex min-h-screen items-center justify-center bg-background px-4 pt-24">
-        <div className="max-w-md text-center">
-          <div className="font-mono text-xs tracking-[0.3em] text-neon mb-4">// SIGNAL_LOST</div>
-          <h1 className="text-8xl font-semibold text-foreground text-glow">404</h1>
-          <h2 className="mt-4 text-xl font-semibold">Coordinates not found</h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            This sector is outside operational airspace.
-          </p>
-          <div className="mt-8">
-            <Link
-              to="/"
-              className="inline-flex min-h-11 items-center border border-neon px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-neon transition hover:bg-neon hover:text-background"
-            >
-              Return to base
-            </Link>
-          </div>
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 pt-24">
+      <div className="max-w-md text-center">
+        <div className="font-mono text-xs tracking-[0.3em] text-neon mb-4">// SIGNAL_LOST</div>
+        <h1 className="text-8xl font-semibold text-foreground text-glow">404</h1>
+        <h2 className="mt-4 text-xl font-semibold">Coordinates not found</h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          This sector is outside operational airspace.
+        </p>
+        <div className="mt-8">
+          <Link
+            to="/"
+            className="inline-flex min-h-11 items-center border border-neon px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-neon transition hover:bg-neon hover:text-background"
+          >
+            Return to base
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -85,6 +85,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <>
+      <ScrollToTop />
+      <Preloader />
+      <CustomCursor />
       <Nav />
       <main>
         <Outlet />

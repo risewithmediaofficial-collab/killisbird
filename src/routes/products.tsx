@@ -209,7 +209,7 @@ function ProductsPage() {
       />
 
       {/* Quick-Nav strip */}
-      <div className="sticky top-[80px] z-40 border-b border-border/50 bg-background/90 backdrop-blur-md">
+      <div className="sticky top-[80px] z-30 border-b border-border/50 bg-background/90 backdrop-blur-md">
         <div className="container-edge flex gap-1 overflow-x-auto py-2 scrollbar-none">
           {products.map((p) => (
             <a
@@ -228,7 +228,7 @@ function ProductsPage() {
           <article
             key={p.code}
             id={p.code.split(" ")[0]}
-            className="scroll-mt-40 card-surface flex flex-col overflow-hidden h-full"
+            className="scroll-mt-40 card-surface flex flex-col h-full"
           >
             <div className="w-full shrink-0 border-b border-border/50">
               <ProductGallery images={p.images} code={p.code} />

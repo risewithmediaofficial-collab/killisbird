@@ -24,16 +24,16 @@ export function IntelligenceSection() {
       <div className="grid lg:grid-cols-2 gap-20">
         
         {/* Left: Our Blog */}
-        <div>
+        <div className="flex flex-col gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="mb-12"
+            className="flex flex-col gap-2"
           >
             <h2 className="heading-lg font-black text-foreground">OUR BLOG</h2>
-            <p className="text-muted-foreground mt-2">Latest insights from our defense and engineering teams.</p>
+            <p className="text-muted-foreground">Latest insights from our defense and engineering teams.</p>
           </motion.div>
 
           <div className="flex flex-col gap-6">
@@ -44,9 +44,9 @@ export function IntelligenceSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="group cursor-pointer p-6 rounded-2xl border border-border bg-surface-elevated hover:border-neon transition-colors"
+                className="group cursor-pointer p-6 rounded-2xl border border-border bg-surface-elevated hover:border-neon transition-colors flex flex-col gap-3"
               >
-                <div className="font-mono text-xs text-muted-foreground tracking-widest mb-3 uppercase group-hover:text-neon transition-colors">
+                <div className="font-mono text-xs text-muted-foreground tracking-widest uppercase group-hover:text-neon transition-colors">
                   {blog.date}
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold leading-snug group-hover:text-neon transition-colors">
@@ -58,16 +58,16 @@ export function IntelligenceSection() {
         </div>
 
         {/* Right: Trusted Clients */}
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-10%" }}
             transition={{ duration: 0.8 }}
-            className="mb-12"
+            className="flex flex-col gap-2"
           >
             <h2 className="heading-lg font-black text-foreground">TRUSTED CLIENTS</h2>
-            <p className="text-muted-foreground mt-2">Powering defense and industry leaders.</p>
+            <p className="text-muted-foreground">Powering defense and industry leaders.</p>
           </motion.div>
 
           <motion.div 

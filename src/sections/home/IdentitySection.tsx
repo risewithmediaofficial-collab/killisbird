@@ -12,9 +12,9 @@ export function IdentitySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.8 }}
-          className="flex flex-col items-center"
+          className="flex flex-col items-center gap-8"
         >
-          <div className="flex items-center gap-3 mb-8">
+          <div className="flex items-center gap-3">
             <span className="w-10 h-[2px] bg-neon"></span>
             <span className="font-mono text-xs sm:text-sm tracking-[0.25em] font-bold text-foreground/80 uppercase">
               Welcome to Killis Bird
@@ -22,7 +22,7 @@ export function IdentitySection() {
             <span className="w-10 h-[2px] bg-neon"></span>
           </div>
 
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground leading-[1.1] tracking-tight mb-10">
+          <h2 className="heading-lg font-black text-foreground">
             Delivering Cutting-Edge UAV Components for a Smarter Future.
           </h2>
 

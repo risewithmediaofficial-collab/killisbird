@@ -86,11 +86,12 @@ export function SystemsSection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="flex flex-col gap-6"
             >
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3">
                 <span className="w-8 h-[2px] bg-neon"></span>
                 <span className="font-mono text-sm tracking-[0.25em] font-bold text-neon uppercase">
-                  Our Drones
+                  Our Products
                 </span>
                 <span className="w-8 h-[2px] bg-neon"></span>
               </div>
@@ -99,7 +100,7 @@ export function SystemsSection() {
                 WHAT WE BUILD
               </h2>
               
-              <p className="mt-8 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-md">
+              <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-md">
                 High-performance hardware engineered for extreme environments and tactical precision. 
                 Each system is meticulously designed, tested, and field-proven inside our indigenous facility.
               </p>
@@ -107,7 +108,7 @@ export function SystemsSection() {
           </div>
 
           {/* RIGHT: SCROLLING CARDS */}
-          <div className="lg:col-span-7 flex flex-col gap-4 relative z-20 pb-32">
+          <div className="lg:col-span-7 flex flex-col gap-4 relative z-20 pb-12">
             {systems.map((item, i) => {
               const isActive = activeId === i;
               const numLabel = (i + 1).toString().padStart(2, "0");
@@ -118,9 +119,19 @@ export function SystemsSection() {
                   layout
                   initial={false}
                   transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      activeIdRef.current = i;
+                      setActiveId(i);
+                    }
+                  }}
                   className={cn(
-                    "scroll-card-item relative overflow-hidden rounded-[24px] cursor-pointer group flex-shrink-0 w-full bg-[#1B2D6B]",
-                    isActive ? "h-[500px] sm:h-[600px] shadow-2xl" : "h-[80px] sm:h-[100px] hover:bg-[#233880]"
+                    "scroll-card-item relative overflow-hidden rounded-[24px] cursor-pointer group flex-shrink-0 w-full transition-all duration-700",
+                    isActive 
+                      ? "h-[500px] sm:h-[600px] shadow-2xl bg-[var(--navy)]" 
+                      : "h-[80px] sm:h-[100px] bg-[var(--navy)]/90 hover:bg-[var(--navy)]"
                   )}
                   onClick={() => {
                     activeIdRef.current = i;
@@ -151,7 +162,7 @@ export function SystemsSection() {
                         />
                         {/* Dark gradient overlay on bottom half */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
-                        <div className="absolute inset-0 bg-[#1B2D6B]/10 mix-blend-multiply" />
+                        <div className="absolute inset-0 bg-[var(--navy)]/10 mix-blend-multiply" />
                       </motion.div>
                     )}
                   </AnimatePresence>

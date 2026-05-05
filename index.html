@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Killis Bird | Aerial Excellence</title>
+    <style>
+        /* --- Reset & Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #0a0a0a; /* Dark background for premium feel */
+            color: #ffffff;
+        }
+
+        /* --- Loading Screen Styles --- */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background-color: #000; /* Solid black background while video loads */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
+        }
+
+        #loader video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures video fills screen edge-to-edge */
+            pointer-events: none; /* Prevents user interaction with video */
+        }
+
+        /* Exit animation: Upward wipe */
+        .loader-exit {
+            transform: translateY(-100%) !important;
+        }
+
+        /* --- Main Content Styles --- */
+        #main-content {
+            width: 100%;
+            min-height: 100vh;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.5s ease-out;
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        /* Reveal main content */
+        #main-content.content-visible {
+            opacity: 1;
+        }
+
+        /* Demo UI Elements */
+        h1 {
+            font-size: clamp(2rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            margin-top: 2.5rem;
+            padding: 1rem 2.5rem;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 
+        VIDEO LOADING SCREEN
+        z-index: 9999
+        Fullscreen video that covers the viewport
+    -->
+    <div id="loader">
+        <video id="loader-video" autoplay muted playsinline>
+            <source src="./intro.mp4" type="video/mp4">
+            <!-- Fallback text for very old browsers -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- 
+        MAIN WEBSITE CONTENT
+        Hidden while video is playing
+    -->
+    <div id="main-content">
+        <h1>KILLIS BIRD</h1>
+        <p>Redefining the boundaries of aerial technology. Our drones are built for the visionaries, the explorers, and the pioneers of tomorrow.</p>
+        <a href="#" class="cta-button">Explore the Fleet</a>
+    </div>
+
+    <script>
+        /**
+         * VIDEO LOADER LOGIC
+         * Handles video playback, exit animations, and fallback safety net.
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            const loader = document.getElementById('loader');
+            const video = document.getElementById('loader-video');
+            const mainContent = document.getElementById('main-content');
+            
+            let isExited = false;
+
+            /**
+             * Triggers the exit animation sequence
+             */
+            const exitLoader = () => {
+                if (isExited) return;
+                isExited = true;
+
+                // 1. Slide the loader upward
+                loader.classList.add('loader-exit');
+
+                // 2. Fade in the main content
+                // We add a small delay to sync with the upward wipe visual
+                setTimeout(() => {
+                    mainContent.classList.add('content-visible');
+                }, 100);
+            };
+
+            // --- Event Listeners ---
+
+            // A. Trigger exit when video naturally ends
+            video.addEventListener('ended', exitLoader);
+
+            // B. Cleanup: Remove loader from DOM after animation completes
+            loader.addEventListener('transitionend', (e) => {
+                // Ensure we only react to the transform transition on the loader itself
+                if (e.propertyName === 'transform') {
+                    loader.remove();
+                }
+            });
+
+            // C. Fallback Safety Net (8 seconds)
+            // If video fails to load, is blocked, or is too long, we exit anyway
+            const fallbackTimeout = setTimeout(() => {
+                console.warn('Video loader: Fallback triggered after 8s');
+                exitLoader();
+            }, 8000);
+
+            // Clear fallback if video ends before 8s
+            video.addEventListener('ended', () => {
+                clearTimeout(fallbackTimeout);
+            });
+
+            // D. Handle potential video play failure (e.g., power save mode)
+            video.play().catch(error => {
+                console.error("Video play failed:", error);
+                // If autoplay is blocked even when muted, trigger exit immediately
+                exitLoader();
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -44,7 +44,7 @@ export function Nav() {
   }, [open]);
 
   return (
-    <header className="fixed top-4 inset-x-0 z-50 pointer-events-none flex justify-center px-4">
+    <header className="fixed top-4 inset-x-0 z-[100] pointer-events-none flex justify-center px-4">
       {/* The background pill */}
       <div
         className={cn(
@@ -98,7 +98,7 @@ export function Nav() {
             <Link
               to="/contact"
               className={cn(
-                "flex items-center justify-center rounded-full bg-neon text-black font-bold shadow-neon transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:shadow-[0_4px_25px_-4px_rgba(232,69,10,0.5)] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neon",
+                "flex items-center justify-center rounded-full bg-neon text-white font-bold shadow-neon transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-105 hover:shadow-[0_4px_25px_-4px_rgba(232,69,10,0.5)] outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neon",
                 isScrolled && !open ? "px-5 py-2 text-[13px]" : "px-6 py-2.5 text-sm"
               )}
             >
@@ -131,7 +131,6 @@ export function Nav() {
               <Link
                 key={l.to}
                 to={l.to}
-                onClick={() => setOpen(false)}
                 activeOptions={{ exact: l.to === "/" }}
                 activeProps={{ className: "text-foreground font-bold" }}
                 className="py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-muted-foreground transition-colors hover:text-foreground border-b border-black/5 last:border-0 flex items-center justify-between group"
@@ -146,8 +145,10 @@ export function Nav() {
             </div>
             <Link
               to="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-neon px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-black font-bold transition-all hover:scale-[1.02] shadow-neon"
+              onClick={() => {
+                setOpen(false);
+              }}
+              className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-neon px-6 py-3 font-mono text-xs uppercase tracking-[0.18em] text-white font-bold transition-all hover:scale-[1.02] shadow-neon"
             >
               Request Quote
             </Link>

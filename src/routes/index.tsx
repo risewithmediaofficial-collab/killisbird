@@ -3,8 +3,10 @@ import { CapabilitySection } from "@/sections/home/CapabilitySection";
 import { CtaSection } from "@/sections/home/CtaSection";
 import { HeroSection } from "@/sections/home/HeroSection";
 import { IdentitySection } from "@/sections/home/IdentitySection";
-import { IntelligenceSection } from "@/sections/home/IntelligenceSection";
 import { SystemsSection } from "@/sections/home/SystemsSection";
+import { BlogSection } from "@/sections/home/BlogSection";
+import { QuotesSection } from "@/sections/home/QuotesSection";
+import { ClientsSection } from "@/sections/home/ClientsSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,7 +28,9 @@ function Home() {
       <HeroSection />
       <IdentitySection />
       <SystemsSection />
-      <IntelligenceSection />
+      <BlogSection />
+      <QuotesSection />
+      <ClientsSection />
       <CapabilitySection />
       <CtaSection />
     </>

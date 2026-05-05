@@ -1,47 +1,92 @@
-import { motion } from "framer-motion";
-import { PremiumCard } from "@/components/site/PremiumCard";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { capabilities } from "@/data/home";
 
 export function CapabilitySection() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+
   return (
     <section id="services" className="relative section-y bg-background border-t border-border/50">
-      <div className="container-edge relative">
+      <div className="container-edge">
+        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-10%" }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 flex flex-col gap-4 text-center md:mb-20 items-center"
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="flex flex-col gap-4 mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="w-8 h-[2px] bg-neon"></span>
+          <div className="flex items-center gap-3">
+            <span className="w-8 h-[2px] bg-neon" />
             <span className="font-mono text-sm tracking-[0.25em] font-bold text-neon uppercase">
               Capabilities
             </span>
-            <span className="w-8 h-[2px] bg-neon"></span>
+            <span className="w-8 h-[2px] bg-neon" />
           </div>
-          <h2 className="heading-lg max-w-3xl font-black text-foreground">WHAT WE DO?</h2>
+          <h2 className="heading-lg font-black text-foreground">WHAT WE DO?</h2>
         </motion.div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
+        {/* Accordion Rows */}
+        <div className="flex flex-col divide-y divide-border">
           {capabilities.map((item, i) => {
-            const Icon = item.icon;
+            const isOpen = openIdx === i;
+            const num = (i + 1).toString().padStart(2, "0");
+
             return (
-              <PremiumCard key={i} delay={i * 0.1}>
-                <div className="card-surface p-8 sm:p-10 rounded-[24px] border border-border bg-surface-elevated flex flex-col h-full transition-colors hover:border-neon/40 group">
-                  <div className="w-12 h-12 rounded-full bg-black border border-white/10 flex items-center justify-center mb-8 group-hover:bg-neon group-hover:text-black transition-colors">
-                    <Icon size={20} />
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07, duration: 0.5 }}
+              >
+                <button
+                  onClick={() => setOpenIdx(isOpen ? null : i)}
+                  className="group w-full flex items-center justify-between py-6 sm:py-7 text-left hover:bg-neon/[0.04] transition-colors rounded-lg px-3 -mx-3"
+                  aria-expanded={isOpen}
+                  aria-controls={`capability-content-${i}`}
+                  id={`capability-button-${i}`}
+                >
+                  <div className="flex items-center gap-6">
+                    {/* Number */}
+                    <span className="font-display text-xl sm:text-2xl font-black text-neon w-10 shrink-0 tabular-nums">
+                      {num}
+                    </span>
+                    {/* Title */}
+                    <span className="text-lg sm:text-2xl font-bold text-foreground group-hover:text-neon transition-colors">
+                      {item.title}
+                    </span>
                   </div>
-                  
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground mb-4 group-hover:text-neon transition-colors">
-                    {item.title}
-                  </h3>
-                  
-                  <p className="text-muted-foreground leading-relaxed flex-1">
-                    {item.text}
-                  </p>
-                </div>
-              </PremiumCard>
+                  {/* Arrow */}
+                  <span
+                    className="text-neon text-xl shrink-0 ml-4 transition-transform duration-300 inline-block"
+                    style={{ transform: isOpen ? "rotate(45deg)" : "rotate(0deg)" }}
+                    aria-hidden="true"
+                  >
+                    →
+                  </span>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      id={`capability-content-${i}`}
+                      role="region"
+                      aria-labelledby={`capability-button-${i}`}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-7 pl-12 sm:pl-16 pr-4 text-muted-foreground leading-relaxed text-base sm:text-lg max-w-2xl">
+                        {item.text}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>

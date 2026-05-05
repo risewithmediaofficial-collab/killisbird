@@ -79,18 +79,18 @@ function SupportPage() {
             return (
               <div
                 key={i}
-                className="card-surface p-8 rounded-2xl border border-border bg-surface-elevated flex flex-col items-start transition-colors hover:border-neon/40 group"
+                className="card-surface p-8 rounded-2xl border border-border bg-surface-elevated flex flex-col gap-6 items-start transition-colors hover:border-neon/40 group"
               >
-                <div className="w-12 h-12 rounded-full bg-black border border-white/10 flex items-center justify-center mb-6 group-hover:bg-neon group-hover:text-black transition-colors">
+                <div className="w-12 h-12 rounded-full bg-black border border-white/10 flex items-center justify-center group-hover:bg-neon group-hover:text-black transition-colors">
                   <Icon size={20} />
                 </div>
-                <h3 className="text-xl font-bold mb-3 tracking-tight">{category.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-8 flex-1">
+                <h3 className="text-xl font-bold tracking-tight">{category.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                   {category.desc}
                 </p>
                 <a
                   href={category.href}
-                  className="font-mono text-[11px] tracking-[0.25em] uppercase text-neon hover:underline inline-flex items-center gap-2"
+                  className="font-mono text-[11px] tracking-[0.25em] uppercase text-neon hover:underline inline-flex items-center gap-2 mt-2"
                 >
                   {category.action} <span className="text-lg leading-none">→</span>
                 </a>
@@ -164,17 +164,17 @@ function SupportPage() {
 
       {/* Contact Banner */}
       <section className="container-edge py-24 text-center">
-        <div className="max-w-2xl mx-auto">
-          <div className="w-16 h-16 rounded-full bg-neon/10 text-neon flex items-center justify-center mx-auto mb-6">
+        <div className="max-w-2xl mx-auto flex flex-col items-center gap-6">
+          <div className="w-16 h-16 rounded-full bg-neon/10 text-neon flex items-center justify-center">
             <Mail size={24} />
           </div>
-          <h2 className="text-3xl font-bold mb-4">Still need help?</h2>
-          <p className="text-muted-foreground mb-8">
+          <h2 className="text-3xl font-bold">Still need help?</h2>
+          <p className="text-muted-foreground">
             Our engineering support team usually responds within 24-48 hours.
           </p>
           <a
             href="mailto:info@killisbird.com"
-            className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 font-mono text-[11px] uppercase tracking-[0.2em] text-black font-bold transition-all hover:scale-105 hover:bg-neon"
+            className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 font-mono text-[11px] uppercase tracking-[0.2em] text-black font-bold transition-all hover:scale-105 hover:bg-neon mt-2"
           >
             Email Support
           </a>
