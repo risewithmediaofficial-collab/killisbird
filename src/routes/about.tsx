@@ -49,7 +49,9 @@ function AboutPage() {
         </div>
         <aside className="bg-surface-elevated border border-border shadow-soft rounded-[24px] space-y-6 p-8 sm:p-10 lg:col-span-5 h-fit relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-neon opacity-20" />
-          <div className="font-mono text-[10px] tracking-[0.3em] text-neon uppercase">// Manifesto</div>
+          <div className="font-mono text-[10px] tracking-[0.3em] text-neon uppercase">
+            // Manifesto
+          </div>
           <p className="text-3xl font-semibold leading-snug">
             "We're not just part of the UAV market — we help{" "}
             <span className="text-neon">shape its future</span>."
@@ -73,7 +75,10 @@ function AboutPage() {
             text: "To become the most trusted and innovative partner in the UAV ecosystem, delivering unmatched value through robust, adaptable, and forward-thinking technologies.",
           },
         ].map(({ label, icon: Icon, text }) => (
-          <div key={label} className="bg-white border border-border rounded-[32px] p-10 sm:p-14 md:p-16 shadow-sm hover:shadow-md transition-shadow">
+          <div
+            key={label}
+            className="bg-white border border-border rounded-[32px] p-10 sm:p-14 md:p-16 shadow-sm hover:shadow-md transition-shadow"
+          >
             <div className="card-content">
               <div className="mb-8 flex items-center gap-3 font-mono text-[10px] tracking-[0.3em] text-neon uppercase">
                 <Icon size={16} /> OUR {label}
@@ -128,7 +133,10 @@ function AboutPage() {
                 d: "Focused on innovation, R&D, and future-ready design.",
               },
             ].map(({ icon: Icon, t, d }) => (
-              <div key={t} className="bg-surface-elevated border border-border shadow-soft rounded-[24px] p-8 md:p-10 hover:border-neon/30 transition-colors">
+              <div
+                key={t}
+                className="bg-surface-elevated border border-border shadow-soft rounded-[24px] p-8 md:p-10 hover:border-neon/30 transition-colors"
+              >
                 <div className="card-content">
                   <Icon className="mb-6 text-neon" size={28} />
                   <h3 className="text-xl font-semibold">{t}</h3>

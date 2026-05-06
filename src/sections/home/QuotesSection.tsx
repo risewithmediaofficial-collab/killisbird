@@ -39,12 +39,12 @@ export function QuotesSection() {
     const cards = el.querySelectorAll(".quote-card");
     const card = cards[idx] as HTMLElement;
     if (!card) return;
-    
+
     // Calculate the scroll position to center the card
     const containerWidth = el.offsetWidth;
     const cardWidth = card.offsetWidth;
-    const targetScroll = card.offsetLeft - (containerWidth / 2) + (cardWidth / 2);
-    
+    const targetScroll = card.offsetLeft - containerWidth / 2 + cardWidth / 2;
+
     el.scrollTo({ left: targetScroll, behavior: "smooth" });
     setActiveIdx(idx);
   };
@@ -52,14 +52,14 @@ export function QuotesSection() {
   const onScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
-    
+
     const containerWidth = el.offsetWidth;
-    const containerCenter = el.scrollLeft + (containerWidth / 2);
-    
+    const containerCenter = el.scrollLeft + containerWidth / 2;
+
     const cards = el.querySelectorAll(".quote-card");
     let closestIdx = 0;
     let minDistance = Infinity;
-    
+
     cards.forEach((card, i) => {
       const cardCenter = (card as HTMLElement).offsetLeft + (card as HTMLElement).offsetWidth / 2;
       const distance = Math.abs(containerCenter - cardCenter);
@@ -68,7 +68,7 @@ export function QuotesSection() {
         closestIdx = i;
       }
     });
-    
+
     if (closestIdx !== activeIdx) {
       setActiveIdx(closestIdx);
     }

@@ -17,12 +17,8 @@ const blogs = [
 
 export function IntelligenceSection() {
   return (
-    <section
-      id="blog"
-      className="container-edge section-y bg-background border-t border-border/50"
-    >
+    <section id="blog" className="container-edge section-y bg-background border-t border-border/50">
       <div className="grid lg:grid-cols-2 gap-20">
-        
         {/* Left: Our Blog */}
         <div className="flex flex-col gap-10">
           <motion.div
@@ -33,7 +29,9 @@ export function IntelligenceSection() {
             className="flex flex-col gap-2"
           >
             <h2 className="heading-lg font-black text-foreground">OUR BLOG</h2>
-            <p className="text-muted-foreground">Latest insights from our defense and engineering teams.</p>
+            <p className="text-muted-foreground">
+              Latest insights from our defense and engineering teams.
+            </p>
           </motion.div>
 
           <div className="flex flex-col gap-6">
@@ -70,7 +68,7 @@ export function IntelligenceSection() {
             <p className="text-muted-foreground">Powering defense and industry leaders.</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -79,16 +77,17 @@ export function IntelligenceSection() {
           >
             {/* Empty boxes for client logos */}
             {Array.from({ length: 6 }).map((_, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="h-32 rounded-xl border border-border/50 bg-black/5 flex items-center justify-center filter grayscale opacity-40 hover:opacity-100 hover:grayscale-0 transition-all duration-300"
               >
-                <div className="font-mono text-xs tracking-widest text-muted-foreground/30">LOGO {i+1}</div>
+                <div className="font-mono text-xs tracking-widest text-muted-foreground/30">
+                  LOGO {i + 1}
+                </div>
               </div>
             ))}
           </motion.div>
         </div>
-
       </div>
     </section>
   );

@@ -51,10 +51,11 @@ function BlogIndexPage() {
                     <img
                       src={article.coverImage}
                       alt={article.title}
-                      className="h-full w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105 p-8"
+                      loading="lazy"
+                      className="h-full w-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105 p-8"
                     />
                     <div className="absolute inset-0 bg-foreground/[0.02] pointer-events-none" />
-                    
+
                     {/* Category Label */}
                     <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-md px-2.5 py-1 font-mono text-[0.55rem] tracking-[0.2em] text-foreground border border-border/50 rounded-sm">
                       {article.category}
@@ -78,7 +79,7 @@ function BlogIndexPage() {
                     <h3 className="text-xl font-bold text-foreground mb-4 group-hover:text-neon transition-colors line-clamp-2 leading-tight">
                       {article.title}
                     </h3>
-                    
+
                     <p className="text-sm text-muted-foreground line-clamp-3 mb-8 flex-1 leading-relaxed">
                       {article.excerpt}
                     </p>
@@ -95,7 +96,7 @@ function BlogIndexPage() {
         </div>
 
         {/* Bottom CTA */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -104,13 +105,15 @@ function BlogIndexPage() {
           <div className="max-w-2xl mx-auto space-y-6">
             <h4 className="heading-md">Deep Intelligence?</h4>
             <p className="text-muted-foreground">
-              Request a classified briefing or technical consultation with our engineering team for custom mission requirements.
+              Request a classified briefing or technical consultation with our engineering team for
+              custom mission requirements.
             </p>
             <Link
               to="/contact"
               className="inline-flex min-h-12 items-center gap-3 font-mono text-[11px] uppercase tracking-[0.25em] text-neon hover:underline group"
             >
-              Request classified briefing <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              Request classified briefing{" "}
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </motion.div>
@@ -118,5 +121,3 @@ function BlogIndexPage() {
     </>
   );
 }
-
-

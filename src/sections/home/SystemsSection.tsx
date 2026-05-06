@@ -24,13 +24,13 @@ export function SystemsSection() {
   useEffect(() => {
     let ticking = false;
     const section = document.getElementById("systems");
-    
+
     const handleScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const cards = document.querySelectorAll(".scroll-card-item");
           if (cards.length === 0) return;
-          
+
           let closestIdx = activeIdRef.current;
           let minDistance = Infinity;
           const centerY = window.innerHeight / 2;
@@ -57,14 +57,17 @@ export function SystemsSection() {
 
     if (!section) return;
 
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        handleScroll();
-      } else {
-        window.removeEventListener("scroll", handleScroll);
-      }
-    }, { rootMargin: "200px" });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          window.addEventListener("scroll", handleScroll, { passive: true });
+          handleScroll();
+        } else {
+          window.removeEventListener("scroll", handleScroll);
+        }
+      },
+      { rootMargin: "200px" },
+    );
 
     observer.observe(section);
 
@@ -78,7 +81,6 @@ export function SystemsSection() {
     <section id="systems" className="relative bg-background section-y overflow-hidden">
       <div className="container-edge">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          
           {/* LEFT: STICKY PANEL */}
           <div className="lg:col-span-5 lg:sticky lg:top-40 z-10 pointer-events-none">
             <motion.div
@@ -95,14 +97,15 @@ export function SystemsSection() {
                 </span>
                 <span className="w-8 h-[2px] bg-neon"></span>
               </div>
-              
+
               <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground leading-[1.1] tracking-tight">
                 WHAT WE BUILD
               </h2>
-              
+
               <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-md">
-                High-performance hardware engineered for extreme environments and tactical precision. 
-                Each system is meticulously designed, tested, and field-proven inside our indigenous facility.
+                High-performance hardware engineered for extreme environments and tactical
+                precision. Each system is meticulously designed, tested, and field-proven inside our
+                indigenous facility.
               </p>
             </motion.div>
           </div>
@@ -143,9 +146,9 @@ export function SystemsSection() {
                   }}
                   className={cn(
                     "scroll-card-item relative overflow-hidden rounded-[24px] cursor-pointer group flex-shrink-0 w-full transition-all duration-700",
-                    isActive 
-                      ? "h-[380px] sm:h-[460px] shadow-2xl bg-[var(--navy)]" 
-                      : "h-[68px] sm:h-[80px] bg-[var(--navy)]/90 hover:bg-[var(--navy)]"
+                    isActive
+                      ? "h-[380px] sm:h-[460px] shadow-2xl bg-[var(--navy)]"
+                      : "h-[68px] sm:h-[80px] bg-[var(--navy)]/90 hover:bg-[var(--navy)]",
                   )}
                   onClick={() => {
                     activeIdRef.current = i;
@@ -162,10 +165,11 @@ export function SystemsSection() {
                         transition={{ duration: 0.7 }}
                         className="absolute inset-0 z-0"
                       >
-                        <img 
-                          src={getImageForCode(item.code)} 
+                        <img
+                          src={getImageForCode(item.code)}
                           alt={item.title}
-                          className="w-full h-full object-cover" 
+                          loading="lazy"
+                          className="w-full h-full object-cover"
                         />
                         {/* Dark gradient overlay on bottom half */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
@@ -176,16 +180,19 @@ export function SystemsSection() {
 
                   <div className="relative z-10 px-6 sm:px-10 py-6 sm:py-8 h-full flex flex-col justify-between pointer-events-none">
                     {/* Top: Title & Number */}
-                    <motion.div layout="position" className="flex justify-between items-center w-full">
+                    <motion.div
+                      layout="position"
+                      className="flex justify-between items-center w-full"
+                    >
                       <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-wide">
                         {item.title}
                       </h3>
-                      <span 
+                      <span
                         className={cn(
                           "font-display font-black leading-none transition-all duration-500",
-                          isActive 
-                            ? "text-[80px] sm:text-[100px] text-transparent -mt-4 opacity-50" 
-                            : "text-3xl text-white/50"
+                          isActive
+                            ? "text-[80px] sm:text-[100px] text-transparent -mt-4 opacity-50"
+                            : "text-3xl text-white/50",
                         )}
                         style={isActive ? { WebkitTextStroke: "2px rgba(255,255,255,1)" } : {}}
                       >
@@ -196,7 +203,7 @@ export function SystemsSection() {
                     {/* Bottom: Description & Tags */}
                     <AnimatePresence initial={false}>
                       {isActive && (
-                        <motion.div 
+                        <motion.div
                           key="content"
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}

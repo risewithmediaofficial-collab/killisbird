@@ -42,7 +42,8 @@ export function HeroSection() {
           left: "-80px",
           width: "600px",
           height: "600px",
-          background: "radial-gradient(circle, color-mix(in srgb, var(--neon) 15%, transparent) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--neon) 15%, transparent) 0%, transparent 70%)",
           borderRadius: "50%",
         }}
         aria-hidden="true"
@@ -54,7 +55,8 @@ export function HeroSection() {
           right: "-60px",
           width: "500px",
           height: "500px",
-          background: "radial-gradient(circle, color-mix(in srgb, #1B2D6B 12%, transparent) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, color-mix(in srgb, #1B2D6B 12%, transparent) 0%, transparent 70%)",
           borderRadius: "50%",
         }}
         aria-hidden="true"
@@ -117,7 +119,9 @@ export function HeroSection() {
             className="heading-h1 flex flex-col gap-4 lg:gap-6 leading-[0.95]"
           >
             <span className="block">PRECISION</span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">FLIGHT.</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-foreground to-foreground/50">
+              FLIGHT.
+            </span>
             <span className="block">ENGINEERED</span>
             <span className="block text-neon">BOLD.</span>
           </motion.h1>
@@ -129,7 +133,8 @@ export function HeroSection() {
             transition={{ delay: 0.3, duration: 1 }}
             className="max-w-[480px] text-lg sm:text-xl text-muted-foreground font-medium leading-relaxed"
           >
-            High-end aerial systems crafted for absolute precision, intelligent autonomy, and premium design.
+            High-end aerial systems crafted for absolute precision, intelligent autonomy, and
+            premium design.
           </motion.p>
 
           {/* CTA Button */}
@@ -184,11 +189,13 @@ export function HeroSection() {
 
         {/* Rotating circular badge */}
         <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 pointer-events-none hidden sm:flex items-center justify-center">
-          <div
-            className="w-16 h-16 rounded-full bg-neon flex items-center justify-center animate-spin-badge"
-          >
+          <div className="w-16 h-16 rounded-full bg-neon flex items-center justify-center animate-spin-badge">
             <span className="text-white text-[10px] font-black text-center leading-tight tracking-wide uppercase">
-              BUILT<br />FOR<br />PROS
+              BUILT
+              <br />
+              FOR
+              <br />
+              PROS
             </span>
           </div>
         </div>

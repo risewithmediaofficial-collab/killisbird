@@ -45,7 +45,8 @@ export function BlogSection() {
                     <img
                       src={post.coverImage}
                       alt={post.title}
-                      className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105 p-8"
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 p-8"
                     />
                     <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     {/* Category badge */}

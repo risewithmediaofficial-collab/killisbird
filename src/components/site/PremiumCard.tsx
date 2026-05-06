@@ -12,14 +12,14 @@ interface PremiumCardProps {
   onKeyDown?: (e: React.KeyboardEvent<HTMLDivElement>) => void;
 }
 
-export function PremiumCard({ 
-  children, 
-  className, 
-  delay = 0, 
+export function PremiumCard({
+  children,
+  className,
+  delay = 0,
   tilt = true,
   role,
   tabIndex,
-  onKeyDown
+  onKeyDown,
 }: PremiumCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -79,12 +79,15 @@ export function PremiumCard({
       role={role}
       tabIndex={tabIndex}
       onKeyDown={onKeyDown}
-      style={{ 
-        transform: tilt || isHovered ? transform : undefined, 
+      style={{
+        transform: tilt || isHovered ? transform : undefined,
         transformStyle: "preserve-3d",
-        zIndex: isHovered ? 45 : 1
+        zIndex: isHovered ? 45 : 1,
       }}
-      className={cn("will-change-transform relative group rounded-[20px] transition-shadow duration-500", className)}
+      className={cn(
+        "will-change-transform relative group rounded-[20px] transition-shadow duration-500",
+        className,
+      )}
     >
       <div
         style={{ transform: tilt ? "translateZ(20px)" : "none", transformStyle: "preserve-3d" }}

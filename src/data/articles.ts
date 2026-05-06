@@ -79,7 +79,8 @@ Swarm intelligence turns multi-UAV missions into coordinated systems: fast local
   {
     slug: "flight-control",
     title: "Next-Gen Flight Control Systems: STM32H743",
-    excerpt: "Exploring the computational power behind real-time stabilization and rapid decision-making.",
+    excerpt:
+      "Exploring the computational power behind real-time stabilization and rapid decision-making.",
     author: "Anil Kumar Singh",
     date: "Sep 28, 2026",
     category: "HARDWARE",
@@ -286,4 +287,3 @@ Anti-drone jammers are reshaping modern defense thinking by adding a non-kinetic
 export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((article) => article.slug === slug);
 }
-

@@ -16,9 +16,16 @@ export function CustomCursor() {
     let smoothY = mouseY;
     let currentTilt = 0;
 
-    const onMouseMove = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY; };
-    const onEnter = () => { isHovering = true; };
-    const onLeave = () => { isHovering = false; };
+    const onMouseMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    };
+    const onEnter = () => {
+      isHovering = true;
+    };
+    const onLeave = () => {
+      isHovering = false;
+    };
 
     const attachListeners = () => {
       document.querySelectorAll("a, button, [role='button'], [data-cursor-hover]").forEach((el) => {
@@ -46,64 +53,74 @@ export function CustomCursor() {
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     rafId = requestAnimationFrame(animate);
-    return () => { window.removeEventListener("mousemove", onMouseMove); cancelAnimationFrame(rafId); observer.disconnect(); };
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, []);
 
   return (
     <div ref={droneRef} className="drone-cursor" aria-hidden="true">
       {/* 26×26px rendered, 48×48 viewBox for crisp detail */}
-      <svg width="26" height="26" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="26"
+        height="26"
+        viewBox="0 0 48 48"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
           {/* Carbon fiber arm */}
           <linearGradient id="cf1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stopColor="#444" />
-            <stop offset="50%"  stopColor="#1a1a1a" />
+            <stop offset="0%" stopColor="#444" />
+            <stop offset="50%" stopColor="#1a1a1a" />
             <stop offset="100%" stopColor="#080808" />
           </linearGradient>
           {/* Arm highlight edge */}
           <linearGradient id="cf2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stopColor="#666" stopOpacity="0.7" />
+            <stop offset="0%" stopColor="#666" stopOpacity="0.7" />
             <stop offset="100%" stopColor="#333" stopOpacity="0" />
           </linearGradient>
           {/* Motor can - metallic radial */}
           <radialGradient id="mtr" cx="38%" cy="30%" r="65%">
-            <stop offset="0%"   stopColor="#aaa" />
-            <stop offset="40%"  stopColor="#555" />
+            <stop offset="0%" stopColor="#aaa" />
+            <stop offset="40%" stopColor="#555" />
             <stop offset="100%" stopColor="#111" />
           </radialGradient>
           {/* Motor side wall */}
           <linearGradient id="mwall" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stopColor="#333" />
+            <stop offset="0%" stopColor="#333" />
             <stop offset="100%" stopColor="#0a0a0a" />
           </linearGradient>
           {/* Body plate */}
           <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stopColor="#1c3a7a" />
-            <stop offset="55%"  stopColor="#0a1a50" />
+            <stop offset="0%" stopColor="#1c3a7a" />
+            <stop offset="55%" stopColor="#0a1a50" />
             <stop offset="100%" stopColor="#05102a" />
           </linearGradient>
           {/* Body specular */}
           <radialGradient id="bspec" cx="35%" cy="25%" r="55%">
-            <stop offset="0%"   stopColor="#fff" stopOpacity="0.18" />
+            <stop offset="0%" stopColor="#fff" stopOpacity="0.18" />
             <stop offset="100%" stopColor="#fff" stopOpacity="0" />
           </radialGradient>
           {/* Prop disc blur */}
           <radialGradient id="pdisc" cx="50%" cy="50%" r="50%">
-            <stop offset="0%"   stopColor="#FF6B00" stopOpacity="0.05" />
-            <stop offset="55%"  stopColor="#FF6B00" stopOpacity="0.28" />
-            <stop offset="85%"  stopColor="#FF6B00" stopOpacity="0.45" />
+            <stop offset="0%" stopColor="#FF6B00" stopOpacity="0.05" />
+            <stop offset="55%" stopColor="#FF6B00" stopOpacity="0.28" />
+            <stop offset="85%" stopColor="#FF6B00" stopOpacity="0.45" />
             <stop offset="100%" stopColor="#FF6B00" stopOpacity="0.05" />
           </radialGradient>
           {/* Blade gradient */}
           <linearGradient id="blade" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%"   stopColor="#FF9030" />
-            <stop offset="50%"  stopColor="#FF6B00" />
+            <stop offset="0%" stopColor="#FF9030" />
+            <stop offset="50%" stopColor="#FF6B00" />
             <stop offset="100%" stopColor="#CC4400" />
           </linearGradient>
           {/* Camera lens */}
           <radialGradient id="lens" cx="35%" cy="30%" r="60%">
-            <stop offset="0%"   stopColor="#4466aa" />
-            <stop offset="60%"  stopColor="#111" />
+            <stop offset="0%" stopColor="#4466aa" />
+            <stop offset="60%" stopColor="#111" />
             <stop offset="100%" stopColor="#000" />
           </radialGradient>
           {/* Soft drop shadow */}
@@ -112,43 +129,119 @@ export function CustomCursor() {
           </filter>
           {/* Orange glow */}
           <filter id="oglow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="0" stdDeviation="1.5" floodColor="#FF6B00" floodOpacity="0.9" />
+            <feDropShadow
+              dx="0"
+              dy="0"
+              stdDeviation="1.5"
+              floodColor="#FF6B00"
+              floodOpacity="0.9"
+            />
           </filter>
           {/* Blue body glow */}
           <filter id="bglow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="0" stdDeviation="1.2" floodColor="#2255cc" floodOpacity="0.5" />
+            <feDropShadow
+              dx="0"
+              dy="0"
+              stdDeviation="1.2"
+              floodColor="#2255cc"
+              floodOpacity="0.5"
+            />
           </filter>
         </defs>
 
         {/* ══ ARMS — carbon fiber, dual-stroke for depth ══ */}
         {/* TL */}
-        <line x1="18" y1="17" x2="8"  y2="7"  stroke="url(#cf1)" strokeWidth="3.2" strokeLinecap="round" />
-        <line x1="18" y1="17" x2="8"  y2="7"  stroke="url(#cf2)" strokeWidth="1.2" strokeLinecap="round" />
+        <line
+          x1="18"
+          y1="17"
+          x2="8"
+          y2="7"
+          stroke="url(#cf1)"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="18"
+          y1="17"
+          x2="8"
+          y2="7"
+          stroke="url(#cf2)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
         {/* TR */}
-        <line x1="30" y1="17" x2="40" y2="7"  stroke="url(#cf1)" strokeWidth="3.2" strokeLinecap="round" />
-        <line x1="30" y1="17" x2="40" y2="7"  stroke="url(#cf2)" strokeWidth="1.2" strokeLinecap="round" />
+        <line
+          x1="30"
+          y1="17"
+          x2="40"
+          y2="7"
+          stroke="url(#cf1)"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="30"
+          y1="17"
+          x2="40"
+          y2="7"
+          stroke="url(#cf2)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
         {/* BL */}
-        <line x1="18" y1="31" x2="8"  y2="41" stroke="url(#cf1)" strokeWidth="3.2" strokeLinecap="round" />
-        <line x1="18" y1="31" x2="8"  y2="41" stroke="url(#cf2)" strokeWidth="1.2" strokeLinecap="round" />
+        <line
+          x1="18"
+          y1="31"
+          x2="8"
+          y2="41"
+          stroke="url(#cf1)"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="18"
+          y1="31"
+          x2="8"
+          y2="41"
+          stroke="url(#cf2)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
         {/* BR */}
-        <line x1="30" y1="31" x2="40" y2="41" stroke="url(#cf1)" strokeWidth="3.2" strokeLinecap="round" />
-        <line x1="30" y1="31" x2="40" y2="41" stroke="url(#cf2)" strokeWidth="1.2" strokeLinecap="round" />
+        <line
+          x1="30"
+          y1="31"
+          x2="40"
+          y2="41"
+          stroke="url(#cf1)"
+          strokeWidth="3.2"
+          strokeLinecap="round"
+        />
+        <line
+          x1="30"
+          y1="31"
+          x2="40"
+          y2="41"
+          stroke="url(#cf2)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
 
         {/* ══ MOTOR PODS — cylindrical with metallic cap ══ */}
         {/* TL motor */}
-        <circle cx="8"  cy="7"  r="5.5" fill="url(#mwall)" />
-        <circle cx="8"  cy="7"  r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
-        <circle cx="8"  cy="7"  r="4.2" fill="url(#mtr)" />
+        <circle cx="8" cy="7" r="5.5" fill="url(#mwall)" />
+        <circle cx="8" cy="7" r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
+        <circle cx="8" cy="7" r="4.2" fill="url(#mtr)" />
         <circle cx="6.5" cy="5.5" r="0.9" fill="#ccc" opacity="0.5" />
         {/* TR motor */}
-        <circle cx="40" cy="7"  r="5.5" fill="url(#mwall)" />
-        <circle cx="40" cy="7"  r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
-        <circle cx="40" cy="7"  r="4.2" fill="url(#mtr)" />
+        <circle cx="40" cy="7" r="5.5" fill="url(#mwall)" />
+        <circle cx="40" cy="7" r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
+        <circle cx="40" cy="7" r="4.2" fill="url(#mtr)" />
         <circle cx="38.5" cy="5.5" r="0.9" fill="#ccc" opacity="0.5" />
         {/* BL motor */}
-        <circle cx="8"  cy="41" r="5.5" fill="url(#mwall)" />
-        <circle cx="8"  cy="41" r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
-        <circle cx="8"  cy="41" r="4.2" fill="url(#mtr)" />
+        <circle cx="8" cy="41" r="5.5" fill="url(#mwall)" />
+        <circle cx="8" cy="41" r="5.5" fill="none" stroke="#3a3a3a" strokeWidth="0.6" />
+        <circle cx="8" cy="41" r="4.2" fill="url(#mtr)" />
         <circle cx="6.5" cy="39.5" r="0.9" fill="#ccc" opacity="0.5" />
         {/* BR motor */}
         <circle cx="40" cy="41" r="5.5" fill="url(#mwall)" />
@@ -194,11 +287,29 @@ export function CustomCursor() {
         {/* Ground shadow for depth */}
         <ellipse cx="24.5" cy="30" rx="10" ry="4" fill="#000" opacity="0.2" />
         {/* Main body */}
-        <rect x="14" y="13" width="20" height="22" rx="3.5" fill="url(#body)" filter="url(#bglow)" />
+        <rect
+          x="14"
+          y="13"
+          width="20"
+          height="22"
+          rx="3.5"
+          fill="url(#body)"
+          filter="url(#bglow)"
+        />
         {/* Specular */}
         <rect x="14" y="13" width="20" height="22" rx="3.5" fill="url(#bspec)" />
         {/* Rim */}
-        <rect x="14" y="13" width="20" height="22" rx="3.5" fill="none" stroke="#2a5acc" strokeWidth="0.55" opacity="0.6" />
+        <rect
+          x="14"
+          y="13"
+          width="20"
+          height="22"
+          rx="3.5"
+          fill="none"
+          stroke="#2a5acc"
+          strokeWidth="0.55"
+          opacity="0.6"
+        />
         {/* Panel detail lines */}
         <line x1="14" y1="24" x2="34" y2="24" stroke="#0a1840" strokeWidth="0.5" opacity="0.55" />
         <line x1="24" y1="13" x2="24" y2="35" stroke="#0a1840" strokeWidth="0.5" opacity="0.35" />

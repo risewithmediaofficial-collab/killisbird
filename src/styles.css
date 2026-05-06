@@ -80,7 +80,7 @@
 
   /* Electric yellow accent */
   --neon: #e8450a;
-  --navy: #1B2D6B;
+  --navy: #1b2d6b;
   --violet: #5500ff;
   --magenta: #ff00ff;
 
@@ -122,7 +122,9 @@
 }
 
 @layer base {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     border-color: var(--color-border);
     box-sizing: border-box;
   }
@@ -140,6 +142,7 @@
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    overscroll-behavior-y: none;
   }
   body::before {
     content: "";
@@ -166,6 +169,11 @@
   textarea,
   select {
     -webkit-tap-highlight-color: transparent;
+  }
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* Prevent iOS zoom */
   }
   button,
   a {
@@ -434,6 +442,7 @@
     );
     z-index: 2;
     pointer-events: none;
+    will-change: opacity;
   }
   .hero-drone-canvas__hud {
     position: absolute;
@@ -774,12 +783,20 @@
 
   /* ── New keyframes ───────────────────────────────────────────── */
   @keyframes spin-badge {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   @keyframes ticker-reverse {
-    from { transform: translateX(-50%); }
-    to   { transform: translateX(0); }
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
   }
 
   .animate-spin-badge {
@@ -816,18 +833,18 @@
   font-weight: 600;
 }
 
-
-
-
 /* ── Scroll reveal animation ───────────────────────────────────── */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
 }
 
 /* ── Quotes Section ────────────────────────────────────────────── */
@@ -889,7 +906,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
   flex-shrink: 0;
 }
 .quote-nav-btn:hover {
@@ -902,7 +921,10 @@
   border-radius: 50%;
   background: #ddd;
   border: none;
-  transition: width 0.3s ease, background 0.3s ease, border-radius 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background 0.3s ease,
+    border-radius 0.3s ease;
   flex-shrink: 0;
   cursor: pointer;
 }
@@ -934,6 +956,7 @@
   animation: ticker 30s linear infinite;
   white-space: nowrap;
   flex-shrink: 0;
+  will-change: transform;
 }
 .clients-logo-item {
   display: inline-flex;

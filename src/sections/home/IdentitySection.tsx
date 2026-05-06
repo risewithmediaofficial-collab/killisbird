@@ -27,7 +27,8 @@ export function IdentitySection() {
           </h2>
 
           <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-3xl font-medium">
-            At Killis Bird, we are redefining what is possible in unmanned aerial systems through innovative, indigenous solutions designed to elevate performance and reliability.
+            At Killis Bird, we are redefining what is possible in unmanned aerial systems through
+            innovative, indigenous solutions designed to elevate performance and reliability.
           </p>
         </motion.div>
       </div>

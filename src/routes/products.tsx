@@ -147,7 +147,7 @@ function ProductGallery({ images, code }: { images: string[]; code: string }) {
               src={src}
               alt={`${code} view ${idx + 1}`}
               loading="lazy"
-              className="h-full w-full object-contain mix-blend-multiply"
+              className="h-full w-full object-cover mix-blend-multiply"
             />
           </div>
         ))}
@@ -251,7 +251,9 @@ function ProductsPage() {
                     <div className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
                       {s.k}
                     </div>
-                    <div className="mt-1 break-words text-sm font-semibold text-foreground">{s.v}</div>
+                    <div className="mt-1 break-words text-sm font-semibold text-foreground">
+                      {s.v}
+                    </div>
                   </div>
                 ))}
               </div>

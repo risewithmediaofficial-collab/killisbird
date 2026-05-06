@@ -49,19 +49,26 @@ export function Footer() {
             <div className="flex items-start gap-3">
               <MapPin size={16} className="text-neon mt-0.5 shrink-0" />
               <span className="leading-relaxed">
-                Plot No.107, Pollupalli SIDCO Industrial Estate,<br />
+                Plot No.107, Pollupalli SIDCO Industrial Estate,
+                <br />
                 Gangasandiram, Krishnagiri 635115.
               </span>
             </div>
             <div className="flex items-center gap-3">
               <Phone size={16} className="text-neon shrink-0" />
-              <a href="tel:+917200743683" className="hover:text-neon transition-colors font-mono tracking-widest text-xs">
+              <a
+                href="tel:+917200743683"
+                className="hover:text-neon transition-colors font-mono tracking-widest text-xs"
+              >
                 +91 72007 43683
               </a>
             </div>
             <div className="flex items-center gap-3">
               <Mail size={16} className="text-neon shrink-0" />
-              <a href="mailto:info@killisbird.com" className="hover:text-neon transition-colors font-mono tracking-widest text-xs">
+              <a
+                href="mailto:info@killisbird.com"
+                className="hover:text-neon transition-colors font-mono tracking-widest text-xs"
+              >
                 info@killisbird.com
               </a>
             </div>

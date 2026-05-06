@@ -4,15 +4,16 @@ import droneBg from "@/assets/hero-drone.jpg";
 
 export function CtaSection() {
   return (
-    <section id="cta" className="relative py-28 md:py-36 bg-black text-white overflow-hidden border-t border-border/50">
+    <section
+      id="cta"
+      className="relative py-28 md:py-36 bg-black text-white overflow-hidden border-t border-border/50"
+    >
       {/* Faint drone silhouette background */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none"
-        aria-hidden="true"
-      >
+      <div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
         <img
           src={droneBg}
           alt=""
+          loading="lazy"
           className="w-full h-full object-cover opacity-[0.06] mix-blend-luminosity"
         />
       </div>
@@ -50,17 +51,17 @@ export function CtaSection() {
           </h2>
 
           {/* Two buttons */}
-          <div className="flex flex-col sm:flex-row items-center gap-4 mt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-2 w-full max-w-sm sm:max-w-none mx-auto">
             <Link
               to="/contact"
               onClick={() => window.scrollTo(0, 0)}
-              className="inline-flex h-14 items-center justify-center rounded-full bg-neon px-10 font-mono text-sm uppercase tracking-[0.18em] text-white font-bold transition-all hover:scale-105 hover:shadow-[0_8px_32px_rgba(232,69,10,0.5)] shadow-[0_4px_20px_rgba(232,69,10,0.3)]"
+              className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-full bg-neon px-10 font-mono text-sm uppercase tracking-[0.18em] text-white font-bold transition-all hover:scale-105 hover:shadow-[0_8px_32px_rgba(232,69,10,0.5)] shadow-[0_4px_20px_rgba(232,69,10,0.3)]"
             >
               Request A Call
             </Link>
             <a
               href="mailto:info@killisbird.com"
-              className="inline-flex h-14 items-center justify-center rounded-full border border-white/30 px-10 font-mono text-sm uppercase tracking-[0.18em] text-white font-bold transition-all hover:border-neon hover:text-neon hover:scale-105"
+              className="inline-flex h-14 w-full sm:w-auto items-center justify-center rounded-full border border-white/30 px-10 font-mono text-sm uppercase tracking-[0.18em] text-white font-bold transition-all hover:border-neon hover:text-neon hover:scale-105"
             >
               Email Us
             </a>

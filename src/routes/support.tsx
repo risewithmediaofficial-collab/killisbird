@@ -8,7 +8,8 @@ export const Route = createFileRoute("/support")({
       { title: "Support & Warranty — Killis Bird" },
       {
         name: "description",
-        content: "Customer support, warranty registration, and technical assistance for Killis Bird UAV components.",
+        content:
+          "Customer support, warranty registration, and technical assistance for Killis Bird UAV components.",
       },
     ],
   }),
@@ -106,12 +107,12 @@ function SupportPage() {
         <div className="max-w-4xl border-t border-border pt-16">
           <SectionLabel index="01" label="Warranty Policy" />
           <h2 className="heading-lg mt-8 mb-6">Terms & Conditions</h2>
-          
+
           <div className="prose prose-invert prose-p:text-muted-foreground prose-p:leading-relaxed max-w-none space-y-6">
             <p>
-              Killis Bird LLP stands behind the quality and engineering of our products. We offer a limited warranty 
-              of <strong>6 to 12 months</strong> (depending on the product category) against manufacturing defects, 
-              valid from the date of delivery.
+              Killis Bird LLP stands behind the quality and engineering of our products. We offer a
+              limited warranty of <strong>6 to 12 months</strong> (depending on the product
+              category) against manufacturing defects, valid from the date of delivery.
             </p>
             <div className="grid sm:grid-cols-2 gap-6 my-8">
               <div className="p-6 bg-black/40 border border-border rounded-lg">
@@ -137,9 +138,10 @@ function SupportPage() {
               </div>
             </div>
             <p>
-              To initiate a warranty claim, the product must be registered on our website within 5 days of purchase. 
-              Claims must be submitted to <strong>info@killisbird.com</strong> with your invoice, serial number, 
-              and clear photographic or video evidence of the issue.
+              To initiate a warranty claim, the product must be registered on our website within 5
+              days of purchase. Claims must be submitted to <strong>info@killisbird.com</strong>{" "}
+              with your invoice, serial number, and clear photographic or video evidence of the
+              issue.
             </p>
           </div>
         </div>
@@ -151,7 +153,7 @@ function SupportPage() {
           <div className="max-w-3xl mx-auto text-center mb-16">
             <h2 className="heading-lg">Frequently Asked Questions</h2>
           </div>
-          
+
           <div className="max-w-4xl mx-auto space-y-6">
             {faqs.map((faq, i) => (
               <div key={i} className="p-6 sm:p-8 border border-border bg-background rounded-2xl">

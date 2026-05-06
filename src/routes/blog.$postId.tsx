@@ -44,11 +44,7 @@ function BlogPostPage() {
   return (
     <div className="bg-background">
       {/* Hero Section */}
-      <PageHero
-        kicker={article.category}
-        title={article.title}
-        subtitle={article.excerpt}
-      />
+      <PageHero kicker={article.category} title={article.title} subtitle={article.excerpt} />
 
       <section className="container-edge -mt-12 mb-24 md:-mt-16 md:mb-32 relative z-10">
         <motion.div
@@ -60,7 +56,7 @@ function BlogPostPage() {
             <img
               src={article.coverImage}
               alt={article.title}
-              className="w-full h-full object-contain p-12 mix-blend-multiply"
+              className="w-full h-full object-cover p-12 mix-blend-multiply"
             />
             <div className="absolute inset-0 bg-foreground/5 pointer-events-none" />
           </div>
@@ -71,8 +67,9 @@ function BlogPostPage() {
       <section className="container-edge pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Metadata Sidebar */}
-          <aside className="lg:col-span-3 space-y-12">
-            <div className="space-y-8 sticky top-32">
+          <aside className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-border/50 px-4 pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] flex justify-around items-center shadow-[0_-4px_20px_rgba(0,0,0,0.05)] lg:relative lg:block lg:col-span-3 lg:space-y-12 lg:bg-transparent lg:border-none lg:p-0 lg:z-auto lg:shadow-none lg:pb-0">
+            {/* Desktop Sidebar */}
+            <div className="hidden lg:block space-y-8 sticky top-32">
               <div>
                 <SectionLabel index="01" label="Author" />
                 <div className="mt-4 flex items-center gap-3">
@@ -110,11 +107,35 @@ function BlogPostPage() {
                     to="/blog"
                     className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground hover:text-neon transition-colors group"
                   >
-                    <ArrowLeft size={12} className="group-hover:-translate-x-1 transition-transform" />
+                    <ArrowLeft
+                      size={12}
+                      className="group-hover:-translate-x-1 transition-transform"
+                    />
                     Back to Archive
                   </Link>
                 </div>
               </div>
+            </div>
+
+            {/* Mobile Bottom Tab Bar */}
+            <div className="flex lg:hidden w-full justify-around items-center">
+              <Link
+                to="/blog"
+                className="flex flex-col items-center gap-1.5 text-muted-foreground hover:text-neon transition-colors"
+              >
+                <ArrowLeft size={20} />
+                <span className="text-[9px] font-mono uppercase tracking-widest">Back</span>
+              </Link>
+              <div className="flex flex-col items-center gap-1.5 text-foreground">
+                <Clock size={20} className="text-neon" />
+                <span className="text-[9px] font-mono uppercase tracking-widest">
+                  {article.readTime}
+                </span>
+              </div>
+              <button className="flex flex-col items-center gap-1.5 text-muted-foreground hover:text-neon transition-colors">
+                <Share2 size={20} />
+                <span className="text-[9px] font-mono uppercase tracking-widest">Share</span>
+              </button>
             </div>
           </aside>
 
@@ -123,8 +144,23 @@ function BlogPostPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="lg:col-span-9 max-w-3xl"
+            className="lg:col-span-9 max-w-3xl pb-16 lg:pb-0"
           >
+            {/* Mobile Author/Date Info */}
+            <div className="flex lg:hidden items-center justify-between border-b border-border/50 pb-6 mb-10">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-neon/10 flex items-center justify-center text-neon">
+                  <User size={18} />
+                </div>
+                <div>
+                  <div className="text-sm font-medium">{article.author}</div>
+                  <div className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
+                    {article.date}
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="prose-custom">
               {article.content.split("\n\n").map((block, idx) => {
                 const trimmed = block.trim();
@@ -132,20 +168,14 @@ function BlogPostPage() {
                 // Handle headers
                 if (trimmed.startsWith("## ")) {
                   return (
-                    <h2
-                      key={idx}
-                      className="heading-md mt-16 mb-6 text-foreground first:mt-0"
-                    >
+                    <h2 key={idx} className="heading-md mt-16 mb-6 text-foreground first:mt-0">
                       {trimmed.replace("## ", "")}
                     </h2>
                   );
                 }
                 if (trimmed.startsWith("### ")) {
                   return (
-                    <h3
-                      key={idx}
-                      className="text-xl font-medium text-foreground mt-10 mb-4"
-                    >
+                    <h3 key={idx} className="text-xl font-medium text-foreground mt-10 mb-4">
                       {trimmed.replace("### ", "")}
                     </h3>
                   );
@@ -171,11 +201,17 @@ function BlogPostPage() {
                   const lines = trimmed.split("\n").filter((line) => line.includes("|"));
                   if (lines.length > 2) {
                     return (
-                      <div key={idx} className="overflow-x-auto my-10 border border-border/50 rounded-sm">
+                      <div
+                        key={idx}
+                        className="overflow-x-auto my-10 border border-border/50 rounded-sm"
+                      >
                         <table className="w-full text-left border-collapse">
                           <tbody className="divide-y divide-border/50">
                             {lines.map((line, i) => (
-                              <tr key={i} className="group hover:bg-foreground/[0.02] transition-colors">
+                              <tr
+                                key={i}
+                                className="group hover:bg-foreground/[0.02] transition-colors"
+                              >
                                 {line
                                   .split("|")
                                   .filter((cell) => cell.trim())
@@ -199,7 +235,10 @@ function BlogPostPage() {
                 // Regular paragraphs
                 if (trimmed) {
                   return (
-                    <p key={idx} className="text-lg text-muted-foreground leading-relaxed mb-8 last:mb-0">
+                    <p
+                      key={idx}
+                      className="text-lg text-muted-foreground leading-relaxed mb-8 last:mb-0"
+                    >
                       {trimmed}
                     </p>
                   );
@@ -218,7 +257,7 @@ function BlogPostPage() {
           <div className="mb-12">
             <SectionLabel index="04" label="Related Briefings" />
           </div>
-          
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10 mb-16">
             {articles
               .filter((a) => a.slug !== article.slug)
@@ -236,7 +275,8 @@ function BlogPostPage() {
                         <img
                           src={related.coverImage}
                           alt={related.title}
-                          className="h-full w-full object-contain mix-blend-multiply transition-transform duration-700 group-hover:scale-105 p-6"
+                          loading="lazy"
+                          className="h-full w-full object-cover mix-blend-multiply transition-transform duration-700 group-hover:scale-105 p-6"
                         />
                         <div className="absolute inset-0 bg-foreground/[0.02] pointer-events-none" />
                       </div>
@@ -271,4 +311,3 @@ function BlogPostPage() {
     </div>
   );
 }
-
