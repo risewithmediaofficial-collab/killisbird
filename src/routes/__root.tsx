@@ -4,7 +4,6 @@ import appCss from "../styles.css?url";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { Preloader } from "@/components/site/Preloader";
-import { CustomCursor } from "@/components/site/CustomCursor";
 import { ScrollToTop } from "@/components/site/ScrollToTop";
 
 function NotFoundComponent() {
@@ -87,7 +86,6 @@ function RootComponent() {
     <>
       <ScrollToTop />
       <Preloader />
-      <CustomCursor />
       <Nav />
       <main>
         <Outlet />

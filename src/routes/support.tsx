@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Shield, FileText, Wrench, Mail, Clock } from "lucide-react";
 import { PageHero, SectionLabel } from "@/components/site/Section";
 
@@ -88,12 +88,13 @@ function SupportPage() {
                 <p className="text-muted-foreground text-sm leading-relaxed flex-1">
                   {category.desc}
                 </p>
-                <a
-                  href={category.href}
+                <Link
+                  to={category.href.startsWith("/") ? (category.href as any) : undefined}
+                  hash={category.href.startsWith("#") ? category.href.replace("#", "") : undefined}
                   className="font-mono text-[11px] tracking-[0.25em] uppercase text-neon hover:underline inline-flex items-center gap-2 mt-2"
                 >
                   {category.action} <span className="text-lg leading-none">→</span>
-                </a>
+                </Link>
               </div>
             );
           })}

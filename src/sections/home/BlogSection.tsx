@@ -1,38 +1,10 @@
 import { PremiumCard } from "@/components/site/PremiumCard";
 import { ArrowUpRight } from "lucide-react";
-import img1 from "@/assets/drone-parts/FLIGHT-CONTROL-CARD1.png";
-import img2 from "@/assets/drone-parts/Swarm – GCS1.png";
-import img3 from "@/assets/drone-parts/FRAMES1.png";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
+import { articles as allArticles } from "@/data/articles";
 
-const blogPosts = [
-  {
-    id: 1,
-    title: "Advancements in Autonomous Swarm Intelligence",
-    date: "Oct 12, 2026",
-    category: "TECHNOLOGY",
-    image: img2,
-    excerpt:
-      "How distributed AI is revolutionizing multi-agent drone coordination in complex environments.",
-  },
-  {
-    id: 2,
-    title: "Next-Gen Flight Control Systems: STM32H743",
-    date: "Sep 28, 2026",
-    category: "HARDWARE",
-    image: img1,
-    excerpt:
-      "Exploring the computational power behind real-time stabilization and rapid decision-making.",
-  },
-  {
-    id: 3,
-    title: "Aerospace Grade Frames: Carbon Fiber vs Titanium",
-    date: "Sep 15, 2026",
-    category: "ENGINEERING",
-    image: img3,
-    excerpt: "A deep dive into material science for high-stress payload delivery operations.",
-  },
-];
+const blogPosts = allArticles.slice(0, 3);
 
 export function BlogSection() {
   return (
@@ -60,57 +32,53 @@ export function BlogSection() {
         {/* Cards Grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {blogPosts.map((post, i) => (
-            <PremiumCard 
-              key={post.id} 
-              delay={0.1 * i} 
-              className="group cursor-pointer blog-card"
-              role="link"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  // Navigate to post or handle click
-                }
-              }}
+            <Link
+              key={post.slug}
+              to="/blog/$postId"
+              params={{ postId: post.slug }}
+              className="no-underline"
             >
-              <article className="bg-white rounded-[20px] overflow-hidden flex flex-col h-full shadow-card transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-elevated group-hover:border-b-2 group-hover:border-neon">
-                {/* Image */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-background">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105 p-8"
-                  />
-                  <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  {/* Category badge */}
-                  <div className="absolute top-4 left-4 bg-background/90 px-3 py-1.5 font-mono text-[0.55rem] tracking-[0.2em] text-foreground border border-border/50 rounded-sm shadow-sm backdrop-blur-md">
-                    {post.category}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-6 gap-4">
-                  {/* Date pill badge */}
-                  <div className="self-start">
-                    <span className="inline-flex items-center bg-neon text-white text-[0.6rem] font-mono tracking-widest uppercase px-3 py-1 rounded-full font-bold">
-                      {post.date}
-                    </span>
+              <PremiumCard delay={0.1 * i} className="group cursor-pointer blog-card">
+                <article className="bg-white rounded-[20px] overflow-hidden flex flex-col h-full shadow-card transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-elevated group-hover:border-b-2 group-hover:border-neon">
+                  {/* Image */}
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-background">
+                    <img
+                      src={post.coverImage}
+                      alt={post.title}
+                      className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105 p-8"
+                    />
+                    <div className="absolute inset-0 bg-foreground/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    {/* Category badge */}
+                    <div className="absolute top-4 left-4 bg-background/90 px-3 py-1.5 font-mono text-[0.55rem] tracking-[0.2em] text-foreground border border-border/50 rounded-sm shadow-sm backdrop-blur-md">
+                      {post.category}
+                    </div>
                   </div>
 
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-neon transition-colors line-clamp-2 leading-snug">
-                    {post.title}
-                  </h3>
+                  {/* Content */}
+                  <div className="flex flex-col flex-1 p-6 gap-4">
+                    {/* Date pill badge */}
+                    <div className="self-start">
+                      <span className="inline-flex items-center bg-neon text-white text-[0.6rem] font-mono tracking-widest uppercase px-3 py-1 rounded-full font-bold">
+                        {post.date}
+                      </span>
+                    </div>
 
-                  <p className="text-sm text-muted-foreground line-clamp-3 flex-1 leading-relaxed">
-                    {post.excerpt}
-                  </p>
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-neon transition-colors line-clamp-2 leading-snug">
+                      {post.title}
+                    </h3>
 
-                  <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-neon font-bold mt-2 group-hover:gap-3 transition-all">
-                    Read More
-                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    <p className="text-sm text-muted-foreground line-clamp-3 flex-1 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex items-center gap-2 font-mono text-[0.65rem] uppercase tracking-[0.2em] text-neon font-bold mt-2 group-hover:gap-3 transition-all">
+                      READ ARTICLES
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
                   </div>
-                </div>
-              </article>
-            </PremiumCard>
+                </article>
+              </PremiumCard>
+            </Link>
           ))}
         </div>
       </div>

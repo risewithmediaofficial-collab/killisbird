@@ -371,7 +371,7 @@
   .heading-lg,
   .heading-h2 {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 4rem);
+    font-size: clamp(1.75rem, 4vw, 2.8rem);
     font-weight: 400;
     line-height: 1.15;
     letter-spacing: 0.04em;
@@ -816,47 +816,8 @@
   font-weight: 600;
 }
 
-/* ── Custom Cursor ─────────────────────────────────────────────── */
-/* Hide default cursor on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  *,
-  button,
-  a {
-    cursor: none !important;
-  }
-}
-.cursor-arrow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 99999;
-  pointer-events: none;
-  will-change: transform;
-  /* Offset so tip of arrow is at cursor hotspot */
-  margin-top: -2px;
-  margin-left: -2px;
-  transition: opacity 0.15s ease;
-}
-.cursor-trail {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 5px;
-  width: 40px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(232, 69, 10, 0.9) 0%, rgba(232, 69, 10, 0) 100%);
-  z-index: 99998;
-  pointer-events: none;
-  will-change: transform, width, opacity;
-  transition: opacity 0.15s ease;
-}
-/* Hide cursor elements on touch devices */
-@media (hover: none) {
-  .cursor-arrow,
-  .cursor-trail {
-    display: none;
-  }
-}
+
+
 
 /* ── Scroll reveal animation ───────────────────────────────────── */
 .reveal {

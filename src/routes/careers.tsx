@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Cpu, MapPin, GraduationCap, Briefcase, Wrench, ArrowUpRight } from "lucide-react";
 import { PageHero, SectionLabel } from "@/components/site/Section";
 
@@ -109,14 +109,12 @@ function CareersPage() {
               </div>
 
               <div className="flex items-start justify-end gap-3 lg:col-span-2 lg:flex-col lg:items-end">
-                <a
-                  href="https://www.killisbird.com/apply.php"
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  to="/contact"
                   className="inline-flex min-h-12 w-full items-center justify-center gap-2 bg-neon rounded-full px-6 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-background transition hover:scale-105 shadow-md hover:shadow-neon/50"
                 >
                   Apply Now <ArrowUpRight size={14} />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

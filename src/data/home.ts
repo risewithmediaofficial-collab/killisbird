@@ -52,6 +52,12 @@ export const systems = [
     title: "Propellers",
     spec: "A drone propeller is the blade that spins to lift the drone into the air. It controls movement and direction by changing speed and rotation.",
   },
+  {
+    icon: Radar,
+    code: "SWM-100X",
+    title: "Swarm Drones",
+    spec: "A coordinated fleet of 100+ autonomous drones operating in unison. Our swarm technology enables synchronized missions across defense, surveillance, and industrial applications with AI-driven precision.",
+  },
 ] as const;
 
 export const intelligenceStats = [

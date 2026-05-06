@@ -79,13 +79,13 @@ export function HeroSection() {
         style={{ y: droneY, scale: droneScale }}
         className="absolute top-1/2 -translate-y-1/2 right-[0%] sm:right-[5%] lg:right-[10%] w-[80%] sm:w-[45%] lg:w-[35%] max-w-[600px] z-10 pointer-events-none"
       >
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="wait">
           <motion.img
             key={imgIdx}
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -50, scale: 1.05 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ type: "spring", stiffness: 50, damping: 25, mass: 1 }}
             src={heroImages[imgIdx]}
             alt="Autonomous Drone"
             className="w-full h-auto object-contain animate-float-slow drop-shadow-2xl"

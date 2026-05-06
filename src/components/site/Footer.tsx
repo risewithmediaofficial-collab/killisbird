@@ -14,10 +14,10 @@ const quickLinks = [
 ];
 
 const productLinks = [
-  { label: "Flight Control Card", to: "/products" },
-  { label: "Frames", to: "/products" },
-  { label: "Propellers", to: "/products" },
-  { label: "Swarm GCS", to: "/products" },
+  { label: "Flight Control Card", to: "/products#01" },
+  { label: "Frames", to: "/products#02" },
+  { label: "Propellers", to: "/products#03" },
+  { label: "Swarm GCS", to: "/products#04" },
   { label: "Custom Solutions", to: "/contact" },
   { label: "White Labelling", to: "/contact" },
 ];

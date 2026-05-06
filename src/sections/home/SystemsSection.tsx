@@ -118,7 +118,7 @@ export function SystemsSection() {
                   key={item.code}
                   layout
                   initial={false}
-                  transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -127,22 +127,29 @@ export function SystemsSection() {
                       setActiveId(i);
                     }
                   }}
+                  onMouseEnter={() => {
+                    activeIdRef.current = i;
+                    setActiveId(i);
+                    // Scroll card below navbar if it's hidden under it
+                    const NAV_H = 88; // navbar height in px
+                    const el = document.querySelectorAll(".scroll-card-item")[i];
+                    if (el) {
+                      const rect = el.getBoundingClientRect();
+                      if (rect.top < NAV_H + 8) {
+                        const target = window.scrollY + rect.top - NAV_H - 8;
+                        window.scrollTo({ top: target, behavior: "smooth" });
+                      }
+                    }
+                  }}
                   className={cn(
                     "scroll-card-item relative overflow-hidden rounded-[24px] cursor-pointer group flex-shrink-0 w-full transition-all duration-700",
                     isActive 
-                      ? "h-[500px] sm:h-[600px] shadow-2xl bg-[var(--navy)]" 
-                      : "h-[80px] sm:h-[100px] bg-[var(--navy)]/90 hover:bg-[var(--navy)]"
+                      ? "h-[380px] sm:h-[460px] shadow-2xl bg-[var(--navy)]" 
+                      : "h-[68px] sm:h-[80px] bg-[var(--navy)]/90 hover:bg-[var(--navy)]"
                   )}
                   onClick={() => {
                     activeIdRef.current = i;
                     setActiveId(i);
-                    // Optional: Smooth scroll the clicked card to center
-                    const el = document.querySelectorAll(".scroll-card-item")[i];
-                    if (el) {
-                      const rect = el.getBoundingClientRect();
-                      const offset = window.scrollY + rect.top - (window.innerHeight / 2) + (rect.height / 2);
-                      window.scrollTo({ top: offset, behavior: "smooth" });
-                    }
                   }}
                 >
                   <AnimatePresence initial={false}>

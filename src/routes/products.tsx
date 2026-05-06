@@ -11,8 +11,8 @@ import p02_3 from "@/assets/drone-parts/FRAMES3.png";
 import p03_1 from "@/assets/drone-parts/Propellers1.png";
 import p03_2 from "@/assets/drone-parts/Propellers2.png";
 import p03_3 from "@/assets/drone-parts/Propellers3.png";
-import p04_1 from "@/assets/drone-parts/Swarm – GCS1.png";
-import p04_2 from "@/assets/drone-parts/Swarm – GCS2.png";
+import p04_1 from "@/assets/drone-parts/Swarm - GCS1.png";
+import p04_2 from "@/assets/drone-parts/Swarm - GCS2.png";
 
 export const Route = createFileRoute("/products")({
   head: () => ({
