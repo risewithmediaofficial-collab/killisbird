@@ -1,5 +1,5 @@
 import img1 from "@/assets/drone-parts/FLIGHT-CONTROL-CARD1.png";
-import img2 from "@/assets/drone-parts/Swarm – GCS1.png";
+import img2 from "@/assets/drone-parts/swarm-gcs1.png";
 import img3 from "@/assets/drone-parts/FRAMES1.png";
 
 export interface Article {
