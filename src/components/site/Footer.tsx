@@ -140,7 +140,7 @@ export function Footer() {
       <div className="container-edge relative z-10 border-t border-white/10 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-mono tracking-widest text-white/40">
         <div>COPYRIGHT © 2026 KILLIS BIRD, ALL RIGHTS RESERVED.</div>
         <div>
-          DEVELOPED BY <span className="text-white/80 font-bold">WIZMO TECH</span>
+          DEVELOPED BY <span className="text-white/80 font-bold">RISE WITH MEDIA</span>
         </div>
       </div>
     </footer>
