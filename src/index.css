@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* Killis Bird Official Color Palette & Typography */
+
+:root {
+  /* Official Killis Bird Colors */
+  --navy-primary: #0F172A;
+  --orange-accent: #F97316;
+  --white-base: #FFFFFF;
+  --gray-secondary: #6B7280;
+  --gray-light: #F3F4F6;
+  
+  /* Legacy color aliases (for transition) */
+  --primary-navy: #0F172A;
+  --primary-blue: #F97316;
+  --secondary-blue: #F97316;
+  --accent-blue: #F97316;
+  --light-bg: #F3F4F6;
+  --dark-bg: #0F172A;
+  --border-light: #E5E7EB;
+  --border-dark: #1F2937;
+  --text-dark: #0F172A;
+  --text-light: #FFFFFF;
+  
+  /* Shadows & Effects */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --glow-orange: 0 0 20px rgba(249, 115, 22, 0.3);
+  --glow-orange-strong: 0 0 40px rgba(249, 115, 22, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--navy-primary);
+}
+
+h1 {
+  font-size: clamp(2rem, 8vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 600;
+}
+
+p {
+  font-size: 1rem;
+  color: var(--gray-secondary);
+  font-weight: 400;
+}
+
+/* Custom Components */
+.premium-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease-out;
+}
+
+.premium-button-primary {
+  color: var(--white-base);
+  background-color: var(--orange-accent);
+  box-shadow: var(--glow-orange);
+}
+
+.premium-button-primary:hover {
+  background-color: #ea6317;
+  box-shadow: var(--glow-orange-strong);
+  transform: scale(1.05);
+}
+
+.premium-button-secondary {
+  background-color: var(--white-base);
+  border: 2px solid var(--orange-accent);
+  color: var(--orange-accent);
+}
+
+.premium-button-secondary:hover {
+  background-color: var(--orange-accent);
+  color: var(--white-base);
+}
+
+.premium-button-navy {
+  color: var(--white-base);
+  background-color: var(--navy-primary);
+}
+
+.premium-button-navy:hover {
+  background-color: #111827;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card Styles */
+.premium-card {
+  border-width: 1px;
+  border-radius: 0.75rem;
+  background-color: var(--white-base);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border-color: var(--gray-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.premium-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--orange-accent);
+}
+
+.premium-card-dark {
+  border-width: 1px;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  background-color: var(--navy-primary);
+  border-color: #1F2937;
+  color: var(--white-base);
+}
+
+/* Section Spacing */
+.section-padding {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.section-padding-sm {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/* Grid Backgrounds */
+.grid-background {
+  background-image: 
+    linear-gradient(rgba(249, 115, 22, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+}
+
+.grid-background-dark {
+  background-image: 
+    linear-gradient(rgba(249, 115, 22, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249, 115, 22, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-attachment: fixed;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--orange-accent) 0%, #ea6317 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-white {
+  background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow Effects */
+.glow-blue {
+  box-shadow: var(--glow-orange);
+}
+
+.glow-blue-strong {
+  box-shadow: var(--glow-orange-strong);
+}
+
+.text-glow {
+  filter: drop-shadow(0 0 10px rgba(249, 115, 22, 0.3));
+}
+
+/* Smooth Transitions */
+.transition-smooth {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Scroll Animation Utilities */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.fade-in {
+  opacity: 0;
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+  }
+
+  h3 {
+    font-size: 1.375rem;
+  }
+
+  .section-padding {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .section-padding-sm {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .section-padding-sm {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: var(--glow-orange);
+  }
+  50% {
+    box-shadow: var(--glow-orange-strong);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background-size: 1000px 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange-accent);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ea6317;
+}
+
+/* Three.js Canvas Styles */
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

@@ -8,17 +8,17 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as SupportRouteImport } from './routes/support'
-import { Route as ProductsRouteImport } from './routes/products'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as CareersRouteImport } from './routes/careers'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as BlogIndexRouteImport } from './routes/blog.index'
-import { Route as BlogPostIdRouteImport } from './routes/blog.$postId'
+import { Route as rootRouteImport } from './../routes/__root'
+import { Route as SupportRouteImport } from './../routes/support'
+import { Route as ProductsRouteImport } from './../routes/products'
+import { Route as PrivacyRouteImport } from './../routes/privacy'
+import { Route as ContactRouteImport } from './../routes/contact'
+import { Route as CareersRouteImport } from './../routes/careers'
+import { Route as BlogRouteImport } from './../routes/blog'
+import { Route as AboutRouteImport } from './../routes/about'
+import { Route as IndexRouteImport } from './../routes/index'
+import { Route as BlogIndexRouteImport } from './../routes/blog.index'
+import { Route as BlogPostIdRouteImport } from './../routes/blog.$postId'
 
 const SupportRoute = SupportRouteImport.update({
   id: '/support',
@@ -89,3 +89,12 @@ const rootRouteChildren = {
   SupportRoute: SupportRoute,
 }
 export const routeTree = rootRouteImport._addFileChildren(rootRouteChildren)
+
+import type { getRouter } from '../router.jsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

@@ -21,6 +21,7 @@ export function Nav() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHomeHero = location.pathname === "/" && !isScrolled && !open;
 
   useEffect(() => {
     setOpen(false);
@@ -45,10 +46,12 @@ export function Nav() {
     <header className="fixed top-0 inset-x-0 z-[100] pointer-events-none">
       <div
         className={cn(
-          "pointer-events-auto flex flex-col w-full bg-white border-b border-black/8 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          "pointer-events-auto flex flex-col w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
           open
             ? "fixed inset-0 h-[100dvh] rounded-none bg-white z-50 pt-4 px-4 overflow-y-auto"
-            : "relative rounded-none",
+            : isHomeHero
+              ? "relative rounded-none bg-transparent border-b border-white/10"
+              : "relative rounded-none bg-white border-b border-black/8",
         )}
       >
         <div
@@ -62,7 +65,9 @@ export function Nav() {
             to="/"
             className={cn(
               "group flex items-center gap-2.5 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-full border transition-all duration-300",
-              isNavActive(location.pathname, "/")
+              isHomeHero
+                ? "border-transparent px-1 py-1 bg-transparent shadow-none"
+                : isNavActive(location.pathname, "/")
                 ? "border-[#f05a12]/25 bg-[#fff4ee] px-4 py-2 shadow-[inset_0_0_0_1px_rgba(240,90,18,0.1)]"
                 : "border-transparent px-1 py-1",
             )}
@@ -86,7 +91,11 @@ export function Nav() {
                   to={link.to}
                   className={cn(
                     "whitespace-nowrap text-[0.88rem] font-semibold uppercase tracking-[0.12em] transition-all duration-300 relative py-2 px-3 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-full",
-                    active
+                    isHomeHero
+                      ? active
+                        ? "text-white"
+                        : "text-white/80 hover:text-white"
+                      : active
                       ? "text-foreground bg-[#fff4ee] shadow-[inset_0_0_0_1px_rgba(240,90,18,0.16)]"
                       : "text-muted-foreground hover:text-foreground",
                   )}
@@ -107,7 +116,10 @@ export function Nav() {
 
           <button
             onClick={() => setOpen((value) => !value)}
-            className="grid place-items-center text-foreground lg:hidden shrink-0 ml-auto p-2 -mr-2 transition-transform hover:scale-105 active:scale-95"
+            className={cn(
+              "grid place-items-center lg:hidden shrink-0 ml-auto p-2 -mr-2 transition-transform hover:scale-105 active:scale-95",
+              isHomeHero ? "text-white" : "text-foreground",
+            )}
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-navigation"

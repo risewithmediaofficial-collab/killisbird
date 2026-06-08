@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import dronePrimary from "@/assets/drone-parts/DRONE1.png";
 import droneSecondary from "@/assets/drone-parts/DRONE2.png";
 import flightCard from "@/assets/drone-parts/FLIGHT-CONTROL-CARD1.png";
 import frame from "@/assets/drone-parts/FRAMES2.png";
+import landingVideo from "@/assets/landing page video.mp4";
 import propeller from "@/assets/drone-parts/Propellers1.png";
 import swarm from "@/assets/drone-parts/swarm-gcs1.png";
 import { motion } from "framer-motion";
@@ -70,123 +72,159 @@ const heroSlides = [
 ];
 
 function HeroSection() {
+  const typingWords = ["BOLD.", "AUTONOMOUS.", "MISSION-READY."];
+  const [wordIndex, setWordIndex] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentWord = typingWords[wordIndex];
+    const isWordComplete = typedText === currentWord;
+    const isWordRemoved = typedText === "";
+
+    const timeout = window.setTimeout(
+      () => {
+        if (!isDeleting) {
+          setTypedText(currentWord.slice(0, typedText.length + 1));
+          if (isWordComplete) {
+            setIsDeleting(true);
+          }
+        } else {
+          setTypedText(currentWord.slice(0, typedText.length - 1));
+          if (isWordRemoved) {
+            setIsDeleting(false);
+            setWordIndex((prev) => (prev + 1) % typingWords.length);
+          }
+        }
+      },
+      isWordComplete && !isDeleting ? 1100 : isDeleting ? 50 : 95,
+    );
+
+    return () => window.clearTimeout(timeout);
+  }, [typedText, isDeleting, wordIndex]);
+
   return (
-    <section
-      id="hero"
-      className="relative overflow-hidden bg-background pt-28 sm:pt-32"
-    >
-      <div
-        className="absolute inset-0"
-        style={{ background: "var(--gradient-hero)" }}
-      />
-      <div className="absolute inset-0 bg-grid opacity-45 [mask-image:radial-gradient(ellipse_at_center,black,transparent_76%)]" />
-      <div className="absolute left-[-10rem] top-[32rem] h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,_rgba(27,45,107,0.12)_0%,_transparent_72%)] blur-3xl" />
-      <div className="absolute right-[-8rem] top-10 h-[24rem] w-[24rem] rounded-full bg-[radial-gradient(circle,_rgba(232,69,10,0.14)_0%,_transparent_70%)] blur-3xl" />
+    <>
+      <section
+        id="hero"
+        className="relative min-h-screen overflow-hidden bg-background pt-28 sm:pt-32"
+      >
+        <div className="absolute inset-0 overflow-hidden">
+          <video
+            className="h-full w-full object-cover"
+            src={landingVideo}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,0.66)_0%,rgba(18,18,18,0.42)_28%,rgba(25,25,25,0.22)_55%,rgba(28,28,28,0.34)_100%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.06)_0%,rgba(255,255,255,0.02)_35%,rgba(0,0,0,0.08)_100%)]" />
 
-      <div className="container-edge relative z-10 flex min-h-[100svh] flex-col justify-center pb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8 flex items-center justify-center gap-3 sm:mb-10"
-        >
-          <span className="h-[2px] w-10 bg-neon" />
-          <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-foreground/72 sm:text-xs">
-            Killis Bird :: Imagine, Ideate, Innovative
-          </span>
-        </motion.div>
+        <div className="container-edge relative z-10 flex min-h-[calc(100svh-7rem)] flex-col justify-center pb-20 sm:pb-24 lg:min-h-[calc(100svh-8rem)] lg:pb-28">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+            <div className="max-w-[42rem]">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-8 flex items-center gap-3 sm:mb-10"
+              >
+                <span className="h-[2px] w-10 bg-neon" />
+                <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-white/80 sm:text-xs">
+                  Killis Bird :: Imagine, Ideate, Innovative
+                </span>
+              </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="heading-h1 mx-auto max-w-[13ch] text-center text-[clamp(4rem,11vw,9.5rem)] leading-[0.9] tracking-[0.02em]"
-        >
-          <span className="block tracking-[-0.035em] sm:tracking-[-0.045em]">
-            PRECISION ENGINEERED
-          </span>
-          <span className="block text-neon">BOLD.</span>
-        </motion.h1>
+              <motion.h1
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.05, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-[7ch] text-left font-display text-[clamp(3.1rem,6.2vw,6.4rem)] font-semibold uppercase leading-[0.94] tracking-[-0.04em] text-white"
+              >
+                <span className="block tracking-[-0.035em] sm:tracking-[-0.045em]">
+                  PRECISION ENGINEERED
+                </span>
+                <span className="mt-3 block min-h-[1.1em] text-neon">
+                  {typedText}
+                  <span className="ml-1 inline-block h-[0.9em] w-[2px] animate-pulse bg-neon align-middle" />
+                </span>
+              </motion.h1>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <div className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)] lg:items-start">
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18, duration: 0.9 }}
-            className="grid gap-5"
-          >
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,1.35fr)_minmax(15rem,0.65fr)]">
-              <div className="card-surface card-glass overflow-hidden rounded-[2rem] p-6 sm:p-8">
-                <HeroDroneCardsCarousel slides={heroSlides} />
+      <section className="relative bg-background py-24 sm:py-28 lg:py-32">
+        <div className="container-edge">
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1.2fr)_minmax(22rem,0.8fr)] lg:items-start">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.9 }}
+              className="grid gap-5"
+            >
+              <div className="grid gap-5 lg:grid-cols-[minmax(0,1.42fr)_minmax(14rem,0.58fr)]">
+                <div className="card-surface card-glass overflow-hidden rounded-[2rem] p-6 sm:p-8">
+                  <HeroDroneCardsCarousel slides={heroSlides} />
+                </div>
+
+                <div className="grid gap-5 content-start">
+                  <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                    {heroStats.map((item) => (
+                      <div
+                        key={item.label}
+                        className="glass rounded-[1.4rem] px-5 py-4"
+                      >
+                        <div className="font-display text-2xl font-semibold tracking-[0.06em] text-foreground">
+                          {item.value}
+                        </div>
+                        <div className="mt-2 text-sm leading-6 text-muted-foreground">
+                          {item.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
+            </motion.div>
 
-              <div className="grid gap-5">
-                <div className="card-surface overflow-hidden rounded-[1.6rem] border border-border/60 bg-white/90 p-5">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Live Secondary View
-                  </p>
-                  <div className="mt-4 flex min-h-[10rem] items-center justify-center rounded-[1.2rem] bg-secondary/35 p-4">
+            <motion.div
+              initial={{ opacity: 0, y: 26 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.28, duration: 0.9 }}
+              className="grid gap-4"
+            >
+              {heroDetails.map((item) => (
+                <article
+                  key={item.title}
+                  className="card-surface card-flat flex items-center gap-4 rounded-[1.5rem] p-4 sm:gap-5 sm:p-5"
+                >
+                  <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[1.15rem] bg-white p-3 shadow-soft sm:h-28 sm:w-28">
                     <img
-                      src={droneSecondary}
-                      alt="Secondary drone render"
-                      className="h-full max-h-[9rem] w-full object-contain transition-transform duration-700 hover:scale-[1.04]"
+                      src={item.image}
+                      alt={item.title}
+                      className="h-full w-full object-contain mix-blend-multiply"
                       draggable={false}
                     />
                   </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                  {heroStats.map((item) => (
-                    <div
-                      key={item.label}
-                      className="glass rounded-[1.4rem] px-5 py-4"
-                    >
-                      <div className="font-display text-2xl font-semibold tracking-[0.06em] text-foreground">
-                        {item.value}
-                      </div>
-                      <div className="mt-2 text-sm leading-6 text-muted-foreground">
-                        {item.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.9 }}
-            className="grid gap-4"
-          >
-            {heroDetails.map((item) => (
-              <article
-                key={item.title}
-                className="card-surface card-flat flex items-center gap-4 rounded-[1.5rem] p-4 sm:gap-5 sm:p-5"
-              >
-                <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-[1.15rem] bg-white p-3 shadow-soft sm:h-28 sm:w-28">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-full w-full object-contain mix-blend-multiply"
-                    draggable={false}
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="text-base font-semibold uppercase tracking-[0.08em] text-foreground sm:text-lg">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-[15px]">
-                    {item.text}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </motion.div>
+                  <div className="min-w-0">
+                    <h3 className="text-base font-semibold uppercase tracking-[0.08em] text-foreground sm:text-lg">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-7 text-muted-foreground sm:text-[15px]">
+                      {item.text}
+                    </p>
+                  </div>
+                </article>
+              ))}
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

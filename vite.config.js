@@ -8,7 +8,7 @@ var stdin_default = defineConfig(({ command }) => ({
     tailwindcss(),
     tanstackStart({
       router: {
-        generatedRouteTree: "routeTree.gen.js",
+        generatedRouteTree: "src/routeTree.gen.ts",
         disableTypes: true,
       },
       importProtection: {
