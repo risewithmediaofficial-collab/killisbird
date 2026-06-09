@@ -110,9 +110,12 @@ function HeroSection() {
         id="hero"
         className="relative min-h-screen overflow-hidden bg-background pt-28 sm:pt-32"
       >
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden flex items-center justify-center sm:block">
           <video
-            className="h-full w-full object-cover"
+            className="w-full h-full object-cover sm:w-full sm:h-full"
+            style={{
+              aspectRatio: "9 / 16",
+            }}
             src={landingVideo}
             autoPlay
             muted

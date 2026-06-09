@@ -33,14 +33,6 @@ function Preloader() {
           exit: { y: "-100%" },
           transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] },
           children: [
-            /* @__PURE__ */ jsx("video", {
-              className: "preloader__video",
-              src: introVideo,
-              autoPlay: true,
-              muted: true,
-              loop: true,
-              playsInline: true,
-            }),
             /* @__PURE__ */ jsx("div", { className: "preloader__scrim" }),
             /* @__PURE__ */ jsx(motion.div, {
               className: "preloader__boom",

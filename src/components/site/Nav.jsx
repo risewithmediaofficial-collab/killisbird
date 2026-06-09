@@ -62,14 +62,7 @@ export function Nav() {
         >
           <Link
             to="/"
-            className={cn(
-              "group flex items-center gap-2.5 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-full border transition-all duration-300",
-              isHomeHero
-                ? "border-transparent px-1 py-1 bg-transparent shadow-none"
-                : isNavActive(location.pathname, "/")
-                  ? "border-[#f05a12]/25 bg-[#fff4ee] px-4 py-2 shadow-[inset_0_0_0_1px_rgba(240,90,18,0.1)]"
-                  : "border-transparent px-1 py-1",
-            )}
+            className="group flex items-center gap-2.5 shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-neon transition-all duration-300"
           >
             <img
               src={logoImg}
@@ -89,13 +82,13 @@ export function Nav() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "relative rounded-full px-2.5 py-2 text-[0.78rem] font-semibold whitespace-nowrap uppercase tracking-[0.1em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-neon xl:px-3 xl:text-[0.88rem] xl:tracking-[0.12em]",
+                    "relative px-2.5 py-2 text-[0.78rem] font-semibold whitespace-nowrap uppercase tracking-[0.1em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-neon xl:px-3 xl:text-[0.88rem] xl:tracking-[0.12em]",
                     isHomeHero
                       ? active
                         ? "text-white"
                         : "text-white/80 hover:text-white"
                       : active
-                        ? "text-foreground bg-[#fff4ee] shadow-[inset_0_0_0_1px_rgba(240,90,18,0.16)]"
+                        ? "text-foreground"
                         : "text-muted-foreground hover:text-foreground",
                   )}
                 >
