@@ -24,7 +24,7 @@ export default function FloatingCard({
       {Icon && (
         <motion.div
           whileHover={{ scale: 1.1, rotate: 5 }}
-          className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 shadow-lg"
+          className="w-16 h-16 bg-linear-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 shadow-lg"
         >
           <Icon className="text-white text-2xl" />
         </motion.div>
@@ -41,7 +41,7 @@ export default function FloatingCard({
       <motion.div
         initial={{ opacity: 0, scaleX: 0 }}
         whileHover={hoverable ? { opacity: 1, scaleX: 1 } : {}}
-        className="mt-4 h-1 bg-gradient-to-r from-blue-500 to-blue-400 origin-left"
+        className="mt-4 h-1 bg-linear-to-r from-blue-500 to-blue-400 origin-left"
       />
     </motion.div>
   );

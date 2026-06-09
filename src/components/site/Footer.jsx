@@ -7,7 +7,6 @@ const quickLinks = [
   { label: "About", to: "/about" },
   { label: "Products", to: "/products" },
   { label: "Support", to: "/support" },
-  { label: "Blog", to: "/blog" },
   { label: "Careers", to: "/careers" },
   { label: "Contact", to: "/contact" },
   { label: "Privacy Policy", to: "/privacy" },

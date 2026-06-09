@@ -76,10 +76,9 @@ function AboutPage() {
       <section className="container-edge grid gap-12 py-20 md:py-32 lg:grid-cols-12 lg:gap-16">
         <div className="space-y-8 text-lg leading-8 text-slate-600 lg:col-span-7">
           <p>
-            We understand the critical importance of each component in achieving optimal
-            performance and reliability in UAVs. That&apos;s why we focus on delivering solutions
-            that not only meet but exceed industry standards — ensuring products are both
-            innovative and robust.
+            We understand the critical importance of each component in achieving optimal performance
+            and reliability in UAVs. That&apos;s why we focus on delivering solutions that not only
+            meet but exceed industry standards — ensuring products are both innovative and robust.
           </p>
           <p>
             We believe in empowering customers with full autonomy in their selection process. Our
@@ -144,16 +143,16 @@ function AboutPage() {
             itemStackDistance={24}
             baseScale={0.92}
           >
-          {whatWeDo.map((item, index) => (
-            <ScrollStackItem key={item}>
-              <div className="card-surface rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
-                <div className="flex items-start gap-4">
-                  <Check className="mt-1 shrink-0 text-neon" size={20} />
-                  <p className="text-xl leading-9 text-slate-900">{item}</p>
+            {whatWeDo.map((item, index) => (
+              <ScrollStackItem key={item}>
+                <div className="card-surface rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
+                  <div className="flex items-start gap-4">
+                    <Check className="mt-1 shrink-0 text-neon" size={20} />
+                    <p className="text-xl leading-9 text-slate-900">{item}</p>
+                  </div>
                 </div>
-              </div>
-            </ScrollStackItem>
-          ))}
+              </ScrollStackItem>
+            ))}
           </ScrollStack>
         </div>
       </section>
@@ -168,15 +167,15 @@ function AboutPage() {
               itemStackDistance={28}
               baseScale={0.9}
             >
-            {whyKillisBird.map(({ icon: Icon, title, description }, index) => (
-              <ScrollStackItem key={title}>
-                <div className="card-surface h-full rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
-                  <Icon className="text-neon" size={28} />
-                  <h3 className="mt-6 text-2xl font-semibold text-neon">{title}</h3>
-                  <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">{description}</p>
-                </div>
-              </ScrollStackItem>
-            ))}
+              {whyKillisBird.map(({ icon: Icon, title, description }, index) => (
+                <ScrollStackItem key={title}>
+                  <div className="card-surface h-full rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
+                    <Icon className="text-neon" size={28} />
+                    <h3 className="mt-6 text-2xl font-semibold text-neon">{title}</h3>
+                    <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">{description}</p>
+                  </div>
+                </ScrollStackItem>
+              ))}
             </ScrollStack>
           </div>
         </div>
@@ -186,7 +185,8 @@ function AboutPage() {
         <div className="mx-auto max-w-5xl">
           <SectionLabel index="05" label="Application Areas" />
           <h2 className="mt-8 text-[clamp(1.7rem,4.2vw,3.6rem)] font-medium uppercase leading-[1.08] tracking-[-0.04em] text-neon">
-            Whether you&apos;re building for <span className="text-neon">precision agriculture</span>,{" "}
+            Whether you&apos;re building for{" "}
+            <span className="text-neon">precision agriculture</span>,{" "}
             <span className="text-violet">industrial logistics</span>, or{" "}
             <span className="text-neon">advanced surveillance</span> — Killis Bird is your trusted
             collaborator in flight.

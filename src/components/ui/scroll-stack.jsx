@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { Children, useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
 function useIsMobile(breakpoint = 768) {
@@ -36,40 +36,48 @@ function ScrollStack({
   itemDistance = 100,
   itemStackDistance = 30,
   stackPosition = "7rem",
+  mobileItemDistance = 56,
+  mobileItemStackDistance = 12,
+  mobileStackPosition = "5.25rem",
   mobileBreakpoint = 768,
 }) {
   const isMobile = useIsMobile(mobileBreakpoint);
-  const items = useMemo(() => (Array.isArray(children) ? children : [children]), [children]);
+  const items = useMemo(() => Children.toArray(children), [children]);
+  const activeItemDistance = isMobile ? mobileItemDistance : itemDistance;
+  const activeItemStackDistance = isMobile ? mobileItemStackDistance : itemStackDistance;
+  const activeStackPosition = isMobile ? mobileStackPosition : stackPosition;
 
   const resolveTop = (index) => {
-    if (typeof stackPosition === "number") {
-      return `${stackPosition + itemStackDistance * index}px`;
+    if (typeof activeStackPosition === "number") {
+      return `${activeStackPosition + activeItemStackDistance * index}px`;
     }
 
-    if (typeof stackPosition === "string" && stackPosition.includes("rem")) {
-      const base = Number.parseFloat(stackPosition);
-      return `${base + itemStackDistance / 16 * index}rem`;
+    if (typeof activeStackPosition === "string" && activeStackPosition.includes("rem")) {
+      const base = Number.parseFloat(activeStackPosition);
+      return `${base + (activeItemStackDistance / 16) * index}rem`;
     }
 
-    if (typeof stackPosition === "string" && stackPosition.includes("px")) {
-      const base = Number.parseFloat(stackPosition);
-      return `${base + itemStackDistance * index}px`;
+    if (typeof activeStackPosition === "string" && activeStackPosition.includes("px")) {
+      const base = Number.parseFloat(activeStackPosition);
+      return `${base + activeItemStackDistance * index}px`;
     }
 
-    return `calc(${stackPosition} + ${itemStackDistance * index}px)`;
+    return `calc(${activeStackPosition} + ${activeItemStackDistance * index}px)`;
   };
 
   return (
     <div className={cn("relative w-full", className)}>
-      <div className={cn("relative mx-auto flex w-full flex-col", isMobile ? "gap-6" : "pb-28 pt-8")}>
+      <div
+        className={cn("relative mx-auto flex w-full flex-col pt-6", isMobile ? "pb-20" : "pb-28")}
+      >
         {items.map((child, index) => (
           <div
             key={index}
-            className={cn("relative", !isMobile && "sticky")}
+            className="sticky"
             style={{
-              top: isMobile ? undefined : resolveTop(index),
+              top: resolveTop(index),
               zIndex: items.length + index,
-              marginBottom: isMobile || index === items.length - 1 ? 0 : `${itemDistance}px`,
+              marginBottom: index === items.length - 1 ? 0 : `${activeItemDistance}px`,
             }}
           >
             {child}

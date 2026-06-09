@@ -32,7 +32,7 @@ export default function Hero() {
         duration: 0.8,
         stagger: 0.2,
         ease: "power3.out",
-      }
+      },
     );
   }, []);
 
@@ -91,9 +91,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  document
-                    .getElementById("solutions")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("solutions")?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="premium-button-primary flex items-center justify-center gap-2"
               >
@@ -105,9 +103,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() =>
-                  document
-                    .getElementById("quote")
-                    ?.scrollIntoView({ behavior: "smooth" })
+                  document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" })
                 }
                 className="premium-button-secondary flex items-center justify-center gap-2"
               >

@@ -8,7 +8,6 @@ const links = [
   { to: "/about", label: "Who We Are" },
   { to: "/products", label: "Products" },
   { to: "/support", label: "Assistance" },
-  { to: "/blog", label: "Journal" },
   { to: "/careers", label: "Join Us" },
 ];
 
@@ -68,8 +67,8 @@ export function Nav() {
               isHomeHero
                 ? "border-transparent px-1 py-1 bg-transparent shadow-none"
                 : isNavActive(location.pathname, "/")
-                ? "border-[#f05a12]/25 bg-[#fff4ee] px-4 py-2 shadow-[inset_0_0_0_1px_rgba(240,90,18,0.1)]"
-                : "border-transparent px-1 py-1",
+                  ? "border-[#f05a12]/25 bg-[#fff4ee] px-4 py-2 shadow-[inset_0_0_0_1px_rgba(240,90,18,0.1)]"
+                  : "border-transparent px-1 py-1",
             )}
           >
             <img
@@ -96,17 +95,15 @@ export function Nav() {
                         ? "text-white"
                         : "text-white/80 hover:text-white"
                       : active
-                      ? "text-foreground bg-[#fff4ee] shadow-[inset_0_0_0_1px_rgba(240,90,18,0.16)]"
-                      : "text-muted-foreground hover:text-foreground",
+                        ? "text-foreground bg-[#fff4ee] shadow-[inset_0_0_0_1px_rgba(240,90,18,0.16)]"
+                        : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {link.label}
                   <span
                     className={cn(
                       "absolute bottom-1 left-1/2 h-0.5 rounded-full -translate-x-1/2 transition-all duration-300 ease-out",
-                      active
-                        ? "w-[72%] bg-neon"
-                        : "w-0 bg-neon group-hover:w-[80%]",
+                      active ? "w-[72%] bg-neon" : "w-0 bg-neon group-hover:w-[80%]",
                     )}
                   />
                 </Link>
@@ -151,7 +148,9 @@ export function Nav() {
                   <span
                     className={cn(
                       "transition-all duration-300 text-neon",
-                      active ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0",
+                      active
+                        ? "opacity-100 translate-x-0"
+                        : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0",
                     )}
                   >
                     →

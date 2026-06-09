@@ -20,7 +20,7 @@ export default function Products() {
   const [expandedProduct, setExpandedProduct] = useState(null);
 
   return (
-    <section id="products" className="section-padding bg-gradient-to-b from-orange-50 to-white">
+    <section id="products" className="section-padding bg-linear-to-b from-orange-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:pxsx-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -30,9 +30,7 @@ export default function Products() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Our Products
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Our Products</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Premium UAV components engineered for performance and reliability
           </p>
@@ -52,27 +50,21 @@ export default function Products() {
                 transition={{ delay: idx * 0.15, duration: 0.6 }}
                 className="premium-card group cursor-pointer"
                 onClick={() =>
-                  setExpandedProduct(
-                    expandedProduct === product.id ? null : product.id
-                  )
+                  setExpandedProduct(expandedProduct === product.id ? null : product.id)
                 }
               >
                 {/* Product Icon */}
                 <motion.div
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="w-20 h-20 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg"
+                  className="w-20 h-20 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg"
                 >
                   <IconComponent className="text-white text-4xl" />
                 </motion.div>
 
                 {/* Product Info */}
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                  {product.title}
-                </h3>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{product.title}</h3>
 
-                <p className="text-gray-600 leading-relaxed mb-6">
-                  {product.description}
-                </p>
+                <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
 
                 {/* View Details Button */}
                 <motion.button
@@ -130,18 +122,14 @@ export default function Products() {
                   >
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg mx-auto"
+                      className="w-24 h-24 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-6 shadow-lg mx-auto"
                     >
                       <IconComponent className="text-white text-4xl" />
                     </motion.div>
 
-                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-                      {product.title}
-                    </h3>
+                    <h3 className="text-2xl font-semibold text-gray-900 mb-3">{product.title}</h3>
 
-                    <p className="text-gray-600 leading-relaxed mb-6">
-                      {product.description}
-                    </p>
+                    <p className="text-gray-600 leading-relaxed mb-6">{product.description}</p>
 
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -165,9 +153,7 @@ export default function Products() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-16 pt-12 border-t border-gray-200"
         >
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">
-            Product Features
-          </h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Product Features</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[

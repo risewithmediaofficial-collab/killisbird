@@ -21,7 +21,7 @@ export default function Company() {
   });
 
   return (
-    <section id="company" className="section-padding bg-gradient-to-b from-white to-orange-50">
+    <section id="company" className="section-padding bg-linear-to-b from-white to-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -31,12 +31,10 @@ export default function Company() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            About Killis Bird
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">About Killis Bird</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Pioneering innovative UAV solutions with a commitment to excellence and
-            indigenous technology
+            Pioneering innovative UAV solutions with a commitment to excellence and indigenous
+            technology
           </p>
         </motion.div>
 
@@ -50,17 +48,14 @@ export default function Company() {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            <h3 className="text-3xl font-bold text-gray-900">
-              Redefining Unmanned Aerial Systems
-            </h3>
+            <h3 className="text-3xl font-bold text-gray-900">Redefining Unmanned Aerial Systems</h3>
             <p className="text-lg text-gray-600 leading-relaxed">
-              At Killis Bird, we are redefining what is possible in unmanned aerial
-              systems through innovative, indigenous solutions designed to elevate
-              performance and reliability.
+              At Killis Bird, we are redefining what is possible in unmanned aerial systems through
+              innovative, indigenous solutions designed to elevate performance and reliability.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Our team of expert engineers combines cutting-edge technology with
-              deep industry knowledge to deliver solutions that exceed expectations.
+              Our team of expert engineers combines cutting-edge technology with deep industry
+              knowledge to deliver solutions that exceed expectations.
             </p>
 
             {/* Stats */}
@@ -79,10 +74,7 @@ export default function Company() {
           </motion.div>
 
           {/* Right Features */}
-          <motion.div
-            ref={containerRef}
-            className="space-y-4"
-          >
+          <motion.div ref={containerRef} className="space-y-4">
             {content.features.map((feature) => {
               const IconComponent = iconMap[feature.icon];
               return (
@@ -95,7 +87,7 @@ export default function Company() {
                   transition={{ duration: 0.6 }}
                 >
                   <div className="flex items-start gap-4">
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <motion.div
                         whileHover={{ scale: 1.1, rotate: 10 }}
                         className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
@@ -104,9 +96,7 @@ export default function Company() {
                       </motion.div>
                     </div>
                     <div>
-                      <h4 className="text-lg font-semibold text-gray-900">
-                        {feature.title}
-                      </h4>
+                      <h4 className="text-lg font-semibold text-gray-900">{feature.title}</h4>
                       <p className="text-gray-600 text-sm mt-1">
                         Delivering excellence through innovation and precision
                       </p>
@@ -119,7 +109,7 @@ export default function Company() {
         </div>
 
         {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-orange-300 to-transparent my-16" />
+        <div className="h-px bg-linear-to-r from-transparent via-orange-300 to-transparent my-16" />
 
         {/* Additional Info Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
@@ -148,12 +138,8 @@ export default function Company() {
               transition={{ delay: idx * 0.1, duration: 0.6 }}
               className="premium-card text-center"
             >
-              <h4 className="text-lg font-semibold text-gray-900 mb-3">
-                {card.title}
-              </h4>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                {card.description}
-              </p>
+              <h4 className="text-lg font-semibold text-gray-900 mb-3">{card.title}</h4>
+              <p className="text-gray-600 text-sm leading-relaxed">{card.description}</p>
             </motion.div>
           ))}
         </div>

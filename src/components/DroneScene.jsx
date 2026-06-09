@@ -47,7 +47,12 @@ function Drone() {
         </mesh>
 
         {/* Drone Arms */}
-        {[[1, 1], [1, -1], [-1, 1], [-1, -1]].map((pos, idx) => (
+        {[
+          [1, 1],
+          [1, -1],
+          [-1, 1],
+          [-1, -1],
+        ].map((pos, idx) => (
           <group key={idx}>
             {/* Arm */}
             <mesh position={[pos[0] * 0.6, 0.1, pos[1] * 0.6]}>
@@ -76,7 +81,10 @@ function Drone() {
         </mesh>
 
         {/* LED Lights */}
-        {[[0.3, 0, 0.4], [-0.3, 0, 0.4]].map((pos, idx) => (
+        {[
+          [0.3, 0, 0.4],
+          [-0.3, 0, 0.4],
+        ].map((pos, idx) => (
           <mesh key={`led-${idx}`} position={pos}>
             <sphereGeometry args={[0.08, 32, 32]} />
             <meshStandardMaterial color="#ff0080" emissive="#ff0080" emissiveIntensity={0.8} />
@@ -106,7 +114,7 @@ export default function DroneScene({ isMobile = false }) {
     >
       <PerspectiveCamera makeDefault position={[0, 0, 3]} fov={50} />
       <Drone />
-      
+
       {!isMobile && (
         <OrbitControls
           autoRotate

@@ -28,10 +28,7 @@ export default function Solutions() {
   });
 
   return (
-    <section
-      id="solutions"
-      className="section-padding bg-white"
-    >
+    <section id="solutions" className="section-padding bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -41,12 +38,9 @@ export default function Solutions() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            UAV Solutions
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">UAV Solutions</h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Comprehensive solutions tailored to your specific requirements and
-            industry needs
+            Comprehensive solutions tailored to your specific requirements and industry needs
           </p>
         </motion.div>
 
@@ -69,22 +63,18 @@ export default function Solutions() {
                   <div className="relative mb-4">
                     <motion.div
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg"
+                      className="w-16 h-16 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-lg"
                     >
                       <IconComponent className="text-white text-3xl" />
                     </motion.div>
 
                     {/* Glow Effect */}
-                    <div className="absolute -inset-2 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur" />
+                    <div className="absolute -inset-2 bg-linear-to-r from-orange-400 to-orange-600 rounded-xl opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {solution.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {solution.description}
-                  </p>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{solution.title}</h3>
+                  <p className="text-gray-600 leading-relaxed">{solution.description}</p>
 
                   {/* Hover Link Indicator */}
                   <motion.div
@@ -93,7 +83,10 @@ export default function Solutions() {
                     className="flex items-center gap-2 text-orange-600 font-semibold mt-4 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
                     <span>Learn More</span>
-                    <motion.span animate={{ x: [0, 5, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
                       →
                     </motion.span>
                   </motion.div>
@@ -128,7 +121,7 @@ export default function Solutions() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="text-center p-6 rounded-lg bg-gradient-to-br from-blue-50 to-transparent hover:shadow-lg transition-shadow"
+                className="text-center p-6 rounded-lg bg-linear-to-br from-blue-50 to-transparent hover:shadow-lg transition-shadow"
               >
                 <div className="text-3xl mb-3">{benefit.icon}</div>
                 <p className="font-semibold text-gray-900">{benefit.label}</p>

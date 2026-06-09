@@ -21,13 +21,14 @@ export const useScrollAnimation = (options = {}) => {
   } = options;
 
   useEffect(() => {
-    if (!elementRef.current) return;
+    const element = elementRef.current;
+    if (!element) return;
 
     if (animation) {
       // Custom animation
-      gsap.to(elementRef.current, {
+      gsap.to(element, {
         scrollTrigger: {
-          trigger: elementRef.current,
+          trigger: element,
           start,
           end,
           scrub,
@@ -40,7 +41,7 @@ export const useScrollAnimation = (options = {}) => {
     } else {
       // Default fade-up animation
       gsap.fromTo(
-        elementRef.current,
+        element,
         {
           opacity: 0,
           y: 50,
@@ -51,19 +52,19 @@ export const useScrollAnimation = (options = {}) => {
           duration,
           delay,
           scrollTrigger: {
-            trigger: elementRef.current,
+            trigger: element,
             start: "top 80%",
             end: "top 50%",
             scrub: false,
             markers,
           },
-        }
+        },
       );
     }
 
     return () => {
-      if (elementRef.current && elementRef.current._gsap) {
-        gsap.killTweensOf(elementRef.current);
+      if (element._gsap) {
+        gsap.killTweensOf(element);
       }
     };
   }, [trigger, start, end, scrub, markers, duration, delay, animation]);
@@ -96,24 +97,20 @@ export const useScrollStagger = (options = {}) => {
       right: { x: -50, opacity: 0 },
     };
 
-    gsap.fromTo(
-      children,
-      fromAnimation[fromDirection],
-      {
-        y: 0,
-        x: 0,
-        opacity: 1,
-        duration,
-        delay,
-        stagger,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: false,
-        },
-      }
-    );
+    gsap.fromTo(children, fromAnimation[fromDirection], {
+      y: 0,
+      x: 0,
+      opacity: 1,
+      duration,
+      delay,
+      stagger,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 80%",
+        end: "top 50%",
+        scrub: false,
+      },
+    });
 
     return () => {
       gsap.killTweensOf(children);
@@ -222,20 +219,21 @@ export const useInViewport = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    const element = ref.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, []);

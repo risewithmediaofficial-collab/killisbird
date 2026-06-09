@@ -22,7 +22,7 @@ export default function CTA() {
   }, []);
 
   return (
-    <section className="section-padding bg-gradient-to-b from-white via-slate-900 to-slate-900 relative overflow-hidden">
+    <section className="section-padding bg-linear-to-b from-white via-slate-900 to-slate-900 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500 opacity-10 rounded-full blur-3xl" />
@@ -38,14 +38,10 @@ export default function CTA() {
           className="text-center"
         >
           {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            {ctaData.title}
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{ctaData.title}</h2>
 
           {/* Description */}
-          <p className="text-xl text-orange-200 mb-12 leading-relaxed">
-            {ctaData.description}
-          </p>
+          <p className="text-xl text-orange-200 mb-12 leading-relaxed">{ctaData.description}</p>
 
           {/* CTA Buttons */}
           <motion.div
@@ -124,10 +120,7 @@ export default function CTA() {
         viewBox="0 0 1200 120"
         preserveAspectRatio="none"
       >
-        <path
-          d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z"
-          fill="currentColor"
-        />
+        <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="currentColor" />
       </svg>
     </section>
   );

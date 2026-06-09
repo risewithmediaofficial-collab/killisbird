@@ -71,8 +71,9 @@ const heroSlides = [
   },
 ];
 
+const typingWords = ["BOLD.", "AUTONOMOUS.", "MISSION-READY."];
+
 function HeroSection() {
-  const typingWords = ["BOLD.", "AUTONOMOUS.", "MISSION-READY."];
   const [wordIndex, setWordIndex] = useState(0);
   const [typedText, setTypedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -174,10 +175,7 @@ function HeroSection() {
                 <div className="grid gap-5 content-start">
                   <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
                     {heroStats.map((item) => (
-                      <div
-                        key={item.label}
-                        className="glass rounded-[1.4rem] px-5 py-4"
-                      >
+                      <div key={item.label} className="glass rounded-[1.4rem] px-5 py-4">
                         <div className="font-display text-2xl font-semibold tracking-[0.06em] text-foreground">
                           {item.value}
                         </div>

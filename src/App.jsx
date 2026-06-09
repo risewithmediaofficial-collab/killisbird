@@ -9,7 +9,6 @@ import Solutions from "./components/Solutions";
 import Products from "./components/Products";
 import TechnicalSection from "./components/TechnicalSection";
 import TrustedClients from "./components/TrustedClients";
-import Insights from "./components/Insights";
 import Careers from "./components/Careers";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
@@ -42,9 +41,6 @@ function App() {
 
         {/* Trusted Clients */}
         <TrustedClients />
-
-        {/* Insights/Blog */}
-        <Insights />
 
         {/* Careers */}
         <Careers />

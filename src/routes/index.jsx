@@ -5,7 +5,6 @@ import { CtaSection } from "@/sections/home/CtaSection";
 import { HeroSection } from "@/sections/home/HeroSection";
 import { IdentitySection } from "@/sections/home/IdentitySection";
 import { SystemsSection } from "@/sections/home/SystemsSection";
-import { BlogSection } from "@/sections/home/BlogSection";
 import { QuotesSection } from "@/sections/home/QuotesSection";
 import { ClientsSection } from "@/sections/home/ClientsSection";
 const Route = createFileRoute("/")({
@@ -27,7 +26,6 @@ function Home() {
       /* @__PURE__ */ jsx(HeroSection, {}),
       /* @__PURE__ */ jsx(IdentitySection, {}),
       /* @__PURE__ */ jsx(SystemsSection, {}),
-      /* @__PURE__ */ jsx(BlogSection, {}),
       /* @__PURE__ */ jsx(QuotesSection, {}),
       /* @__PURE__ */ jsx(ClientsSection, {}),
       /* @__PURE__ */ jsx(CapabilitySection, {}),

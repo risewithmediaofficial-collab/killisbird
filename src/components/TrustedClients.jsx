@@ -9,7 +9,7 @@ import HandshakeIcon from "@mui/icons-material/Handshake";
 
 export default function TrustedClients() {
   return (
-    <section className="section-padding bg-gradient-to-b from-white to-orange-50">
+    <section className="section-padding bg-linear-to-b from-white to-orange-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -21,9 +21,7 @@ export default function TrustedClients() {
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <HandshakeIcon className="text-blue-600" style={{ fontSize: "2rem" }} />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-              Trusted Clients
-            </h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Trusted Clients</h2>
             <HandshakeIcon className="text-blue-600" style={{ fontSize: "2rem" }} />
           </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -65,15 +63,13 @@ export default function TrustedClients() {
                   {/* Placeholder Logo */}
                   <motion.div
                     whileHover={{ scale: 1.1 }}
-                    className="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 shadow-lg glow-blue"
+                    className="w-24 h-24 bg-linear-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 shadow-lg glow-blue"
                   >
                     <BusinessCenterIcon className="text-white text-5xl" />
                   </motion.div>
 
                   {/* Client Name */}
-                  <h3 className="text-lg font-semibold text-gray-900 text-center">
-                    {client}
-                  </h3>
+                  <h3 className="text-lg font-semibold text-gray-900 text-center">{client}</h3>
 
                   {/* Description */}
                   <p className="text-sm text-gray-600 text-center mt-3">
@@ -102,7 +98,7 @@ export default function TrustedClients() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-16 pt-12 border-t border-gray-200"
         >
-          <div className="relative overflow-hidden bg-gradient-to-r from-orange-600 to-orange-400 rounded-lg py-8 px-6">
+          <div className="relative overflow-hidden bg-linear-to-r from-orange-600 to-orange-400 rounded-lg py-8 px-6">
             <motion.div
               animate={{ x: ["0%", "-100%"] }}
               transition={{
@@ -143,9 +139,7 @@ export default function TrustedClients() {
               className="premium-card text-center"
             >
               <div className="text-3xl mb-2">{indicator.icon}</div>
-              <div className="text-2xl font-bold text-blue-600 mb-1">
-                {indicator.label}
-              </div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">{indicator.label}</div>
               <div className="text-gray-600 text-sm">{indicator.value}</div>
             </motion.div>
           ))}

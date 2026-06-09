@@ -83,34 +83,34 @@ function SupportPage() {
             itemStackDistance={26}
             baseScale={0.9}
           >
-          {supportCategories.map((category, index) => {
-            const Icon = category.icon;
-            return (
-              <ScrollStackItem key={category.title}>
-                <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-                  <div className="flex h-full flex-col gap-6">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff4ee] text-neon shadow-[0_10px_30px_rgba(240,90,18,0.12)]">
-                      <Icon size={24} />
+            {supportCategories.map((category, index) => {
+              const Icon = category.icon;
+              return (
+                <ScrollStackItem key={category.title}>
+                  <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+                    <div className="flex h-full flex-col gap-6">
+                      <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff4ee] text-neon shadow-[0_10px_30px_rgba(240,90,18,0.12)]">
+                        <Icon size={24} />
+                      </div>
+                      <h3 className="text-2xl font-semibold tracking-tight text-neon">
+                        {category.title}
+                      </h3>
+                      <p className="flex-1 text-sm leading-7 text-slate-600">{category.desc}</p>
+                      <Link
+                        to={category.href.startsWith("/") ? category.href : undefined}
+                        hash={
+                          category.href.startsWith("#") ? category.href.replace("#", "") : undefined
+                        }
+                        className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-neon"
+                      >
+                        {category.action}
+                        <span className="text-base leading-none">→</span>
+                      </Link>
                     </div>
-                    <h3 className="text-2xl font-semibold tracking-tight text-neon">
-                      {category.title}
-                    </h3>
-                    <p className="flex-1 text-sm leading-7 text-slate-600">
-                      {category.desc}
-                    </p>
-                    <Link
-                      to={category.href.startsWith("/") ? category.href : undefined}
-                      hash={category.href.startsWith("#") ? category.href.replace("#", "") : undefined}
-                      className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.24em] text-neon"
-                    >
-                      {category.action}
-                      <span className="text-base leading-none">→</span>
-                    </Link>
-                  </div>
-                </article>
-              </ScrollStackItem>
-            );
-          })}
+                  </article>
+                </ScrollStackItem>
+              );
+            })}
           </ScrollStack>
         </div>
       </section>
@@ -132,43 +132,43 @@ function SupportPage() {
               itemStackDistance={24}
               baseScale={0.92}
             >
-            {[
-              {
-                title: "Covered",
-                icon: "✓",
-                color: "text-emerald-500",
-                items: [
-                  "DOA (Dead on Arrival) components",
-                  "Inherent manufacturing defects",
-                  "Premature component failure under normal operating conditions",
-                ],
-              },
-              {
-                title: "Not Covered",
-                icon: "✕",
-                color: "text-red-500",
-                items: [
-                  "Crash damage or physical impact",
-                  "Burnt ESCs/FCs due to incorrect wiring",
-                  "Water or moisture damage",
-                  "Unauthorized modifications or soldering damage",
-                ],
-              },
-            ].map((group, index) => (
-              <ScrollStackItem key={group.title}>
-                <div className="rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
-                  <h3 className="mb-4 flex items-center gap-3 text-xl font-semibold text-neon">
-                    <span className={group.color}>{group.icon}</span>
-                    {group.title}
-                  </h3>
-                  <ul className="space-y-3 text-sm leading-7 text-slate-600">
-                    {group.items.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </ScrollStackItem>
-            ))}
+              {[
+                {
+                  title: "Covered",
+                  icon: "✓",
+                  color: "text-emerald-500",
+                  items: [
+                    "DOA (Dead on Arrival) components",
+                    "Inherent manufacturing defects",
+                    "Premature component failure under normal operating conditions",
+                  ],
+                },
+                {
+                  title: "Not Covered",
+                  icon: "✕",
+                  color: "text-red-500",
+                  items: [
+                    "Crash damage or physical impact",
+                    "Burnt ESCs/FCs due to incorrect wiring",
+                    "Water or moisture damage",
+                    "Unauthorized modifications or soldering damage",
+                  ],
+                },
+              ].map((group, index) => (
+                <ScrollStackItem key={group.title}>
+                  <div className="rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
+                    <h3 className="mb-4 flex items-center gap-3 text-xl font-semibold text-neon">
+                      <span className={group.color}>{group.icon}</span>
+                      {group.title}
+                    </h3>
+                    <ul className="space-y-3 text-sm leading-7 text-slate-600">
+                      {group.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </ScrollStackItem>
+              ))}
             </ScrollStack>
           </div>
 
@@ -187,19 +187,15 @@ function SupportPage() {
             <h2 className="heading-lg mt-8">Frequently Asked Questions</h2>
           </div>
           <div className="mx-auto mt-14 max-w-5xl">
-            <ScrollStack
-              itemDistance={76}
-              itemStackDistance={22}
-              baseScale={0.92}
-            >
-            {faqs.map((faq, index) => (
-              <ScrollStackItem key={faq.q}>
-                <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_18px_45px_rgba(15,23,42,0.08)]">
-                  <h3 className="text-lg font-semibold leading-snug text-neon">{faq.q}</h3>
-                  <p className="mt-4 text-sm leading-7 text-slate-600">{faq.a}</p>
-                </article>
-              </ScrollStackItem>
-            ))}
+            <ScrollStack itemDistance={76} itemStackDistance={22} baseScale={0.92}>
+              {faqs.map((faq, index) => (
+                <ScrollStackItem key={faq.q}>
+                  <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_18px_45px_rgba(15,23,42,0.08)]">
+                    <h3 className="text-lg font-semibold leading-snug text-neon">{faq.q}</h3>
+                    <p className="mt-4 text-sm leading-7 text-slate-600">{faq.a}</p>
+                  </article>
+                </ScrollStackItem>
+              ))}
             </ScrollStack>
           </div>
         </div>

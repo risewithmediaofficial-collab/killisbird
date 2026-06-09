@@ -25,9 +25,7 @@ export default function Footer() {
             transition={{ delay: 0 }}
           >
             <h3 className="text-2xl font-bold text-white mb-4">Killis Bird</h3>
-            <p className="text-orange-200 text-sm leading-relaxed">
-              {footer.about}
-            </p>
+            <p className="text-orange-200 text-sm leading-relaxed">{footer.about}</p>
           </motion.div>
 
           {/* Quick Links Column */}
@@ -43,11 +41,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {footer.quickLinks.map((link, idx) => (
-                <motion.li
-                  key={idx}
-                  whileHover={{ x: 5 }}
-                  className="transition-colors"
-                >
+                <motion.li key={idx} whileHover={{ x: 5 }} className="transition-colors">
                   <a
                     href="#"
                     className="text-orange-200 hover:text-white transition-colors flex items-center gap-2"
@@ -119,7 +113,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent my-8"
+          className="h-px bg-linear-to-r from-transparent via-orange-500 to-transparent my-8"
         />
 
         {/* Bottom Section */}

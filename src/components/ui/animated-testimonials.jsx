@@ -36,15 +36,10 @@ function WordReveal({ text, activeKey }) {
   );
 }
 
-export function AnimatedTestimonials({
-  testimonials,
-  autoplay = false,
-  className,
-}) {
+export function AnimatedTestimonials({ testimonials, autoplay = false, className }) {
   const [active, setActive] = useState(0);
   const rotations = useMemo(
-    () =>
-      testimonials.map((_, index) => defaultAngles[index] ?? ((index % 5) - 2) * 3),
+    () => testimonials.map((_, index) => defaultAngles[index] ?? ((index % 5) - 2) * 3),
     [testimonials],
   );
 
@@ -59,7 +54,9 @@ export function AnimatedTestimonials({
   useEffect(() => {
     if (!autoplay) return undefined;
 
-    const interval = window.setInterval(handleNext, 5000);
+    const interval = window.setInterval(() => {
+      setActive((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
     return () => window.clearInterval(interval);
   }, [autoplay, testimonials.length]);
 

@@ -70,7 +70,7 @@ export default function Navbar() {
         "sticky top-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-white/80 backdrop-blur-md shadow-lg border-b border-gray-200"
-          : "bg-white/40 backdrop-blur-sm"
+          : "bg-white/40 backdrop-blur-sm",
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,11 +80,9 @@ export default function Navbar() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex-shrink-0"
+            className="shrink-0"
           >
-            <div className="text-2xl font-bold gradient-text">
-              Killis Bird
-            </div>
+            <div className="text-2xl font-bold gradient-text">Killis Bird</div>
           </motion.div>
 
           {/* Desktop Navigation */}

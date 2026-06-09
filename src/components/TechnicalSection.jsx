@@ -28,7 +28,7 @@ export default function TechnicalSection() {
   });
 
   return (
-    <section className="section-padding bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+    <section className="section-padding bg-linear-to-b from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
       {/* Background Grid */}
       <div className="absolute inset-0 grid-background-dark opacity-20" />
 
@@ -45,12 +45,9 @@ export default function TechnicalSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Technical Capabilities
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Technical Capabilities</h2>
           <p className="text-xl text-orange-200 max-w-2xl mx-auto">
-            Advanced UAV technology stack with integrated solutions for maximum
-            performance
+            Advanced UAV technology stack with integrated solutions for maximum performance
           </p>
         </motion.div>
 
@@ -73,19 +70,14 @@ export default function TechnicalSection() {
                 transition={{ duration: 0.6 }}
               >
                 {/* Icon */}
-                <motion.div
-                  whileHover={{ scale: 1.15, rotate: 10 }}
-                  className="mb-4"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-lg glow-blue">
+                <motion.div whileHover={{ scale: 1.15, rotate: 10 }} className="mb-4">
+                  <div className="w-12 h-12 bg-linear-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center shadow-lg glow-blue">
                     <IconComponent className="text-white text-2xl" />
                   </div>
                 </motion.div>
 
                 {/* Text */}
-                <h4 className="text-xl font-semibold text-white mb-2">
-                  {capability}
-                </h4>
+                <h4 className="text-xl font-semibold text-white mb-2">{capability}</h4>
                 <p className="text-orange-200 text-sm">
                   Cutting-edge technology for optimal performance
                 </p>
@@ -94,7 +86,7 @@ export default function TechnicalSection() {
                 <motion.div
                   initial={{ opacity: 0, scaleX: 0 }}
                   whileHover={{ opacity: 1, scaleX: 1 }}
-                  className="mt-4 h-1 bg-gradient-to-r from-orange-500 to-orange-400"
+                  className="mt-4 h-1 bg-linear-to-r from-orange-500 to-orange-400"
                 />
               </motion.div>
             );
@@ -107,7 +99,7 @@ export default function TechnicalSection() {
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="h-px bg-gradient-to-r from-transparent via-orange-500 to-transparent my-16"
+          className="h-px bg-linear-to-r from-transparent via-orange-500 to-transparent my-16"
         />
 
         {/* Advanced Features */}
@@ -144,12 +136,8 @@ export default function TechnicalSection() {
               className="text-center"
             >
               <div className="text-4xl mb-4">{feature.icon}</div>
-              <h4 className="text-xl font-semibold text-white mb-2">
-                {feature.title}
-              </h4>
-              <p className="text-orange-200 text-sm leading-relaxed">
-                {feature.description}
-              </p>
+              <h4 className="text-xl font-semibold text-white mb-2">{feature.title}</h4>
+              <p className="text-orange-200 text-sm leading-relaxed">{feature.description}</p>
             </motion.div>
           ))}
         </motion.div>
@@ -177,9 +165,7 @@ export default function TechnicalSection() {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
               >
-                <div className="text-3xl font-bold text-orange-400 mb-2">
-                  {stat.value}
-                </div>
+                <div className="text-3xl font-bold text-orange-400 mb-2">{stat.value}</div>
                 <div className="text-sm text-orange-200">{stat.label}</div>
               </motion.div>
             ))}

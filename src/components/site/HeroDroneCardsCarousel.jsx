@@ -4,12 +4,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
-function HeroDroneCardsCarousel({
-  slides,
-  className,
-  autoplay = true,
-  loop = true,
-}) {
+function HeroDroneCardsCarousel({ slides, className, autoplay = true, loop = true }) {
   const [api, setApi] = useState();
   const [current, setCurrent] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -77,10 +72,9 @@ function HeroDroneCardsCarousel({
               <motion.div
                 initial={false}
                 animate={{
-                  clipPath:
-                    isMobile
-                      ? "inset(0% 0% 0% 0% round 1.75rem)"
-                      : current === index
+                  clipPath: isMobile
+                    ? "inset(0% 0% 0% 0% round 1.75rem)"
+                    : current === index
                       ? "inset(0% 0% 0% 0% round 1.75rem)"
                       : "inset(11% 0% 11% 0% round 1.75rem)",
                   scale: isMobile ? 1 : current === index ? 1 : 0.94,

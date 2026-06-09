@@ -29,8 +29,7 @@ const products = [
     name: "Flight Control Card",
     icon: Cpu,
     images: [p01],
-    blurb:
-      "The brain of the drone - sensor fusion, stabilization, and navigation in real-time.",
+    blurb: "The brain of the drone - sensor fusion, stabilization, and navigation in real-time.",
     description:
       "Engineered for next-generation UAVs requiring ultra-fast processing, precise sensor integration, and robust expandability - all within a compact footprint. Built around the powerful STM32H743 microcontroller, it delivers exceptional computational performance for real-time control, stabilization, and navigation.",
     specs: [
@@ -52,8 +51,7 @@ const products = [
     name: "Aerospace Frame",
     icon: Layers,
     images: [p02],
-    blurb:
-      "Aerospace-grade carbon body. Engineered for racing, freestyle, and tactical use.",
+    blurb: "Aerospace-grade carbon body. Engineered for racing, freestyle, and tactical use.",
     description:
       "A high-performance 5-inch class drone frame engineered for durability, precision, and versatility. True X-configuration with high-strength carbon fiber and AL7075 aluminum - exceptional rigidity and impact resistance with a lightweight profile.",
     specs: [
