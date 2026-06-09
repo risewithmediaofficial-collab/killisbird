@@ -12,9 +12,14 @@ dist
 dist-ssr
 .output
 .vinxi
-.tanstack/**
+.tanstack/
+.vite/
 .nitro
 *.local
+
+# Generated route output / leftover local scaffolds
+frontend/
+src/src/routeTree.gen.js
 
 # Wrangler / Cloudflare
 .wrangler/
