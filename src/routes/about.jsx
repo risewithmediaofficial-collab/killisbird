@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Check, Compass, Cpu, Globe, Layers, Target } from "lucide-react";
-import { PremiumCard } from "@/components/site/PremiumCard";
 import { PageHero, SectionLabel } from "@/components/site/Section";
+import { ScrollStack, ScrollStackItem } from "@/components/ui/scroll-stack";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -109,9 +109,14 @@ function AboutPage() {
       </section>
 
       <section className="container-edge py-20 md:py-32">
-        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+        <ScrollStack
+          className="mx-auto max-w-5xl"
+          itemDistance={100}
+          itemStackDistance={34}
+          baseScale={0.9}
+        >
           {missionVision.map(({ label, icon: Icon, text }, index) => (
-            <PremiumCard key={label} delay={index * 0.08} className="h-full">
+            <ScrollStackItem key={label}>
               <div className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-8 sm:p-10">
                 <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.3em] text-neon">
                   <Icon size={16} />
@@ -121,9 +126,9 @@ function AboutPage() {
                   {text}
                 </p>
               </div>
-            </PremiumCard>
+            </ScrollStackItem>
           ))}
-        </div>
+        </ScrollStack>
       </section>
 
       <section className="container-edge py-20 md:py-32">
@@ -132,33 +137,47 @@ function AboutPage() {
           Engineering UAV systems end-to-end.
         </h2>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2">
+        <div className="mt-16">
+          <ScrollStack
+            className="mx-auto max-w-5xl"
+            itemDistance={72}
+            itemStackDistance={24}
+            baseScale={0.92}
+          >
           {whatWeDo.map((item, index) => (
-            <PremiumCard key={item} delay={index * 0.06}>
+            <ScrollStackItem key={item}>
               <div className="card-surface rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
                 <div className="flex items-start gap-4">
                   <Check className="mt-1 shrink-0 text-neon" size={20} />
                   <p className="text-xl leading-9 text-slate-900">{item}</p>
                 </div>
               </div>
-            </PremiumCard>
+            </ScrollStackItem>
           ))}
+          </ScrollStack>
         </div>
       </section>
 
       <section className="py-20 md:py-32">
         <div className="container-edge">
           <SectionLabel index="04" label="Why Killis Bird" />
-          <div className="mt-16 grid gap-6 md:grid-cols-2">
+          <div className="mt-16">
+            <ScrollStack
+              className="mx-auto max-w-5xl"
+              itemDistance={84}
+              itemStackDistance={28}
+              baseScale={0.9}
+            >
             {whyKillisBird.map(({ icon: Icon, title, description }, index) => (
-              <PremiumCard key={title} delay={index * 0.07}>
+              <ScrollStackItem key={title}>
                 <div className="card-surface h-full rounded-[24px] border border-black/6 bg-white/95 p-8 sm:p-10">
                   <Icon className="text-neon" size={28} />
                   <h3 className="mt-6 text-2xl font-semibold text-neon">{title}</h3>
                   <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">{description}</p>
                 </div>
-              </PremiumCard>
+              </ScrollStackItem>
             ))}
+            </ScrollStack>
           </div>
         </div>
       </section>

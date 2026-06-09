@@ -3,6 +3,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Layers, Network, Wind } from "lucide-react";
 import { PageHero, SectionLabel } from "@/components/site/Section";
+import { ScrollStack, ScrollStackItem } from "@/components/ui/scroll-stack";
 import p01 from "@/assets/FLIGHT-CONTROL-CARD1-removebg-preview.png";
 import p02 from "@/assets/FRAMES1-removebg-preview.png";
 import p03 from "@/assets/Propellers3-removebg-preview.png";
@@ -11,11 +12,11 @@ import p04 from "@/assets/DRONE1-removebg-preview.png";
 export const Route = createFileRoute("/products")({
   head: () => ({
     meta: [
-      { title: "Systems — Killis Bird UAV Components" },
+      { title: "Systems - Killis Bird UAV Components" },
       {
         name: "description",
         content:
-          "Flight control cards, aerospace frames, propellers, and swarm GCS — engineered for next-generation UAVs.",
+          "Flight control cards, aerospace frames, propellers, and swarm GCS engineered for next-generation UAVs.",
       },
     ],
   }),
@@ -29,9 +30,9 @@ const products = [
     icon: Cpu,
     images: [p01],
     blurb:
-      "The brain of the drone — sensor fusion, stabilization, and navigation in real-time.",
+      "The brain of the drone - sensor fusion, stabilization, and navigation in real-time.",
     description:
-      "Engineered for next-generation UAVs requiring ultra-fast processing, precise sensor integration, and robust expandability — all within a compact footprint. Built around the powerful STM32H743 microcontroller, it delivers exceptional computational performance for real-time control, stabilization, and navigation.",
+      "Engineered for next-generation UAVs requiring ultra-fast processing, precise sensor integration, and robust expandability - all within a compact footprint. Built around the powerful STM32H743 microcontroller, it delivers exceptional computational performance for real-time control, stabilization, and navigation.",
     specs: [
       { k: "MCU", v: "STM32H743 @ 480 MHz" },
       { k: "IMU", v: "ICM42688 (6-axis)" },
@@ -39,13 +40,12 @@ const products = [
       { k: "OSD", v: "Inbuilt OSD chip" },
       { k: "Motor Outputs", v: "Up to 8" },
       { k: "UART Ports", v: "5x" },
-      { k: "I²C Buses", v: "2x" },
+      { k: "I2C Buses", v: "2x" },
       { k: "Logging", v: "MicroSD blackbox" },
       { k: "USB", v: "Type-C" },
-      { k: "Dimensions", v: "36 × 36 mm" },
+      { k: "Dimensions", v: "36 x 36 mm" },
       { k: "Platforms", v: "Multirotor · Fixed-wing · Hybrid" },
     ],
-    gradient: ["hsl(15 100% 57%)", "hsl(34 95% 68%)"],
   },
   {
     code: "02 · FRM-5IN",
@@ -55,16 +55,15 @@ const products = [
     blurb:
       "Aerospace-grade carbon body. Engineered for racing, freestyle, and tactical use.",
     description:
-      "A high-performance 5-inch class drone frame engineered for durability, precision, and versatility. True X-configuration with high-strength carbon fiber and AL7075 aluminum — exceptional rigidity and impact resistance, lightweight profile.",
+      "A high-performance 5-inch class drone frame engineered for durability, precision, and versatility. True X-configuration with high-strength carbon fiber and AL7075 aluminum - exceptional rigidity and impact resistance with a lightweight profile.",
     specs: [
       { k: "Frame Size", v: "5-inch class" },
       { k: "Dry Weight", v: "108 grams" },
-      { k: "Motor Mount", v: "16×16 / 19×19 mm" },
+      { k: "Motor Mount", v: "16x16 / 19x19 mm" },
       { k: "Propeller Support", v: "Up to 5.1 inches" },
       { k: "Layout", v: "True X-configuration" },
       { k: "Materials", v: "Carbon fiber + AL7075" },
     ],
-    gradient: ["hsl(205 88% 64%)", "hsl(232 90% 74%)"],
   },
   {
     code: "03 · PRP-NYLON",
@@ -83,17 +82,16 @@ const products = [
     highlights: [
       "Precision molded for consistent aerodynamics",
       "High rigidity and durability",
-      "Balanced design — smoother flight",
+      "Balanced design - smoother flight",
       "Available in CW and CCW configurations",
     ],
-    gradient: ["hsl(88 66% 58%)", "hsl(145 65% 58%)"],
   },
   {
     code: "04 · SWM-GCS",
-    name: "Swarm — Ground Control",
+    name: "Swarm - Ground Control",
     icon: Network,
     images: [p04],
-    blurb: "Coordinate 5–100+ drones in real-time. Mission-critical command.",
+    blurb: "Coordinate 5-100+ drones in real-time. Mission-critical command.",
     description:
       "Cutting-edge Drone Swarm Management System enabling seamless coordination of 5 to 100+ drones in real-time. Designed for mission-critical operations across defense, industrial, agricultural, and research applications.",
     specs: [
@@ -113,7 +111,6 @@ const products = [
       "Speed monitoring",
       "Signal strength tracking",
     ],
-    gradient: ["hsl(260 84% 66%)", "hsl(318 90% 68%)"],
   },
 ];
 
@@ -171,7 +168,7 @@ function ProductGallery({ images, code, isMobile }) {
       </div>
 
       <div className="absolute bottom-4 right-4 rounded-full border border-black/8 bg-white/90 px-4 py-2 font-mono text-[10px] tracking-[0.32em] text-[#f05a12] shadow-sm backdrop-blur-md">
-        ● ACTIVE
+        ACTIVE
       </div>
 
       {images.length > 1 && (
@@ -181,9 +178,7 @@ function ProductGallery({ images, code, isMobile }) {
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`h-2 rounded-full transition-all ${
-                currentIndex === idx
-                  ? "w-10 bg-[#f05a12]"
-                  : "w-2 bg-slate-300 hover:bg-slate-400"
+                currentIndex === idx ? "w-10 bg-[#f05a12]" : "w-2 bg-slate-300 hover:bg-slate-400"
               }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
@@ -200,84 +195,89 @@ function ProductCard({ product, index }) {
   const isMobile = useIsMobile();
 
   return (
-    <section
-      id={product.code.split(" ")[0]}
-      className="relative scroll-mt-32 overflow-hidden px-3 sm:px-6"
-      style={sectionContainer}
-    >
-      <div
-        className={`mx-auto grid w-full max-w-[1180px] items-start gap-8 lg:grid-cols-[minmax(320px,520px)_minmax(0,1fr)] lg:gap-12 ${isZigZag ? "lg:[&_.product-copy]:order-1 lg:[&_.product-media]:order-2 lg:[&_.product-copy]:text-right" : ""}`}
+    <ScrollStackItem className="scroll-mt-32">
+      <section
+        id={product.code.split(" ")[0]}
+        className="relative overflow-hidden rounded-[26px] border border-black/6 bg-white px-3 py-3 shadow-[0_20px_48px_rgba(15,23,42,0.08)] sm:rounded-[30px] sm:px-5 sm:py-5"
       >
-        <div className="product-media" style={cardContainer}>
-          <motion.div
-            className="relative z-10 w-full max-w-[360px] min-[420px]:max-w-[420px] sm:max-w-[460px] lg:max-w-[500px]"
-            initial={false}
-            animate={{ y: 0, rotate: 0, opacity: 1 }}
-            transition={{ duration: isMobile ? 0.2 : 0.35, ease: "easeOut" }}
-            style={card}
-          >
-            <ProductGallery images={product.images} code={product.code} isMobile={isMobile} />
-          </motion.div>
-        </div>
-
-        <div className="product-copy min-w-0 pt-4 lg:pt-10">
-          <SectionLabel
-            index={String(index + 1).padStart(2, "0")}
-            label={product.code.split("·")[1]?.trim() ?? product.name}
-          />
-
-          <div className={`mt-5 flex items-start gap-4 ${isZigZag ? "lg:justify-end" : ""}`}>
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff4ee] text-[#f05a12] shadow-[0_10px_30px_rgba(240,90,18,0.16)]">
-              <Icon size={26} />
-            </div>
-            <div>
-              <h2 className="text-xl font-semibold leading-tight text-neon min-[420px]:text-2xl sm:text-[2rem]">
-                {product.name}
-              </h2>
-              <p className="mt-2 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
-                {product.blurb}
-              </p>
-            </div>
+        <div
+          className={`mx-auto grid w-full max-w-[1080px] items-start gap-6 lg:grid-cols-[minmax(280px,440px)_minmax(0,1fr)] lg:gap-10 ${isZigZag ? "lg:[&_.product-copy]:order-1 lg:[&_.product-media]:order-2 lg:[&_.product-copy]:text-right" : ""}`}
+        >
+          <div className="product-media" style={cardContainer}>
+            <motion.div
+              className="relative z-10 w-full max-w-[300px] min-[420px]:max-w-[360px] sm:max-w-[400px] lg:max-w-[430px]"
+              initial={false}
+              animate={{ y: 0, rotate: 0, opacity: 1 }}
+              transition={{ duration: isMobile ? 0.2 : 0.35, ease: "easeOut" }}
+              style={card}
+            >
+              <ProductGallery images={product.images} code={product.code} isMobile={isMobile} />
+            </motion.div>
           </div>
 
-          <div className="mt-8 font-mono text-[10px] uppercase tracking-[0.32em] text-slate-500">
-            Product briefing
-          </div>
-          <p className={`mt-4 text-[15px] leading-8 text-slate-700 sm:text-[1.02rem] ${isZigZag ? "lg:ml-auto lg:max-w-[44rem]" : "max-w-[44rem]"}`}>
-            {product.description}
-          </p>
+          <div className="product-copy min-w-0 pt-4 lg:pt-10">
+            <SectionLabel
+              index={String(index + 1).padStart(2, "0")}
+              label={product.code.split("·")[1]?.trim() ?? product.name}
+            />
 
-          <div className="mt-8 grid gap-x-10 gap-y-5 sm:grid-cols-2">
-            {product.specs.map((spec) => (
-              <div key={spec.k} className="pb-3">
-                <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-slate-500">
-                  {spec.k}
-                </div>
-                <div className="mt-2 text-sm font-semibold leading-6 text-slate-900">
-                  {spec.v}
-                </div>
+            <div className={`mt-4 flex items-start gap-3 ${isZigZag ? "lg:justify-end" : ""}`}>
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#fff4ee] text-[#f05a12] shadow-[0_10px_24px_rgba(240,90,18,0.14)] sm:h-14 sm:w-14">
+                <Icon size={22} />
               </div>
-            ))}
-          </div>
-
-          {product.highlights && (
-            <div className="mt-6">
-              <div className="font-mono text-[10px] uppercase tracking-[0.32em] text-slate-500">
-                Mission highlights
+              <div>
+                <h2 className="text-lg font-semibold leading-tight text-neon min-[420px]:text-[1.75rem] sm:text-[1.95rem]">
+                  {product.name}
+                </h2>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-slate-600 sm:text-[15px]">
+                  {product.blurb}
+                </p>
               </div>
-              <ul className="mt-4 grid gap-x-10 gap-y-3 text-sm text-slate-600 sm:grid-cols-2">
-                {product.highlights.map((highlight) => (
-                  <li key={highlight} className="flex items-start gap-3">
-                    <span className="mt-1 text-[#f05a12]">▸</span>
-                    <span>{highlight}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
-          )}
+
+            <div className="mt-6 font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
+              Product briefing
+            </div>
+            <p
+              className={`mt-4 text-[14px] leading-7 text-slate-700 sm:text-[15px] sm:leading-8 ${
+                isZigZag ? "lg:ml-auto lg:max-w-[38rem]" : "max-w-[38rem]"
+              }`}
+            >
+              {product.description}
+            </p>
+
+            <div className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+              {product.specs.map((spec) => (
+                <div key={spec.k} className="pb-2">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.22em] text-slate-500 sm:text-[10px]">
+                    {spec.k}
+                  </div>
+                  <div className="mt-1.5 text-sm font-semibold leading-6 text-slate-900">
+                    {spec.v}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {product.highlights && (
+              <div className="mt-5">
+                <div className="font-mono text-[10px] uppercase tracking-[0.28em] text-slate-500">
+                  Mission highlights
+                </div>
+                <ul className="mt-3 grid gap-x-8 gap-y-2.5 text-sm text-slate-600 sm:grid-cols-2">
+                  {product.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-3">
+                      <span className="mt-1 text-[#f05a12]">▸</span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </ScrollStackItem>
   );
 }
 
@@ -295,9 +295,16 @@ function ProductsPage() {
       />
 
       <div style={container}>
-        {products.map((product, index) => (
-          <ProductCard key={product.code} product={product} index={index} />
-        ))}
+        <ScrollStack
+          className="mx-auto max-w-[1180px]"
+          itemDistance={72}
+          itemStackDistance={22}
+          stackPosition="6.5rem"
+        >
+          {products.map((product, index) => (
+            <ProductCard key={product.code} product={product} index={index} />
+          ))}
+        </ScrollStack>
       </div>
     </>
   );
@@ -308,12 +315,6 @@ const container = {
   maxWidth: "1320px",
   paddingBottom: "140px",
   width: "100%",
-};
-
-const sectionContainer = {
-  marginBottom: "28px",
-  paddingTop: "18px",
-  position: "relative",
 };
 
 const cardContainer = {

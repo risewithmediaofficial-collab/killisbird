@@ -8,8 +8,8 @@ import {
   MapPin,
   Wrench,
 } from "lucide-react";
-import { PremiumCard } from "@/components/site/PremiumCard";
 import { PageHero, SectionLabel } from "@/components/site/Section";
+import { ScrollStack, ScrollStackItem } from "@/components/ui/scroll-stack";
 
 export const Route = createFileRoute("/careers")({
   head: () => ({
@@ -63,11 +63,17 @@ export function CareersPage() {
 
       <section className="container-edge space-y-6 pb-20 md:pb-24">
         <SectionLabel index="01" label="Open Positions" />
-        <div className="mt-8 grid gap-6">
+        <div className="mt-8">
+          <ScrollStack
+            className="mx-auto max-w-6xl"
+            itemDistance={92}
+            itemStackDistance={28}
+            baseScale={0.9}
+          >
           {positions.map((position, index) => {
             const Icon = position.icon;
             return (
-              <PremiumCard key={position.id} delay={index * 0.08}>
+              <ScrollStackItem key={position.id}>
                 <article className="card-surface rounded-[28px] border border-black/6 bg-white/95 p-6 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:p-8 md:p-10">
                   <div className="grid gap-8 lg:grid-cols-12">
                     <div className="space-y-4 lg:col-span-4">
@@ -140,9 +146,10 @@ export function CareersPage() {
                     </div>
                   </div>
                 </article>
-              </PremiumCard>
+              </ScrollStackItem>
             );
           })}
+          </ScrollStack>
         </div>
 
         <motion.div

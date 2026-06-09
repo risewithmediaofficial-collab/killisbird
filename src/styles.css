@@ -610,6 +610,35 @@
   .card-surface:hover::before {
     opacity: 1;
   }
+  .scroll-stack-stable .card-surface,
+  .scroll-stack-stable.card-surface {
+    transition:
+      box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.35s ease,
+      background-color 0.35s ease;
+  }
+  .scroll-stack-stable .card-surface:hover,
+  .scroll-stack-stable.card-surface:hover {
+    transform: none;
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.1),
+      0 0 22px rgba(27, 45, 107, 0.1);
+  }
+  .scroll-stack-card {
+    transform: translate3d(0, 0, 0);
+    will-change: transform, filter;
+  }
+  .scroll-stack-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at top right, rgba(27, 45, 107, 0.08), transparent 30%),
+      linear-gradient(135deg, rgba(240, 90, 18, 0.04), transparent 45%);
+    opacity: 0.8;
+  }
   .card-content {
     position: relative;
     z-index: 1;

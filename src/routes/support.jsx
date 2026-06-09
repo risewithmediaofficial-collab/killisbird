@@ -1,8 +1,8 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { FileText, Mail, Shield, Wrench } from "lucide-react";
-import { PremiumCard } from "@/components/site/PremiumCard";
 import { PageHero, SectionLabel } from "@/components/site/Section";
+import { ScrollStack, ScrollStackItem } from "@/components/ui/scroll-stack";
 
 export const Route = createFileRoute("/support")({
   head: () => ({
@@ -76,11 +76,17 @@ function SupportPage() {
 
       <section className="container-edge pt-10 pb-24 md:pt-14 md:pb-28">
         <SectionLabel index="01" label="Support Paths" />
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-10">
+          <ScrollStack
+            className="mx-auto max-w-5xl"
+            itemDistance={90}
+            itemStackDistance={26}
+            baseScale={0.9}
+          >
           {supportCategories.map((category, index) => {
             const Icon = category.icon;
             return (
-              <PremiumCard key={category.title} delay={index * 0.08} className="h-full">
+              <ScrollStackItem key={category.title}>
                 <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
                   <div className="flex h-full flex-col gap-6">
                     <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff4ee] text-neon shadow-[0_10px_30px_rgba(240,90,18,0.12)]">
@@ -102,9 +108,10 @@ function SupportPage() {
                     </Link>
                   </div>
                 </article>
-              </PremiumCard>
+              </ScrollStackItem>
             );
           })}
+          </ScrollStack>
         </div>
       </section>
 
@@ -118,7 +125,13 @@ function SupportPage() {
             valid from the date of delivery.
           </p>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <div className="mt-12">
+            <ScrollStack
+              className="mx-auto max-w-4xl"
+              itemDistance={84}
+              itemStackDistance={24}
+              baseScale={0.92}
+            >
             {[
               {
                 title: "Covered",
@@ -142,7 +155,7 @@ function SupportPage() {
                 ],
               },
             ].map((group, index) => (
-              <PremiumCard key={group.title} delay={0.1 + index * 0.08}>
+              <ScrollStackItem key={group.title}>
                 <div className="rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)]">
                   <h3 className="mb-4 flex items-center gap-3 text-xl font-semibold text-neon">
                     <span className={group.color}>{group.icon}</span>
@@ -154,8 +167,9 @@ function SupportPage() {
                     ))}
                   </ul>
                 </div>
-              </PremiumCard>
+              </ScrollStackItem>
             ))}
+            </ScrollStack>
           </div>
 
           <p className="mt-10 max-w-4xl text-base leading-8 text-slate-600">
@@ -172,15 +186,21 @@ function SupportPage() {
             <SectionLabel index="03" label="FAQ" />
             <h2 className="heading-lg mt-8">Frequently Asked Questions</h2>
           </div>
-          <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-2">
+          <div className="mx-auto mt-14 max-w-5xl">
+            <ScrollStack
+              itemDistance={76}
+              itemStackDistance={22}
+              baseScale={0.92}
+            >
             {faqs.map((faq, index) => (
-              <PremiumCard key={faq.q} delay={index * 0.06} className="h-full">
+              <ScrollStackItem key={faq.q}>
                 <article className="card-surface h-full rounded-[28px] border border-black/6 bg-white/95 p-7 shadow-[0_18px_45px_rgba(15,23,42,0.08)]">
                   <h3 className="text-lg font-semibold leading-snug text-neon">{faq.q}</h3>
                   <p className="mt-4 text-sm leading-7 text-slate-600">{faq.a}</p>
                 </article>
-              </PremiumCard>
+              </ScrollStackItem>
             ))}
+            </ScrollStack>
           </div>
         </div>
       </section>
