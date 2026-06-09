@@ -87,7 +87,7 @@ function HeroDroneCardsCarousel({ slides, className, autoplay = true, loop = tru
                 className="h-full w-full overflow-hidden rounded-[1.5rem] border border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,245,240,0.92))] p-4 shadow-[0_24px_50px_rgba(15,15,15,0.08)] sm:rounded-[1.75rem] sm:p-5"
               >
                 <div className="flex h-full flex-col rounded-[1.2rem] bg-white/78 p-4 sm:rounded-[1.35rem] sm:p-5">
-                  <div className="flex items-start justify-between gap-4">
+                  <div className={cn("flex items-start justify-between gap-4", isMobile ? "hidden" : "")}>
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-neon">
                         {slide.kicker}
@@ -101,7 +101,7 @@ function HeroDroneCardsCarousel({ slides, className, autoplay = true, loop = tru
                     </div>
                   </div>
 
-                  <div className="mt-4 flex min-h-0 flex-1 items-center justify-center rounded-[1rem] bg-[linear-gradient(180deg,rgba(245,245,240,0.92),rgba(255,255,255,0.78))] px-3 py-4 sm:mt-5 sm:rounded-[1.2rem] sm:px-4 sm:py-5">
+                  <div className={cn("flex min-h-0 flex-1 items-center justify-center rounded-[1rem] bg-[linear-gradient(180deg,rgba(245,245,240,0.92),rgba(255,255,255,0.78))] px-3 py-4 sm:mt-5 sm:rounded-[1.2rem] sm:px-4 sm:py-5", isMobile ? "mt-0" : "mt-4")}>
                     <img
                       src={slide.image}
                       alt={slide.title}
