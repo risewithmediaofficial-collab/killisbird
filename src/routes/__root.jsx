@@ -1,5 +1,6 @@
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useRouterState } from "@tanstack/react-router";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import appCss from "../styles.css?url";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
@@ -87,12 +88,33 @@ function RootShell({ children }) {
   });
 }
 function RootComponent() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+  const prefersReducedMotion = useReducedMotion();
+
   return /* @__PURE__ */ jsxs(Fragment, {
     children: [
       /* @__PURE__ */ jsx(ScrollToTop, {}),
       /* @__PURE__ */ jsx(Preloader, {}),
       /* @__PURE__ */ jsx(Nav, {}),
-      /* @__PURE__ */ jsx("main", { children: /* @__PURE__ */ jsx(Outlet, {}) }),
+      /* @__PURE__ */ jsx("main", {
+        children: /* @__PURE__ */ jsx(AnimatePresence, {
+          mode: "wait",
+          initial: false,
+          children: /* @__PURE__ */ jsx(motion.div, {
+            key: pathname,
+            initial: prefersReducedMotion ? false : { opacity: 0, y: 10 },
+            animate: { opacity: 1, y: 0 },
+            exit: prefersReducedMotion ? undefined : { opacity: 0, y: -8 },
+            transition: {
+              duration: prefersReducedMotion ? 0 : 0.28,
+              ease: [0.22, 1, 0.36, 1],
+            },
+            children: /* @__PURE__ */ jsx(Outlet, {}),
+          }),
+        }),
+      }),
       /* @__PURE__ */ jsx(Footer, {}),
     ],
   });

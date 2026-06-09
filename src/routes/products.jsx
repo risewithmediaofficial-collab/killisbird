@@ -176,19 +176,9 @@ function ProductGallery({ images, code, isMobile }) {
                 alt={`${code} view ${idx + 1}`}
                 loading="lazy"
                 className="relative z-10 h-full w-full object-contain drop-shadow-[0_30px_40px_rgba(15,23,42,0.18)]"
-                initial={useSimpleMotion ? false : { y: 120, opacity: 0, scale: 0.72, rotate: -6 }}
-                animate={useSimpleMotion ? { y: 0, opacity: 1, scale: 1, rotate: 0 } : undefined}
-                whileInView={
-                  useSimpleMotion
-                    ? undefined
-                    : { y: -8, opacity: 1, scale: 1.06, rotate: 0 }
-                }
-                viewport={useSimpleMotion ? undefined : { once: true, amount: 0.65 }}
-                transition={
-                  useSimpleMotion
-                    ? { duration: 0.28, ease: "easeOut" }
-                    : { type: "spring", bounce: 0.42, duration: 1.05 }
-                }
+                initial={false}
+                animate={{ y: 0, opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: useSimpleMotion ? 0.22 : 0.35, ease: "easeOut" }}
               />
             </div>
           ))}
@@ -240,12 +230,9 @@ function ProductCard({ product, index }) {
         <div className="product-media" style={cardContainer}>
           <motion.div
             className="relative z-10 w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[500px]"
-            custom={index}
-            initial={isMobile ? false : "offscreen"}
-            whileInView={isMobile ? undefined : "onscreen"}
-            animate={isMobile ? { y: 0, rotate: 0, opacity: 1 } : undefined}
-            viewport={isMobile ? undefined : { once: true, amount: 0.55 }}
-            variants={isMobile ? undefined : cardVariants}
+            initial={false}
+            animate={{ y: 0, rotate: 0, opacity: 1 }}
+            transition={{ duration: isMobile ? 0.2 : 0.35, ease: "easeOut" }}
             style={card}
           >
             <ProductGallery images={product.images} code={product.code} isMobile={isMobile} />
