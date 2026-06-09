@@ -67,11 +67,11 @@ function HeroDroneCardsCarousel({
         slidesToScroll: 1,
       }}
     >
-      <CarouselContent className="-ml-3 h-[22rem] sm:h-[26rem]">
+      <CarouselContent className="-ml-3 h-[20rem] sm:h-[24rem] lg:h-[26rem]">
         {slides.map((slide, index) => (
           <CarouselItem
             key={slide.title}
-            className="basis-[80%] pl-3 sm:basis-[62%] lg:basis-[56%]"
+            className="basis-[88%] pl-3 sm:basis-[68%] lg:basis-[56%]"
           >
             <div className="relative flex h-full items-center justify-center">
               <motion.div
@@ -90,15 +90,15 @@ function HeroDroneCardsCarousel({
                   duration: isMobile ? 0.28 : 0.55,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="h-full w-full overflow-hidden rounded-[1.75rem] border border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,245,240,0.92))] p-5 shadow-[0_24px_50px_rgba(15,15,15,0.08)]"
+                className="h-full w-full overflow-hidden rounded-[1.5rem] border border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,245,240,0.92))] p-4 shadow-[0_24px_50px_rgba(15,15,15,0.08)] sm:rounded-[1.75rem] sm:p-5"
               >
-                <div className="flex h-full flex-col rounded-[1.35rem] bg-white/78 p-5">
+                <div className="flex h-full flex-col rounded-[1.2rem] bg-white/78 p-4 sm:rounded-[1.35rem] sm:p-5">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-neon">
                         {slide.kicker}
                       </p>
-                      <h3 className="mt-3 text-lg font-semibold uppercase tracking-[0.08em] text-foreground sm:text-xl">
+                      <h3 className="mt-3 text-base font-semibold uppercase tracking-[0.08em] text-foreground sm:text-xl">
                         {slide.title}
                       </h3>
                     </div>
@@ -107,12 +107,12 @@ function HeroDroneCardsCarousel({
                     </div>
                   </div>
 
-                  <div className="mt-5 flex min-h-0 flex-1 items-center justify-center rounded-[1.2rem] bg-[linear-gradient(180deg,rgba(245,245,240,0.92),rgba(255,255,255,0.78))] px-4 py-5">
+                  <div className="mt-4 flex min-h-0 flex-1 items-center justify-center rounded-[1rem] bg-[linear-gradient(180deg,rgba(245,245,240,0.92),rgba(255,255,255,0.78))] px-3 py-4 sm:mt-5 sm:rounded-[1.2rem] sm:px-4 sm:py-5">
                     <img
                       src={slide.image}
                       alt={slide.title}
                       draggable={false}
-                      className="h-full max-h-[12.5rem] w-full object-contain drop-shadow-[0_28px_44px_rgba(15,15,15,0.12)] sm:max-h-[15rem]"
+                      className="h-full max-h-[11rem] w-full object-contain drop-shadow-[0_28px_44px_rgba(15,15,15,0.12)] sm:max-h-[15rem]"
                     />
                   </div>
                 </div>
@@ -122,7 +122,7 @@ function HeroDroneCardsCarousel({
         ))}
       </CarouselContent>
 
-      <div className="mt-5 flex items-center justify-between gap-4">
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           {slides.map((slide, index) => (
             <button
@@ -137,7 +137,7 @@ function HeroDroneCardsCarousel({
           ))}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="ml-auto flex items-center gap-2">
           <button
             aria-label="Previous slide"
             onClick={() => api?.scrollPrev()}
@@ -155,7 +155,7 @@ function HeroDroneCardsCarousel({
         </div>
       </div>
 
-      <div className="mt-5 min-h-14">
+      <div className="mt-5 min-h-20 sm:min-h-14">
         <AnimatePresence mode="wait">
           <motion.p
             key={slides[current]?.title}

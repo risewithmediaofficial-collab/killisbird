@@ -37,7 +37,7 @@ function Footer() {
       }),
       /* @__PURE__ */ jsxs("div", {
         className:
-          "container-edge relative z-10 pt-16 md:pt-24 pb-12 grid gap-12 sm:grid-cols-2 lg:grid-cols-4",
+          "container-edge relative z-10 grid gap-10 pb-12 pt-16 sm:grid-cols-2 md:pt-24 lg:grid-cols-4",
         children: [
           /* @__PURE__ */ jsxs("div", {
             className: "space-y-6 lg:col-span-1",
@@ -48,7 +48,7 @@ function Footer() {
                 className: "h-10 w-auto object-contain",
               }),
               /* @__PURE__ */ jsx("p", {
-                className: "text-sm text-white/50 leading-relaxed max-w-xs",
+                className: "max-w-xs text-sm leading-relaxed text-white/50",
                 children: "Indigenous UAV systems built for precision, intelligence, and control.",
               }),
               /* @__PURE__ */ jsxs("div", {
@@ -78,7 +78,7 @@ function Footer() {
                       /* @__PURE__ */ jsx("a", {
                         href: "tel:+917200743683",
                         className:
-                          "hover:text-neon transition-colors font-mono tracking-widest text-xs",
+                          "break-all text-xs font-mono tracking-[0.18em] transition-colors hover:text-neon sm:break-normal sm:tracking-widest",
                         children: "+91 72007 43683",
                       }),
                     ],
@@ -90,7 +90,7 @@ function Footer() {
                       /* @__PURE__ */ jsx("a", {
                         href: "mailto:info@killisbird.com",
                         className:
-                          "hover:text-neon transition-colors font-mono tracking-widest text-xs",
+                          "break-all text-xs font-mono tracking-[0.14em] transition-colors hover:text-neon sm:break-normal sm:tracking-widest",
                         children: "info@killisbird.com",
                       }),
                     ],
@@ -183,7 +183,7 @@ function Footer() {
       }),
       /* @__PURE__ */ jsxs("div", {
         className:
-          "container-edge relative z-10 border-t border-white/10 py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[11px] font-mono tracking-widest text-white/40",
+          "container-edge relative z-10 flex flex-col items-center justify-between gap-3 border-t border-white/10 py-6 text-center font-mono text-[10px] tracking-[0.18em] text-white/40 sm:flex-row sm:text-left sm:text-[11px] sm:tracking-widest",
         children: [
           /* @__PURE__ */ jsx("div", {
             children: "COPYRIGHT \xA9 2026 KILLIS BIRD, ALL RIGHTS RESERVED.",

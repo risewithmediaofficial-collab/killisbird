@@ -43,7 +43,7 @@ export function Nav() {
   }, [open]);
 
   return (
-    <header className="fixed top-0 inset-x-0 z-[100] pointer-events-none">
+    <header className="fixed inset-x-0 top-0 z-[100] pointer-events-none">
       <div
         className={cn(
           "pointer-events-auto flex flex-col w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
@@ -56,7 +56,7 @@ export function Nav() {
       >
         <div
           className={cn(
-            "flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
+            "flex items-center justify-between gap-4 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
             open ? "px-2 py-2" : "container-edge py-4",
             isScrolled && !open ? "py-3" : "",
           )}
@@ -82,7 +82,7 @@ export function Nav() {
             />
           </Link>
 
-          <nav className="hidden lg:flex flex-1 items-center justify-end gap-1 xl:gap-2 ml-6 min-w-0">
+          <nav className="ml-4 hidden min-w-0 flex-1 items-center justify-end gap-1 lg:flex xl:ml-6 xl:gap-2">
             {links.map((link) => {
               const active = isNavActive(location.pathname, link.to);
               return (
@@ -90,7 +90,7 @@ export function Nav() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "whitespace-nowrap text-[0.88rem] font-semibold uppercase tracking-[0.12em] transition-all duration-300 relative py-2 px-3 outline-none focus-visible:ring-2 focus-visible:ring-neon rounded-full",
+                    "relative rounded-full px-2.5 py-2 text-[0.78rem] font-semibold whitespace-nowrap uppercase tracking-[0.1em] outline-none transition-all duration-300 focus-visible:ring-2 focus-visible:ring-neon xl:px-3 xl:text-[0.88rem] xl:tracking-[0.12em]",
                     isHomeHero
                       ? active
                         ? "text-white"
@@ -117,7 +117,7 @@ export function Nav() {
           <button
             onClick={() => setOpen((value) => !value)}
             className={cn(
-              "grid place-items-center lg:hidden shrink-0 ml-auto p-2 -mr-2 transition-transform hover:scale-105 active:scale-95",
+              "ml-auto mr-[-0.5rem] grid shrink-0 place-items-center p-2 transition-transform hover:scale-105 active:scale-95 lg:hidden",
               isHomeHero ? "text-white" : "text-foreground",
             )}
             aria-label={open ? "Close menu" : "Open menu"}
@@ -135,7 +135,7 @@ export function Nav() {
             open ? "flex opacity-100 flex-1 mt-8" : "hidden opacity-0",
           )}
         >
-          <nav className="flex flex-col gap-4 py-6 px-4">
+          <nav className="flex flex-col gap-4 px-3 py-6 sm:px-4">
             {links.map((link) => {
               const active = isNavActive(location.pathname, link.to);
               return (
@@ -143,7 +143,7 @@ export function Nav() {
                   key={link.to}
                   to={link.to}
                   className={cn(
-                    "py-4 font-mono text-lg uppercase tracking-[0.15em] transition-colors border-b border-black/5 last:border-0 flex items-center justify-between group",
+                    "group flex items-center justify-between border-b border-black/5 py-4 font-mono text-base uppercase tracking-[0.12em] transition-colors last:border-0 sm:text-lg sm:tracking-[0.15em]",
                     active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                   )}
                 >
@@ -160,7 +160,7 @@ export function Nav() {
               );
             })}
 
-            <div className="mt-8 pt-8 border-t border-black/5 flex flex-col gap-4 font-mono text-sm tracking-widest text-muted-foreground items-center text-center">
+            <div className="mt-8 flex flex-col items-center gap-4 border-t border-black/5 pt-8 text-center font-mono text-xs tracking-[0.18em] text-muted-foreground sm:text-sm sm:tracking-widest">
               <a href="tel:+917200743683" className="hover:text-neon">
                 +91 72007 43683
               </a>

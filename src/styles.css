@@ -144,6 +144,9 @@
     overflow-x: hidden;
     overscroll-behavior-y: none;
   }
+  main {
+    overflow-x: clip;
+  }
   body::before {
     content: "";
     position: fixed;
@@ -569,8 +572,8 @@
   .container-edge {
     width: min(100%, 94rem);
     margin-inline: auto;
-    padding-left: clamp(1.5rem, 5vw, 5rem);
-    padding-right: clamp(1.5rem, 5vw, 5rem);
+    padding-left: clamp(1rem, 4vw, 5rem);
+    padding-right: clamp(1rem, 4vw, 5rem);
   }
 
   /* ── Card System ─────────────────────────────────────────────── */
@@ -771,6 +774,19 @@
     }
   }
 
+  @media (max-width: 480px) {
+    .container-edge {
+      padding-left: 0.9rem;
+      padding-right: 0.9rem;
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .container-edge {
+      width: min(100%, 100rem);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -910,7 +926,6 @@
     text-align: center;
     padding-inline: 1.25rem;
   }
-
 }
 
 /* ── Scroll reveal animation ───────────────────────────────────── */
@@ -983,6 +998,7 @@
 @media (max-width: 640px) {
   .quote-card {
     min-height: 22rem;
+    width: min(100%, 92vw);
     padding: 2rem 1.5rem;
   }
 
@@ -1095,4 +1111,10 @@
   letter-spacing: 0.08em;
   line-height: 1;
   z-index: 0;
+}
+
+@media (max-width: 767px) {
+  .footer-watermark {
+    display: none;
+  }
 }

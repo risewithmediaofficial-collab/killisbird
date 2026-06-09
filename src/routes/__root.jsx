@@ -99,6 +99,7 @@ function RootComponent() {
       /* @__PURE__ */ jsx(Preloader, {}),
       /* @__PURE__ */ jsx(Nav, {}),
       /* @__PURE__ */ jsx("main", {
+        className: "overflow-x-clip",
         children: /* @__PURE__ */ jsx(AnimatePresence, {
           mode: "wait",
           initial: false,

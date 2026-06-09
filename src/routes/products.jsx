@@ -117,25 +117,6 @@ const products = [
   },
 ];
 
-const cardVariants = {
-  offscreen: {
-    y: 260,
-    rotate: 0,
-    opacity: 1,
-  },
-  onscreen: (index) => ({
-    y: 42,
-    rotate: index % 2 === 0 ? -6 : 6,
-    opacity: 1,
-    transition: {
-      type: "spring",
-      bounce: 0.34,
-      duration: 0.95,
-      delay: index * 0.08,
-    },
-  }),
-};
-
 function useIsMobile(breakpoint = 768) {
   const [isMobile, setIsMobile] = useState(false);
 
@@ -160,7 +141,7 @@ function ProductGallery({ images, code, isMobile }) {
   const useSimpleMotion = isMobile || prefersReducedMotion;
 
   return (
-    <div className="relative h-[280px] sm:h-[420px] lg:h-[520px]">
+    <div className="relative h-[240px] min-[420px]:h-[280px] sm:h-[420px] lg:h-[520px]">
       <div className="absolute inset-[6%_4%_10%_4%] overflow-visible sm:inset-[10%_7%_10%_7%]">
         <div
           className="flex h-full w-full transition-transform duration-500 ease-in-out"
@@ -221,15 +202,15 @@ function ProductCard({ product, index }) {
   return (
     <section
       id={product.code.split(" ")[0]}
-      className="relative scroll-mt-40 px-4 sm:px-6"
+      className="relative scroll-mt-32 overflow-hidden px-3 sm:px-6"
       style={sectionContainer}
     >
       <div
-        className={`mx-auto grid w-full max-w-[1180px] items-start gap-10 lg:grid-cols-[minmax(320px,520px)_minmax(0,1fr)] lg:gap-12 ${isZigZag ? "lg:[&_.product-copy]:order-1 lg:[&_.product-media]:order-2 lg:[&_.product-copy]:text-right" : ""}`}
+        className={`mx-auto grid w-full max-w-[1180px] items-start gap-8 lg:grid-cols-[minmax(320px,520px)_minmax(0,1fr)] lg:gap-12 ${isZigZag ? "lg:[&_.product-copy]:order-1 lg:[&_.product-media]:order-2 lg:[&_.product-copy]:text-right" : ""}`}
       >
         <div className="product-media" style={cardContainer}>
           <motion.div
-            className="relative z-10 w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[500px]"
+            className="relative z-10 w-full max-w-[360px] min-[420px]:max-w-[420px] sm:max-w-[460px] lg:max-w-[500px]"
             initial={false}
             animate={{ y: 0, rotate: 0, opacity: 1 }}
             transition={{ duration: isMobile ? 0.2 : 0.35, ease: "easeOut" }}
@@ -239,18 +220,18 @@ function ProductCard({ product, index }) {
           </motion.div>
         </div>
 
-        <div className="product-copy pt-4 lg:pt-10">
+        <div className="product-copy min-w-0 pt-4 lg:pt-10">
           <SectionLabel
             index={String(index + 1).padStart(2, "0")}
             label={product.code.split("·")[1]?.trim() ?? product.name}
           />
 
-          <div className={`mt-5 flex items-center gap-4 ${isZigZag ? "lg:justify-end" : ""}`}>
+          <div className={`mt-5 flex items-start gap-4 ${isZigZag ? "lg:justify-end" : ""}`}>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#fff4ee] text-[#f05a12] shadow-[0_10px_30px_rgba(240,90,18,0.16)]">
               <Icon size={26} />
             </div>
             <div>
-              <h2 className="text-2xl font-semibold leading-tight text-neon sm:text-[2rem]">
+              <h2 className="text-xl font-semibold leading-tight text-neon min-[420px]:text-2xl sm:text-[2rem]">
                 {product.name}
               </h2>
               <p className="mt-2 text-sm font-medium leading-relaxed text-slate-600 sm:text-base">
@@ -312,20 +293,6 @@ function ProductsPage() {
         }
         subtitle="Each component is engineered, tested, and field-proven inside our facility. Browse the catalog of indigenous systems."
       />
-
-      <div className="sticky top-[80px] z-30 border-b border-border/50 bg-background/90 backdrop-blur-md">
-        <div className="container-edge flex gap-1 overflow-x-auto py-2 scrollbar-none">
-          {products.map((product) => (
-            <a
-              key={product.code}
-              href={`#${product.code.split(" ")[0]}`}
-              className="shrink-0 rounded-full px-4 py-2 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:bg-muted hover:text-foreground whitespace-nowrap"
-            >
-              {product.name}
-            </a>
-          ))}
-        </div>
-      </div>
 
       <div style={container}>
         {products.map((product, index) => (
