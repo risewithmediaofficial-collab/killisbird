@@ -12,6 +12,19 @@ function HeroDroneCardsCarousel({
 }) {
   const [api, setApi] = useState();
   const [current, setCurrent] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobile(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+
+    return () => mediaQuery.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (!api) return undefined;
@@ -31,7 +44,7 @@ function HeroDroneCardsCarousel({
   }, [api]);
 
   useEffect(() => {
-    if (!api || !autoplay) return undefined;
+    if (!api || !autoplay || isMobile) return undefined;
 
     const id = window.setInterval(() => {
       if (api.canScrollNext()) {
@@ -42,7 +55,7 @@ function HeroDroneCardsCarousel({
     }, 2800);
 
     return () => window.clearInterval(id);
-  }, [api, autoplay, loop]);
+  }, [api, autoplay, loop, isMobile]);
 
   return (
     <Carousel
@@ -65,13 +78,18 @@ function HeroDroneCardsCarousel({
                 initial={false}
                 animate={{
                   clipPath:
-                    current === index
+                    isMobile
+                      ? "inset(0% 0% 0% 0% round 1.75rem)"
+                      : current === index
                       ? "inset(0% 0% 0% 0% round 1.75rem)"
                       : "inset(11% 0% 11% 0% round 1.75rem)",
-                  scale: current === index ? 1 : 0.94,
-                  opacity: current === index ? 1 : 0.72,
+                  scale: isMobile ? 1 : current === index ? 1 : 0.94,
+                  opacity: isMobile ? 1 : current === index ? 1 : 0.72,
                 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                transition={{
+                  duration: isMobile ? 0.28 : 0.55,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
                 className="h-full w-full overflow-hidden rounded-[1.75rem] border border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,245,240,0.92))] p-5 shadow-[0_24px_50px_rgba(15,15,15,0.08)]"
               >
                 <div className="flex h-full flex-col rounded-[1.35rem] bg-white/78 p-5">

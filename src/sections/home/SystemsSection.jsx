@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import { systems } from "@/data/home";
 import { cn } from "@/lib/utils";
 import imgFcc from "@/assets/fcc.jpg";
@@ -12,6 +11,24 @@ import imgSwarm from "@/assets/swarm.jpg";
 import imgHero from "@/assets/hero-drone.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const mediaQuery = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const update = () => setIsMobile(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+
+    return () => mediaQuery.removeEventListener("change", update);
+  }, [breakpoint]);
+
+  return isMobile;
+}
 
 const getImageForCode = (code) => {
   if (code.includes("FCC")) return imgFcc;
@@ -29,6 +46,7 @@ function ProductStackCard({
   cardRefs,
   imageRefs,
   setActiveId,
+  isMobile,
 }) {
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
@@ -38,7 +56,11 @@ function ProductStackCard({
   const glowY = useTransform(tiltX, [-8, 8], ["58%", "42%"]);
 
   const handlePointerMove = (event) => {
-    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (
+      isMobile ||
+      !window.matchMedia("(hover: hover) and (pointer: fine)").matches
+    )
+      return;
 
     const rect = event.currentTarget.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width;
@@ -58,8 +80,8 @@ function ProductStackCard({
       ref={(element) => {
         cardRefs.current[index] = element;
       }}
-      className="sticky scroll-card-item"
-      style={{ top: `calc(5.2rem + ${index * 1.55}rem)` }}
+      className={cn(isMobile ? "relative" : "sticky scroll-card-item")}
+      style={isMobile ? undefined : { top: `calc(5.2rem + ${index * 1.55}rem)` }}
     >
       <motion.article
         layout
@@ -69,15 +91,19 @@ function ProductStackCard({
         onMouseLeave={resetTilt}
         onBlur={resetTilt}
         style={{
-          rotateX: tiltX,
-          rotateY: tiltY,
-          transformPerspective: 1600,
+          rotateX: isMobile ? 0 : tiltX,
+          rotateY: isMobile ? 0 : tiltY,
+          transformPerspective: isMobile ? 0 : 1600,
         }}
-        whileHover={{
-          y: -6,
-          scale: 1.01,
-          transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
-        }}
+        whileHover={
+          isMobile
+            ? undefined
+            : {
+                y: -6,
+                scale: 1.01,
+                transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
+              }
+        }
         className={cn(
           "group relative overflow-hidden rounded-[1.85rem] border border-white/20 shadow-[0_30px_80px_rgba(15,15,15,0.14)] backdrop-blur-sm transition-all duration-500 will-change-transform",
           isActive ? "bg-[var(--navy)]" : "bg-[var(--navy)]/94",
@@ -172,35 +198,14 @@ function SystemsSection() {
   const sectionRef = useRef(null);
   const cardRefs = useRef([]);
   const imageRefs = useRef([]);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return undefined;
-
-    const lenis = new Lenis({
-      duration: 1.05,
-      smoothWheel: true,
-      wheelMultiplier: 0.9,
-      touchMultiplier: 1.1,
-    });
-
-    let frameId = 0;
-    const raf = (time) => {
-      lenis.raf(time);
-      frameId = window.requestAnimationFrame(raf);
-    };
-
-    lenis.on("scroll", ScrollTrigger.update);
-    frameId = window.requestAnimationFrame(raf);
-    ScrollTrigger.refresh();
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      lenis.destroy();
-      ScrollTrigger.refresh();
-    };
-  }, []);
+  const isMobile = useIsMobile();
 
   useLayoutEffect(() => {
+    if (isMobile) {
+      setActiveId(0);
+      return undefined;
+    }
+
     const ctx = gsap.context(() => {
       cardRefs.current.forEach((card, index) => {
         const image = imageRefs.current[index];
@@ -263,7 +268,7 @@ function SystemsSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section
@@ -297,6 +302,7 @@ function SystemsSection() {
               cardRefs={cardRefs}
               imageRefs={imageRefs}
               setActiveId={setActiveId}
+              isMobile={isMobile}
             />
           ))}
         </div>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Cpu, Layers, Network, Wind } from "lucide-react";
 import { PageHero, SectionLabel } from "@/components/site/Section";
 import p01 from "@/assets/FLIGHT-CONTROL-CARD1-removebg-preview.png";
@@ -136,12 +136,32 @@ const cardVariants = {
   }),
 };
 
-function ProductGallery({ images, code }) {
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const mediaQuery = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const update = () => setIsMobile(mediaQuery.matches);
+
+    update();
+    mediaQuery.addEventListener("change", update);
+
+    return () => mediaQuery.removeEventListener("change", update);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+function ProductGallery({ images, code, isMobile }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const prefersReducedMotion = useReducedMotion();
+  const useSimpleMotion = isMobile || prefersReducedMotion;
 
   return (
-    <div className="relative h-[360px] sm:h-[420px] lg:h-[520px]">
-      <div className="absolute inset-[10%_7%_10%_7%] overflow-visible">
+    <div className="relative h-[280px] sm:h-[420px] lg:h-[520px]">
+      <div className="absolute inset-[6%_4%_10%_4%] overflow-visible sm:inset-[10%_7%_10%_7%]">
         <div
           className="flex h-full w-full transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -156,10 +176,19 @@ function ProductGallery({ images, code }) {
                 alt={`${code} view ${idx + 1}`}
                 loading="lazy"
                 className="relative z-10 h-full w-full object-contain drop-shadow-[0_30px_40px_rgba(15,23,42,0.18)]"
-                initial={{ y: 120, opacity: 0, scale: 0.72, rotate: -6 }}
-                whileInView={{ y: -8, opacity: 1, scale: 1.06, rotate: 0 }}
-                viewport={{ once: true, amount: 0.65 }}
-                transition={{ type: "spring", bounce: 0.42, duration: 1.05 }}
+                initial={useSimpleMotion ? false : { y: 120, opacity: 0, scale: 0.72, rotate: -6 }}
+                animate={useSimpleMotion ? { y: 0, opacity: 1, scale: 1, rotate: 0 } : undefined}
+                whileInView={
+                  useSimpleMotion
+                    ? undefined
+                    : { y: -8, opacity: 1, scale: 1.06, rotate: 0 }
+                }
+                viewport={useSimpleMotion ? undefined : { once: true, amount: 0.65 }}
+                transition={
+                  useSimpleMotion
+                    ? { duration: 0.28, ease: "easeOut" }
+                    : { type: "spring", bounce: 0.42, duration: 1.05 }
+                }
               />
             </div>
           ))}
@@ -197,6 +226,7 @@ function ProductGallery({ images, code }) {
 function ProductCard({ product, index }) {
   const Icon = product.icon;
   const isZigZag = index % 2 === 1;
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -211,13 +241,14 @@ function ProductCard({ product, index }) {
           <motion.div
             className="relative z-10 w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[500px]"
             custom={index}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.55 }}
-            variants={cardVariants}
+            initial={isMobile ? false : "offscreen"}
+            whileInView={isMobile ? undefined : "onscreen"}
+            animate={isMobile ? { y: 0, rotate: 0, opacity: 1 } : undefined}
+            viewport={isMobile ? undefined : { once: true, amount: 0.55 }}
+            variants={isMobile ? undefined : cardVariants}
             style={card}
           >
-            <ProductGallery images={product.images} code={product.code} />
+            <ProductGallery images={product.images} code={product.code} isMobile={isMobile} />
           </motion.div>
         </div>
 
@@ -336,6 +367,7 @@ const cardContainer = {
   display: "flex",
   justifyContent: "center",
   overflow: "hidden",
+  minHeight: "320px",
   paddingBottom: "28px",
   paddingTop: "20px",
   position: "relative",
