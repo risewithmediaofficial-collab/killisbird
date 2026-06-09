@@ -211,7 +211,7 @@ function HeroSection() {
                       draggable={false}
                     />
                   </div>
-                  <div className="min-w-0">
+                  <div className="hidden lg:block min-w-0">
                     <h3 className="text-base font-semibold uppercase tracking-[0.08em] text-foreground sm:text-lg">
                       {item.title}
                     </h3>
