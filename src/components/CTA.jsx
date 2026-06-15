@@ -1,127 +1,181 @@
-import { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import gsap from "gsap";
 import { content } from "../data/content";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
 
 export default function CTA() {
   const ctaData = content.cta;
-  const containerRef = useRef();
-
-  // Parallax background animation
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (!containerRef.current) return;
-      const offset = window.scrollY;
-      gsap.to(containerRef.current, {
-        y: offset * 0.3,
-        duration: 0.3,
-      });
-    });
-  }, []);
 
   return (
-    <section className="section-padding bg-linear-to-b from-white via-slate-900 to-slate-900 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-orange-500 opacity-10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-400 opacity-10 rounded-full blur-3xl" />
-      </div>
+    <section
+      id="quote"
+      className="kb-section-cta"
+      style={{
+        background: "var(--kb-navy-deep)",
+        padding: "var(--kb-section-pad-y) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Background blobs */}
+      <div
+        data-parallax
+        data-parallax-movement="-8%"
+        style={{
+          position: "absolute",
+          top: "-20%",
+          right: "-10%",
+          width: "clamp(20rem, 40vw, 50rem)",
+          height: "clamp(20rem, 40vw, 50rem)",
+          background:
+            "radial-gradient(circle, rgba(232,69,10,0.15) 0%, transparent 70%)",
+          borderRadius: "50%",
+          pointerEvents: "none",
+          filter: "blur(60px)",
+        }}
+      />
+      <div
+        data-parallax
+        data-parallax-movement="-5%"
+        style={{
+          position: "absolute",
+          bottom: "-20%",
+          left: "-10%",
+          width: "clamp(20rem, 40vw, 50rem)",
+          height: "clamp(20rem, 40vw, 50rem)",
+          background:
+            "radial-gradient(circle, rgba(27,45,107,0.3) 0%, transparent 70%)",
+          borderRadius: "50%",
+          pointerEvents: "none",
+          filter: "blur(60px)",
+        }}
+      />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+      <div className="kb-container" style={{ position: "relative", zIndex: 1 }}>
+        <div
+          slide-up=""
+          style={{
+            textAlign: "center",
+            maxWidth: "56rem",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1.5rem",
+          }}
         >
-          {/* Main Heading */}
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">{ctaData.title}</h2>
+          <span
+            style={{
+              fontSize: "0.7rem",
+              fontWeight: 600,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--kb-orange)",
+            }}
+          >
+            GET IN TOUCH
+          </span>
 
-          {/* Description */}
-          <p className="text-xl text-orange-200 mb-12 leading-relaxed">{ctaData.description}</p>
+          <h2
+            style={{
+              fontFamily: "var(--kb-font-display)",
+              fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              lineHeight: 1.05,
+              color: "var(--kb-white)",
+            }}
+          >
+            {ctaData.title}
+          </h2>
+
+          <p
+            style={{
+              fontSize: "clamp(0.9rem, 1.6vw, 1.05rem)",
+              color: "rgba(255,255,255,0.5)",
+              maxWidth: "40rem",
+              lineHeight: 1.8,
+            }}
+          >
+            {ctaData.description}
+          </p>
 
           {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-12"
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginTop: "1rem",
+            }}
           >
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(249, 115, 22, 0.5)" }}
-              whileTap={{ scale: 0.95 }}
-              className="premium-button-primary flex items-center justify-center gap-2 text-lg px-8 py-4"
+            <button className="kb-btn kb-btn--primary" id="cta-quote-btn">
+              <RequestQuoteIcon style={{ fontSize: "1.1rem", marginRight: "0.5rem" }} />
+              <span>REQUEST QUOTE</span>
+              <div className="kb-btn__corners">
+                <i /><i /><i /><i />
+              </div>
+            </button>
+            <button className="kb-btn kb-btn--ghost-white" id="cta-support-btn">
+              <SupportAgentIcon style={{ fontSize: "1.1rem", marginRight: "0.5rem" }} />
+              <span>CONTACT SUPPORT</span>
+            </button>
+          </div>
+
+          {/* Contact info strip */}
+          <div
+            style={{
+              display: "flex",
+              gap: "3rem",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              marginTop: "2.5rem",
+              paddingTop: "2.5rem",
+              borderTop: "1px solid rgba(255,255,255,0.08)",
+              width: "100%",
+            }}
+          >
+            <a
+              href="tel:+917200743683"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.65rem",
+                color: "rgba(255,255,255,0.55)",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                transition: "color 0.2s ease",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--kb-white)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
             >
-              <RequestQuoteIcon className="w-6 h-6" />
-              Request Quote
-            </motion.button>
-
-            <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(249, 115, 22, 0.5)" }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 border-2 border-orange-400 text-orange-400 hover:bg-orange-400 hover:text-slate-900 flex items-center justify-center gap-2"
+              <PhoneIcon style={{ fontSize: "1.1rem", color: "var(--kb-orange)" }} />
+              +91 72007 43683
+            </a>
+            <a
+              href="mailto:info@killisbird.com"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.65rem",
+                color: "rgba(255,255,255,0.55)",
+                fontSize: "0.9rem",
+                fontWeight: 500,
+                transition: "color 0.2s ease",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--kb-white)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.55)")}
             >
-              <SupportAgentIcon className="w-6 h-6" />
-              Contact Support
-            </motion.button>
-          </motion.div>
-
-          {/* Quick Contact Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="bg-white/10 backdrop-blur-md rounded-lg p-8 border border-white/20"
-          >
-            <p className="text-orange-200 mb-4">Have questions? Get in touch</p>
-            <div className="flex flex-col md:flex-row justify-center gap-8">
-              <a
-                href="tel:+917200743683"
-                className="text-white font-semibold hover:text-orange-400 transition-colors flex items-center justify-center gap-2"
-              >
-                <span>📞</span> +91 72007 43683
-              </a>
-              <a
-                href="mailto:info@killisbird.com"
-                className="text-white font-semibold hover:text-orange-400 transition-colors flex items-center justify-center gap-2"
-              >
-                <span>✉️</span> info@killisbird.com
-              </a>
-            </div>
-          </motion.div>
-
-          {/* Floating Elements */}
-          <motion.div
-            animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 6, repeat: Infinity }}
-            className="absolute top-20 left-10 text-4xl opacity-20"
-          >
-            🚀
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, -20, 0] }}
-            transition={{ duration: 7, repeat: Infinity }}
-            className="absolute bottom-20 right-10 text-4xl opacity-20"
-          >
-            💡
-          </motion.div>
-        </motion.div>
+              <EmailIcon style={{ fontSize: "1.1rem", color: "var(--kb-orange)" }} />
+              info@killisbird.com
+            </a>
+          </div>
+        </div>
       </div>
-
-      {/* Bottom Wave */}
-      <svg
-        className="absolute bottom-0 w-full h-24 text-slate-900"
-        viewBox="0 0 1200 120"
-        preserveAspectRatio="none"
-      >
-        <path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="currentColor" />
-      </svg>
     </section>
   );
 }

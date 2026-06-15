@@ -1,191 +1,224 @@
-import { motion } from "framer-motion";
 import { content } from "../data/content";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SchoolIcon from "@mui/icons-material/School";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-import SendIcon from "@mui/icons-material/Send";
 
 export default function Careers() {
   const careers = content.careers;
 
   return (
-    <section id="careers" className="section-padding bg-linear-to-b from-orange-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+    <section
+      id="careers"
+      style={{
+        background: "var(--kb-foreground)",
+        padding: "var(--kb-section-pad-y) 0",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      {/* Subtle grid bg */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div className="kb-container" style={{ position: "relative", zIndex: 1 }}>
+        {/* Two-column layout */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr",
+            gap: "4rem",
+            alignItems: "center",
+          }}
+          className="kb-careers__grid"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Join Our Team</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Be part of a team that's revolutionizing UAV technology
-          </p>
-        </motion.div>
+          {/* Left column */}
+          <div slide-up="">
+            <span
+              style={{
+                display: "block",
+                fontSize: "0.7rem",
+                fontWeight: 600,
+                letterSpacing: "0.18em",
+                textTransform: "uppercase",
+                color: "var(--kb-orange)",
+                marginBottom: "1.25rem",
+              }}
+            >
+              WORK WITH US
+            </span>
+            <h2
+              style={{
+                fontFamily: "var(--kb-font-display)",
+                fontSize: "clamp(2.2rem, 6vw, 4.5rem)",
+                fontWeight: 700,
+                letterSpacing: "-0.02em",
+                lineHeight: 1.05,
+                color: "var(--kb-white)",
+                marginBottom: "1.5rem",
+              }}
+            >
+              {careers.title}
+            </h2>
+            <p
+              style={{
+                fontSize: "clamp(0.9rem, 1.5vw, 1rem)",
+                color: "rgba(255,255,255,0.5)",
+                lineHeight: 1.8,
+                maxWidth: "40rem",
+                marginBottom: "2.5rem",
+              }}
+            >
+              {careers.description}
+            </p>
 
-        {/* Main Career Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-2xl mx-auto mb-16"
-        >
-          <div className="premium-card border-2 border-orange-300">
-            {/* Title */}
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">{careers.title}</h3>
+            <button className="kb-btn kb-btn--primary" id="careers-apply-btn">
+              <span>APPLY NOW</span>
+              <div className="kb-btn__corners"><i /><i /><i /><i /></div>
+            </button>
+          </div>
 
-            {/* Description */}
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">{careers.description}</p>
-
-            {/* Divider */}
-            <div className="h-px bg-linear-to-r from-transparent via-orange-300 to-transparent my-8" />
-
-            {/* Job Details */}
-            <div className="space-y-6">
-              {/* Location */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-                className="flex items-start gap-4"
-              >
-                <div className="shrink-0">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
-                  >
-                    <LocationOnIcon className="text-orange-600 text-2xl" />
-                  </motion.div>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Job Location</h4>
-                  <p className="text-gray-600">{careers.location}</p>
-                </div>
-              </motion.div>
-
-              {/* Qualification */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="flex items-start gap-4"
-              >
-                <div className="shrink-0">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
-                  >
-                    <SchoolIcon className="text-orange-600 text-2xl" />
-                  </motion.div>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Qualification</h4>
-                  <p className="text-gray-600">{careers.qualification}</p>
-                </div>
-              </motion.div>
-
-              {/* Experience */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 }}
-                className="flex items-start gap-4"
-              >
-                <div className="shrink-0">
-                  <motion.div
-                    whileHover={{ scale: 1.1, rotate: 10 }}
-                    className="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center"
-                  >
-                    <WorkHistoryIcon className="text-orange-600 text-2xl" />
-                  </motion.div>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-1">Experience</h4>
-                  <p className="text-gray-600">{careers.experience}</p>
-                </div>
-              </motion.div>
+          {/* Right column — job details card */}
+          <div slide-up="" className="kb-careers__card">
+            {/* Corner brackets */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                pointerEvents: "none",
+              }}
+            >
+              {["tl","tr","bl","br"].map(pos => (
+                <i key={pos} className={`kb-corner kb-corner--${pos}`}
+                   style={{ borderColor: "rgba(232,69,10,0.4)" }} />
+              ))}
             </div>
 
-            {/* Divider */}
-            <div className="h-px bg-linear-to-r from-transparent via-orange-300 to-transparent my-8" />
-
-            {/* Apply Button */}
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="premium-button-primary w-full flex items-center justify-center gap-2 text-lg py-4"
+            <h3
+              style={{
+                fontFamily: "var(--kb-font-display)",
+                fontSize: "1.1rem",
+                fontWeight: 600,
+                color: "var(--kb-white)",
+                letterSpacing: "0.03em",
+                marginBottom: "2rem",
+                paddingBottom: "1rem",
+                borderBottom: "1px solid rgba(255,255,255,0.08)",
+              }}
             >
-              <SendIcon className="w-5 h-5" />
-              Apply Now
-            </motion.button>
+              Current Opening
+            </h3>
 
-            {/* Additional Info */}
-            <p className="text-center text-gray-600 text-sm mt-6">
-              Please send your CV to{" "}
-              <a
-                href="mailto:info@killisbird.com"
-                className="text-orange-600 font-semibold hover:text-orange-700"
-              >
-                info@killisbird.com
-              </a>
-            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+              }}
+            >
+              {[
+                {
+                  Icon: LocationOnIcon,
+                  label: "Location",
+                  value: careers.location,
+                },
+                {
+                  Icon: SchoolIcon,
+                  label: "Qualification",
+                  value: careers.qualification,
+                },
+                {
+                  Icon: WorkHistoryIcon,
+                  label: "Experience",
+                  value: careers.experience,
+                },
+              ].map(({ Icon, label, value }) => (
+                <div
+                  key={label}
+                  style={{
+                    display: "flex",
+                    gap: "1rem",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: "2.5rem",
+                      height: "2.5rem",
+                      background: "rgba(232,69,10,0.12)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon style={{ color: "var(--kb-orange)", fontSize: "1.2rem" }} />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: "0.68rem",
+                        letterSpacing: "0.12em",
+                        textTransform: "uppercase",
+                        color: "rgba(255,255,255,0.3)",
+                        marginBottom: "0.25rem",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {label}
+                    </div>
+                    <div
+                      style={{
+                        fontSize: "0.9rem",
+                        color: "rgba(255,255,255,0.75)",
+                        lineHeight: 1.5,
+                        fontWeight: 400,
+                      }}
+                    >
+                      {value}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Role tags */}
+            <div
+              style={{
+                marginTop: "2rem",
+                paddingTop: "1.5rem",
+                borderTop: "1px solid rgba(255,255,255,0.06)",
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "0.5rem",
+              }}
+            >
+              {["ECE", "EEE", "Embedded", "Power Electronics"].map((tag) => (
+                <span
+                  key={tag}
+                  style={{
+                    padding: "0.35rem 0.85rem",
+                    border: "1px solid rgba(232,69,10,0.3)",
+                    fontSize: "0.72rem",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "var(--kb-orange)",
+                    fontWeight: 500,
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
-        </motion.div>
-
-        {/* Benefits Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-16"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 mb-8 text-center">Why Work With Us</h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: "💡",
-                title: "Innovation",
-                description: "Work on cutting-edge technology",
-              },
-              {
-                icon: "🚀",
-                title: "Growth",
-                description: "Career development opportunities",
-              },
-              {
-                icon: "🤝",
-                title: "Collaboration",
-                description: "Work with talented engineers",
-              },
-              {
-                icon: "🌟",
-                title: "Impact",
-                description: "Make a global difference",
-              },
-            ].map((benefit, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="premium-card text-center"
-              >
-                <div className="text-3xl mb-3">{benefit.icon}</div>
-                <h4 className="font-semibold text-gray-900 mb-2">{benefit.title}</h4>
-                <p className="text-sm text-gray-600">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

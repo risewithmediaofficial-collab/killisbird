@@ -1,7 +1,7 @@
-import { Suspense, lazy } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SmoothScroll from "./components/SmoothScroll";
+import { useGSAPAnimations } from "./hooks/useGSAP";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Company from "./components/Company";
@@ -14,44 +14,36 @@ import CTA from "./components/CTA";
 import Footer from "./components/Footer";
 import "./index.css";
 
-// Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
+
+function AppContent() {
+  useGSAPAnimations();
+
+  return (
+    <>
+      <Navbar />
+      <main className="kb-main">
+        <Hero />
+        <Company />
+        <Solutions />
+        <Products />
+        <TechnicalSection />
+        <TrustedClients />
+        <Careers />
+        <CTA />
+      </main>
+      <Footer />
+    </>
+  );
+}
 
 function App() {
   return (
-    <SmoothScroll>
-      <div className="min-h-screen bg-white">
-        {/* Navigation */}
-        <Navbar />
-
-        {/* Hero Section */}
-        <Hero />
-
-        {/* Company/About Section */}
-        <Company />
-
-        {/* Solutions Section */}
-        <Solutions />
-
-        {/* Products Section */}
-        <Products />
-
-        {/* Technical Capabilities */}
-        <TechnicalSection />
-
-        {/* Trusted Clients */}
-        <TrustedClients />
-
-        {/* Careers */}
-        <Careers />
-
-        {/* Call to Action */}
-        <CTA />
-
-        {/* Footer */}
-        <Footer />
-      </div>
-    </SmoothScroll>
+    <div className="kb-page-wrapper">
+      <SmoothScroll>
+        <AppContent />
+      </SmoothScroll>
+    </div>
   );
 }
 

@@ -3,10 +3,23 @@
     "ignoreDeprecations": "6.0",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     },
     "checkJs": false
   },
-  "include": ["src/**/*.js", "src/**/*.jsx", "vite.config.js", "eslint.config.js"],
-  "exclude": ["node_modules", "dist", ".wrangler", ".vinxi", ".output"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "vite.config.js",
+    "eslint.config.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".wrangler",
+    ".vinxi",
+    ".output"
+  ]
 }

@@ -1,167 +1,280 @@
-import { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import { content } from "../data/content";
-import DroneScene from "./DroneScene";
-import { useScreenSize } from "../hooks/useScrollAnimation";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
-  const textRef = useRef();
-  const [isMobile, setIsMobile] = useState(false);
-  const screenSize = useScreenSize();
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const word1Ref = useRef(null);
+  const word2Ref = useRef(null);
+  const word3Ref = useRef(null);
+  const canvasRef = useRef(null);
+  const cloudLeftRef = useRef(null);
+  const cloudRightRef = useRef(null);
+  const frameRef = useRef(null);
+  const ctaRef = useRef(null);
+  const badgeRef = useRef(null);
 
+  // Canvas drone animation using frames
   useEffect(() => {
-    setIsMobile(screenSize.width < 768);
-  }, [screenSize.width]);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
 
-  // GSAP text animation
-  useEffect(() => {
-    if (!textRef.current) return;
+    const TOTAL_FRAMES = 211;
+    const frames = [];
+    let currentFrame = 0;
+    let loadedCount = 0;
+    let animationId;
 
-    gsap.fromTo(
-      textRef.current.querySelectorAll(".hero-text-line"),
-      {
-        opacity: 0,
-        y: 50,
+    const resize = () => {
+      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
+      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+
+    const drawFrame = (index) => {
+      if (!frames[index]) return;
+      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const img = frames[index];
+      const scale = Math.min(
+        canvas.offsetWidth / img.naturalWidth,
+        canvas.offsetHeight / img.naturalHeight
+      );
+      const x = (canvas.offsetWidth - img.naturalWidth * scale) / 2;
+      const y = (canvas.offsetHeight - img.naturalHeight * scale) / 2;
+      ctx.drawImage(
+        img,
+        x,
+        y,
+        img.naturalWidth * scale,
+        img.naturalHeight * scale
+      );
+    };
+
+    // Preload first frame immediately, then rest
+    const loadFrame = (i) => {
+      const img = new Image();
+      img.onload = () => {
+        frames[i] = img;
+        loadedCount++;
+        if (i === 0) drawFrame(0);
+      };
+      img.src = `/frames/frame_${String(i + 1).padStart(4, "0")}.png`;
+      return img;
+    };
+
+    for (let i = 0; i < TOTAL_FRAMES; i++) loadFrame(i);
+
+    // Scroll-driven frame scrub
+    const frameState = { frame: 0 };
+    ScrollTrigger.create({
+      trigger: sectionRef.current,
+      start: "top top",
+      end: "+=200%",
+      scrub: 0.5,
+      onUpdate: (self) => {
+        const index = Math.round(self.progress * (TOTAL_FRAMES - 1));
+        if (frames[index]) {
+          frameState.frame = index;
+          drawFrame(index);
+        }
       },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "power3.out",
-      },
-    );
+    });
+
+    // Idle float animation when not scrolling
+    let floatTween = gsap.to(frameState, {
+      frame: 20,
+      duration: 3,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      onUpdate: () => drawFrame(Math.round(frameState.frame)),
+    });
+
+    return () => {
+      window.removeEventListener("resize", resize);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+      floatTween.kill();
+      if (animationId) cancelAnimationFrame(animationId);
+    };
   }, []);
 
-  const intro = content.company.intro;
+  // Hero entrance animations
+  useEffect(() => {
+    const words = [word1Ref.current, word2Ref.current, word3Ref.current].filter(Boolean);
+
+    // Initial states
+    words.forEach((word, i) => {
+      const dir = i % 2 === 0 ? -120 : 120;
+      gsap.set(word, { x: dir, scale: 0.82, opacity: 0, filter: "blur(6px)" });
+    });
+    gsap.set(ctaRef.current, { opacity: 0, y: 30 });
+    gsap.set(badgeRef.current, { opacity: 0, scale: 0.8 });
+
+    const tl = gsap.timeline({ delay: 0.3 });
+
+    // Words entrance
+    tl.to(words, {
+      x: 0,
+      scale: 1,
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 1.2,
+      stagger: 0.15,
+      ease: "power4.out",
+    });
+
+    // CTA entrance
+    tl.to(ctaRef.current, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, "-=0.5");
+
+    // Stats badge
+    tl.to(badgeRef.current, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.7)" }, "-=0.3");
+
+    // Cloud parallax on scroll
+    if (cloudLeftRef.current) {
+      gsap.fromTo(
+        cloudLeftRef.current,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2.5, ease: "power2.out", delay: 0.5 }
+      );
+      gsap.to(cloudLeftRef.current, {
+        x: 80,
+        y: -25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    if (cloudRightRef.current) {
+      gsap.fromTo(
+        cloudRightRef.current,
+        { scale: 0.85, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2.5, ease: "power2.out", delay: 0.7 }
+      );
+      gsap.to(cloudRightRef.current, {
+        x: -80,
+        y: 25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }
+
+    return () => tl.kill();
+  }, []);
+
+  const scrollToSection = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <section id="home" className="section-padding bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <motion.div
-            ref={textRef}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col space-y-6"
-          >
-            {/* Main Title */}
-            <motion.h1
-              className="hero-text-line text-5xl md:text-6xl font-bold text-gray-900 leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-            >
-              {intro.title}
-            </motion.h1>
+    <section ref={sectionRef} id="home" className="kb-hero">
+      {/* Full-bleed canvas for drone frames */}
+      <div className="kb-hero__canvas-wrap">
+        <canvas ref={canvasRef} className="kb-hero__canvas" />
+        {/* Gradient overlay — bottom fade to white */}
+        <div className="kb-hero__canvas-fade" />
+      </div>
 
-            {/* Subtitle */}
-            <motion.h2
-              className="hero-text-line text-2xl md:text-3xl font-semibold gradient-text leading-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
-              {intro.subtitle}
-            </motion.h2>
+      {/* Background gradient blobs */}
+      <div className="kb-hero__bg-blob kb-hero__bg-blob--orange" data-parallax data-parallax-movement="-8%" />
+      <div className="kb-hero__bg-blob kb-hero__bg-blob--navy" data-parallax data-parallax-movement="-5%" />
 
-            {/* Description */}
-            <motion.p
-              className="hero-text-line text-lg text-gray-600 max-w-md leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              {intro.description}
-            </motion.p>
+      {/* Cloud layers */}
+      <div ref={cloudLeftRef} className="kb-hero__cloud kb-hero__cloud--left">
+        <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="kb-hero__cloud-svg">
+          <ellipse cx="400" cy="150" rx="400" ry="150" fill="rgba(255,255,255,0.07)" />
+          <ellipse cx="300" cy="140" rx="280" ry="120" fill="rgba(255,255,255,0.05)" />
+          <ellipse cx="520" cy="160" rx="220" ry="100" fill="rgba(255,255,255,0.04)" />
+        </svg>
+      </div>
+      <div ref={cloudRightRef} className="kb-hero__cloud kb-hero__cloud--right">
+        <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg" className="kb-hero__cloud-svg">
+          <ellipse cx="400" cy="150" rx="400" ry="150" fill="rgba(255,255,255,0.07)" />
+          <ellipse cx="500" cy="140" rx="280" ry="120" fill="rgba(255,255,255,0.05)" />
+          <ellipse cx="280" cy="160" rx="220" ry="100" fill="rgba(255,255,255,0.04)" />
+        </svg>
+      </div>
 
-            {/* CTA Buttons */}
-            <motion.div
-              className="hero-text-line flex flex-col sm:flex-row gap-4 pt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document.getElementById("solutions")?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="premium-button-primary flex items-center justify-center gap-2"
-              >
-                <TravelExploreIcon className="w-5 h-5" />
-                Explore UAV Solutions
-              </motion.button>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() =>
-                  document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" })
-                }
-                className="premium-button-secondary flex items-center justify-center gap-2"
-              >
-                <RequestQuoteIcon className="w-5 h-5" />
-                Get Quote
-              </motion.button>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Content - 3D Drone */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 1 }}
-            className="relative h-96 md:h-full min-h-96"
-          >
-            {/* Background Gradient Glow */}
-            <div className="absolute inset-0 bg-gradient-radial from-orange-400/20 via-transparent to-transparent rounded-full blur-3xl" />
-
-            {/* Grid Background */}
-            <div className="absolute inset-0 grid-background-dark rounded-lg opacity-30" />
-
-            {/* 3D Scene */}
-            <div className="relative h-full rounded-lg overflow-hidden">
-              <DroneScene isMobile={isMobile} />
-            </div>
-
-            {/* Floating Badge */}
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md rounded-full p-4 shadow-lg"
-            >
-              <div className="text-center">
-                <p className="text-xs font-semibold text-blue-600">Premium Quality</p>
-                <p className="text-2xl font-bold text-gray-900">100%</p>
-              </div>
-            </motion.div>
-          </motion.div>
+      {/* Hero Content */}
+      <div className="kb-hero__content">
+        <div className="kb-hero__title-wrap" ref={titleRef}>
+          <h1 className="kb-hero__title">
+            <span ref={word1Ref} className="kb-hero__word kb-hero__word--left">
+              Elevating
+            </span>
+            <span ref={word2Ref} className="kb-hero__word kb-hero__word--right">
+              UAV
+            </span>
+            <span ref={word3Ref} className="kb-hero__word kb-hero__word--center">
+              Technology
+            </span>
+          </h1>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex justify-center mt-12"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-sm text-gray-500 font-medium">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-              <motion.div
-                animate={{ y: [4, 8, 4] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="w-1 h-2 bg-blue-600 rounded-full"
-              />
+        {/* Subtitle line */}
+        <p className="kb-hero__sub" ref={ctaRef}>
+          India's leading indigenous UAV component manufacturer — delivering
+          <br className="kb-hero__sub-br" />
+          precision engineering for next-generation unmanned aerial systems.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="kb-hero__cta-row" ref={ctaRef}>
+          <button
+            className="kb-btn kb-btn--primary"
+            onClick={() => scrollToSection("solutions")}
+            id="hero-explore-btn"
+          >
+            <span>EXPLORE UAV SOLUTIONS</span>
+            <div className="kb-btn__corners">
+              <i /><i /><i /><i />
             </div>
-          </div>
-        </motion.div>
+          </button>
+          <button
+            className="kb-btn kb-btn--ghost"
+            onClick={() => scrollToSection("quote")}
+            id="hero-quote-btn"
+          >
+            <span>GET A QUOTE</span>
+          </button>
+        </div>
+
+        {/* Stats row */}
+        <div className="kb-hero__stats" ref={badgeRef}>
+          {[
+            { value: "5+", label: "Years of Innovation" },
+            { value: "1000+", label: "Components Delivered" },
+            { value: "500+", label: "Active Customers" },
+          ].map((s) => (
+            <div key={s.label} className="kb-hero__stat">
+              <span className="kb-hero__stat-value">{s.value}</span>
+              <span className="kb-hero__stat-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="kb-hero__scroll-indicator">
+        <span className="kb-hero__scroll-text">SCROLL</span>
+        <div className="kb-hero__scroll-line">
+          <div className="kb-hero__scroll-dot" />
+        </div>
       </div>
     </section>
   );
