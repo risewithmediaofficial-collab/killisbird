@@ -81,7 +81,7 @@ const productData = [
   },
 ];
 
-// ── Single Product Card ──────────────────────────────────────
+// Single Product Card
 const ProductCard = memo(function ProductCard({ product, index, isActive, onClick, cardRef }) {
   const imgRef = useRef(null);
 
@@ -102,7 +102,6 @@ const ProductCard = memo(function ProductCard({ product, index, isActive, onClic
         padding: 0,
         textAlign: "left",
         width: "100%",
-        // Active card grows, inactive cards shrink
         flex: isActive ? "2.6 1 0" : "1 1 0",
         minWidth: isActive ? "min(340px, 100%)" : "min(120px, 100%)",
         transition: "flex 0.65s cubic-bezier(0.16,1,0.3,1)",
@@ -386,9 +385,9 @@ const ProductCard = memo(function ProductCard({ product, index, isActive, onClic
       />
     </button>
   );
-}
+});
 
-// ── Main Systems Section ───────────────────────────────
+// Main Systems Section
 function SystemsSectionBase() {
   const [active, setActive] = useState(0);
   const sectionRef = useRef(null);
@@ -396,7 +395,6 @@ function SystemsSectionBase() {
   const cardsRef = useRef(null);
   const cardRefs = useRef([]);
 
-  // Parallax scroll — bg images move at different speeds
   useEffect(() => {
     if (!cardsRef.current) return;
 
@@ -670,6 +668,7 @@ function SystemsSectionBase() {
           />
         </div>
       </div>
+
       {/* Mobile responsive styles */}
       <style>{`
         @media (max-width: 640px) {
