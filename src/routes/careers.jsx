@@ -41,7 +41,7 @@ const positions = [
   },
 ];
 
-export function CareersPage() {
+function CareersPage() {
   return (
     <>
       <PageHero

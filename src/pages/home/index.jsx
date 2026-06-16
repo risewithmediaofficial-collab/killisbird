@@ -1,14 +1,14 @@
 import { Suspense, lazy, memo } from "react";
 // Above-fold — loaded eagerly (critical path)
-import { HeroSection } from "./sections/HeroSection";
+import { HeroSection } from "@/sections/home/HeroSection";
 
-// Below-fold — lazy loaded (code-split, loads only when needed)
-const IdentitySection   = lazy(() => import("./sections/IdentitySection").then(m => ({ default: m.IdentitySection })));
-const SystemsSection    = lazy(() => import("./sections/SystemsSection").then(m => ({ default: m.SystemsSection })));
-const QuotesSection     = lazy(() => import("./sections/QuotesSection").then(m => ({ default: m.QuotesSection })));
-const ClientsSection    = lazy(() => import("./sections/ClientsSection").then(m => ({ default: m.ClientsSection })));
-const CapabilitySection = lazy(() => import("./sections/CapabilitySection").then(m => ({ default: m.CapabilitySection })));
-const CtaSection        = lazy(() => import("./sections/CtaSection").then(m => ({ default: m.CtaSection })));
+// Below-fold — lazy loaded directly from canonical section files (no duplication)
+const IdentitySection   = lazy(() => import("@/sections/home/IdentitySection").then(m => ({ default: m.IdentitySection })));
+const SystemsSection    = lazy(() => import("@/sections/home/SystemsSection").then(m => ({ default: m.SystemsSection })));
+const QuotesSection     = lazy(() => import("@/sections/home/QuotesSection").then(m => ({ default: m.QuotesSection })));
+const ClientsSection    = lazy(() => import("@/sections/home/ClientsSection").then(m => ({ default: m.ClientsSection })));
+const CapabilitySection = lazy(() => import("@/sections/home/CapabilitySection").then(m => ({ default: m.CapabilitySection })));
+const CtaSection        = lazy(() => import("@/sections/home/CtaSection").then(m => ({ default: m.CtaSection })));
 
 // Minimal skeleton shown while lazy sections load
 function SectionSkeleton() {
