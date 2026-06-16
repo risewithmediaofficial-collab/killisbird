@@ -1445,9 +1445,9 @@ footer { background: var(--kb-navy-deep) !important; }
 
 /* ─── Hero Section ─────────────────────────────────────────── */
 @media (max-width: 640px) {
-  /* Headline scales down */
+  /* Headline scales down gracefully */
   #hero h1 {
-    font-size: clamp(2.8rem, 14vw, 4rem) !important;
+    font-size: clamp(2.2rem, 10vw, 3.8rem) !important;
     letter-spacing: -0.02em !important;
   }
   /* Scroll badge hidden on very small screens */

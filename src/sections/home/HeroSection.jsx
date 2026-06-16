@@ -523,7 +523,8 @@ function HeroSection() {
       <section
         ref={sectionRef}
         id="hero"
-        className="relative min-h-screen overflow-hidden bg-background pt-28 sm:pt-32"
+        className="relative overflow-hidden bg-background pt-28 sm:pt-32"
+        style={{ height: "100svh", minHeight: "600px", maxHeight: "100svh" }}
       >
         {/* Background video */}
         <div className="absolute inset-0 overflow-hidden flex items-center justify-center sm:block">
@@ -557,14 +558,14 @@ function HeroSection() {
         />
 
         {/* Content */}
-        <div className="container-edge relative z-10 flex min-h-[calc(100svh-7rem)] flex-col justify-center pb-20 sm:pb-24 lg:min-h-[calc(100svh-8rem)] lg:pb-28">
-          <div className="max-w-[52rem]">
+        <div className="container-edge relative z-10 flex h-full flex-col items-center justify-center pb-20 sm:pb-24 lg:pb-28">
+          <div className="w-full text-center">
             {/* Eyebrow kicker */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 flex items-center gap-3 sm:mb-10"
+              className="mb-8 flex items-center justify-center gap-3 sm:mb-10"
             >
               <span className="h-[2px] w-10 bg-neon" />
               <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-white/80 sm:text-xs">
@@ -576,20 +577,22 @@ function HeroSection() {
             <h1
               className="font-display uppercase text-white leading-[0.93]"
               style={{
-                fontSize: "clamp(3.5rem,9vw,8.5rem)",
+                fontSize: "clamp(2.8rem, 7vw, 7.5rem)",
                 fontWeight: 700,
                 letterSpacing: "-0.025em",
-                lineHeight: 0.93,
+                lineHeight: 0.95,
                 display: "flex",
                 flexDirection: "column",
-                gap: "0.05em",
+                alignItems: "center",
+                gap: "0.08em",
               }}
             >
               <span
                 ref={word1Ref}
                 style={{
                   display: "block",
-                  textAlign: "left",
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
                   willChange: "transform, opacity, filter",
                 }}
               >
@@ -599,7 +602,8 @@ function HeroSection() {
                 ref={word2Ref}
                 style={{
                   display: "block",
-                  textAlign: "left",
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
                   color: "transparent",
                   WebkitTextStroke: "2px rgba(255,255,255,0.55)",
                   willChange: "transform, opacity, filter",
@@ -612,8 +616,13 @@ function HeroSection() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.4, duration: 0.5 }}
-                className="mt-3 block min-h-[1.1em]"
-                style={{ color: "var(--neon)" }}
+                className="mt-3 block min-h-[1.1em] text-center"
+                style={{
+                  color: "var(--neon)",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "clip",
+                }}
               >
                 {typedText}
                 <span
