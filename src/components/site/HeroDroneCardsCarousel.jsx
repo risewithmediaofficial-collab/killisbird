@@ -168,7 +168,7 @@ function HeroDroneCardsCarousel({ slides, className, autoplay = true, loop = tru
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className="mt-3 w-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.p
             key={slides[current]?.title}
@@ -177,7 +177,7 @@ function HeroDroneCardsCarousel({ slides, className, autoplay = true, loop = tru
             exit={{ opacity: 0, y: -8, filter: "blur(6px)" }}
             transition={{ duration: 0.35 }}
             className={cn(
-              "max-w-xl text-sm leading-7 sm:text-[15px]",
+              "w-full text-sm leading-7 sm:text-[15px]",
               dark ? "text-white/45" : "text-muted-foreground"
             )}
           >

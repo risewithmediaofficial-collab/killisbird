@@ -272,13 +272,14 @@ const CapabilitySection = memo(function CapabilitySection() {
           </p>
         </div>
 
-        {/* Timeline grid — two rows */}
+        {/* Timeline grid — responsive */}
         <div
           ref={timelineRef}
-          style={{ display: "flex", flexDirection: "column", gap: "clamp(3rem,6vw,5rem)" }}
+          className="cap-timeline-wrapper"
+          style={{ display: "flex", flexDirection: "column", gap: "clamp(2rem,5vw,4rem)" }}
         >
           {/* Row 1 */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
+          <div className="cap-row" style={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
             {row1.map((item, i) => (
               <TimelineItem
                 key={item.title}
@@ -294,12 +295,13 @@ const CapabilitySection = memo(function CapabilitySection() {
             style={{
               height: "1px",
               background: "rgba(0,0,0,0.07)",
-              margin: "-2rem 0",
+              margin: "-1rem 0",
             }}
+            className="cap-divider"
           />
 
           {/* Row 2 */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
+          <div className="cap-row" style={{ display: "flex", alignItems: "flex-start", gap: 0 }}>
             {row2.map((item, i) => (
               <TimelineItem
                 key={item.title}
@@ -312,11 +314,39 @@ const CapabilitySection = memo(function CapabilitySection() {
         </div>
       </div>
 
-      {/* Hover lift effect on circles */}
+      {/* Hover + mobile responsive styles */}
       <style>{`
         .cap-circle:hover {
           transform: scale(1.1) translateY(-3px) !important;
           box-shadow: 0 8px 28px rgba(232,69,10,0.38) !important;
+        }
+        @media (max-width: 640px) {
+          .cap-row {
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 2rem !important;
+          }
+          .cap-row > div {
+            width: 100% !important;
+            max-width: 320px !important;
+          }
+          /* Hide connector lines on mobile */
+          .cap-row > div > div[style*="position: absolute"] {
+            display: none !important;
+          }
+          .cap-divider {
+            display: none !important;
+          }
+        }
+        @media (min-width: 641px) and (max-width: 900px) {
+          /* 2 rows become 2 items per row */
+          .cap-timeline-wrapper > .cap-row {
+            flex-wrap: wrap;
+          }
+          .cap-timeline-wrapper > .cap-row > div {
+            flex: 1 1 45% !important;
+            min-width: 200px !important;
+          }
         }
       `}</style>
     </section>

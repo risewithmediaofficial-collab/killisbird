@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "framer-motion";
@@ -82,7 +82,7 @@ const productData = [
 ];
 
 // ── Single Product Card ──────────────────────────────────────
-function ProductCard({ product, index, isActive, onClick, cardRef }) {
+const ProductCard = memo(function ProductCard({ product, index, isActive, onClick, cardRef }) {
   const imgRef = useRef(null);
 
   return (
@@ -388,8 +388,8 @@ function ProductCard({ product, index, isActive, onClick, cardRef }) {
   );
 }
 
-// ── Main Systems Section ─────────────────────────────────────
-function SystemsSection() {
+// ── Main Systems Section ───────────────────────────────
+function SystemsSectionBase() {
   const [active, setActive] = useState(0);
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
@@ -553,10 +553,11 @@ function SystemsSection() {
         {/* Cards row — accordion expand on click */}
         <div
           ref={cardsRef}
+          className="kb-prod-cards-row"
           style={{
             display: "flex",
             gap: "3px",
-            height: "clamp(400px,55vh,620px)",
+            height: "clamp(360px,55vh,620px)",
             overflow: "hidden",
             borderRadius: 0,
           }}
@@ -575,11 +576,13 @@ function SystemsSection() {
 
         {/* Bottom product selector row */}
         <div
+          className="kb-prod-selector"
           style={{
             display: "flex",
             gap: "1px",
             background: "rgba(0,0,0,0.06)",
             marginTop: "3px",
+            overflowX: "auto",
           }}
         >
           {productData.map((p, i) => (
@@ -667,8 +670,36 @@ function SystemsSection() {
           />
         </div>
       </div>
+      {/* Mobile responsive styles */}
+      <style>{`
+        @media (max-width: 640px) {
+          .kb-prod-cards-row {
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 3px !important;
+          }
+          .kb-prod-cards-row .kb-prod-card {
+            flex: none !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            min-height: 240px !important;
+            max-height: 320px !important;
+          }
+          .kb-prod-selector {
+            scrollbar-width: none;
+          }
+          .kb-prod-selector::-webkit-scrollbar {
+            display: none;
+          }
+          .kb-prod-selector button {
+            min-width: 120px;
+          }
+        }
+      `}</style>
     </section>
   );
 }
+
+const SystemsSection = memo(SystemsSectionBase);
 
 export { SystemsSection };

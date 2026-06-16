@@ -553,10 +553,11 @@ function SystemsSectionBase() {
         {/* Cards row — accordion expand on click */}
         <div
           ref={cardsRef}
+          className="kb-prod-cards-row"
           style={{
             display: "flex",
             gap: "3px",
-            height: "clamp(400px,55vh,620px)",
+            height: "clamp(360px,55vh,620px)",
             overflow: "hidden",
             borderRadius: 0,
           }}
@@ -575,11 +576,13 @@ function SystemsSectionBase() {
 
         {/* Bottom product selector row */}
         <div
+          className="kb-prod-selector"
           style={{
             display: "flex",
             gap: "1px",
             background: "rgba(0,0,0,0.06)",
             marginTop: "3px",
+            overflowX: "auto",
           }}
         >
           {productData.map((p, i) => (
@@ -667,6 +670,32 @@ function SystemsSectionBase() {
           />
         </div>
       </div>
+      {/* Mobile responsive styles */}
+      <style>{`
+        @media (max-width: 640px) {
+          .kb-prod-cards-row {
+            flex-direction: column !important;
+            height: auto !important;
+            gap: 3px !important;
+          }
+          .kb-prod-cards-row .kb-prod-card {
+            flex: none !important;
+            width: 100% !important;
+            min-width: 100% !important;
+            min-height: 240px !important;
+            max-height: 320px !important;
+          }
+          .kb-prod-selector {
+            scrollbar-width: none;
+          }
+          .kb-prod-selector::-webkit-scrollbar {
+            display: none;
+          }
+          .kb-prod-selector button {
+            min-width: 120px;
+          }
+        }
+      `}</style>
     </section>
   );
 }

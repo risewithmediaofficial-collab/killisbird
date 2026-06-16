@@ -1426,3 +1426,143 @@ footer { background: var(--kb-navy-deep) !important; }
 /* Hide DroneScene in old Hero (not needed anymore) */
 .hero-drone-canvas, .hero-drone-img-wrap { display: none; }
 
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — HOME PAGE SECTIONS
+   Breakpoints: sm=640px  md=768px  lg=1024px
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Global container padding on small screens ──────────── */
+@media (max-width: 640px) {
+  .container-edge {
+    padding-inline: 1rem !important;
+  }
+  .section-y {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+/* ─── Hero Section ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Headline scales down */
+  #hero h1 {
+    font-size: clamp(2.8rem, 14vw, 4rem) !important;
+    letter-spacing: -0.02em !important;
+  }
+  /* Scroll badge hidden on very small screens */
+  #hero [style*="writing-mode"] {
+    display: none;
+  }
+}
+
+/* ─── Product Showcase (hero stats + two-column) ──────────── */
+/* Stats strip: allow horizontal scroll on mobile */
+@media (max-width: 640px) {
+  /* Stats strip scrollable */
+  .hero-showcase-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Identity Section ─────────────────────────────────────── */
+@media (max-width: 767px) {
+  #welcome .grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+  /* Stats in Identity stacks to column on very small */
+  #welcome [style*="repeat(3, 1fr)"] {
+    grid-template-columns: repeat(3, minmax(80px, 1fr)) !important;
+  }
+}
+
+/* ─── Systems Section ──────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Systems section header */
+  .kb-systems-section h2 {
+    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+  }
+  /* Product cards: flex-wrap into column */
+  .kb-prod-cards-row {
+    flex-direction: column !important;
+    height: auto !important;
+  }
+  .kb-prod-card {
+    flex: none !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    min-height: 280px !important;
+  }
+  /* Detail panel full width */
+  .kb-prod-detail {
+    position: relative !important;
+    width: 100% !important;
+  }
+}
+
+/* ─── Quotes Section ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .quote-card {
+    min-width: min(88vw, 320px) !important;
+    padding: 1.5rem !important;
+  }
+  .heading-lg {
+    font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+  }
+}
+
+/* ─── Clients / Trusted Section ────────────────────────────── */
+@media (max-width: 640px) {
+  .kb-clients-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+  }
+}
+
+/* ─── Capability Timeline Section ──────────────────────────── */
+/* (additional rules — main rules are inlined in CapabilitySection.jsx) */
+@media (max-width: 640px) {
+  #capabilities h2 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem) !important;
+  }
+  #capabilities .cap-circle {
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+}
+
+/* ─── CTA Section ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  #cta h2 {
+    font-size: clamp(1.8rem, 8vw, 3rem) !important;
+  }
+  #cta .cta-buttons {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100%;
+  }
+  #cta .cta-buttons a,
+  #cta .cta-buttons button {
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* ─── Navbar mobile ─────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .kb-nav-links { display: none; }
+}
+
+/* ─── Footer mobile ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .kb-footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+}
+
+/* ─── Hide scrollbars on timeline and quote rows ──────────── */
+.scrollbar-hide { scrollbar-width: none; -ms-overflow-style: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+

@@ -137,10 +137,13 @@ function ProductShowcase() {
       {/* ── Stats strip — white bg, dark text ── */}
       <div
         ref={statsRef}
+        className="hero-stats-strip"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          gridTemplateColumns: "repeat(3, minmax(130px, 1fr))",
           borderBottom: "1px solid rgba(0,0,0,0.07)",
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
         }}
       >
         {heroStats.map((s, i) => (
@@ -197,7 +200,7 @@ function ProductShowcase() {
       {/* ── Two-column content ── */}
       <div
         className="container-edge"
-        style={{ paddingTop: 0, paddingBottom: 0 }}
+        style={{ paddingTop: 0, paddingBottom: 0, overflowX: "hidden" }}
       >
         <div className="hero-showcase-grid" style={{ display: "grid", gridTemplateColumns: "1fr" }}>
 
@@ -397,6 +400,25 @@ function ProductShowcase() {
             grid-template-columns: 1.15fr 0.85fr !important;
           }
         }
+        @media (max-width: 767px) {
+          .hero-showcase-grid > div:first-child {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+          }
+          /* Stats strip: stack vertically on mobile */
+          .hero-stats-strip {
+            grid-template-columns: 1fr !important;
+          }
+          .hero-stats-strip > div {
+            border-right: none !important;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+          }
+          .hero-stats-strip > div:last-child {
+            border-bottom: none !important;
+          }
+        }
       `}</style>
     </section>
   );
@@ -506,8 +528,7 @@ function HeroSection() {
         {/* Background video */}
         <div className="absolute inset-0 overflow-hidden flex items-center justify-center sm:block">
           <video
-            className="w-full h-full object-cover sm:w-full sm:h-full"
-            style={{ aspectRatio: "9 / 16" }}
+            className="w-full h-full object-cover"
             src={landingVideo}
             autoPlay
             muted
